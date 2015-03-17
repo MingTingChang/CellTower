@@ -4,7 +4,7 @@
 //
 //  Created by 刘奥明 on 15-3-17.
 //  Copyright (c) 2015年 MingTingChang. All rights reserved.
-//  基础怪物模型类
+//
 
 #import <Foundation/Foundation.h>
 
@@ -20,8 +20,9 @@ typedef enum {
 } CreatureType;
 
 @interface CreatureModel : NSObject
-
 #pragma mark - 属性
+/** 图片名字 */
+@property (nonatomic, copy) NSString *imageName;
 /** 生命值HP */
 @property (nonatomic , assign) int HP;
 
@@ -32,14 +33,15 @@ typedef enum {
 @property (nonatomic , assign) int coin;
 
 /** 怪物类型 */
-@property (nonatomic , assign) CreatureType type;
+@property (nonatomic , assign ,readonly) CreatureType type;
+
+/** 怪物是否隐形 */
+@property (nonatomic , assign, getter=isHidden) BOOL hidden;
+
+/** 怪物是否被减速 */
+@property (nonatomic , assign, getter=isSlowDown) BOOL slowDown;
 
 #pragma mark - 方法
-
-/** 根据字典实例化怪物模型的类方法 */
-+ (instancetype)creatureWithDict:(NSDictionary *)dict;
-
-/** 根据字典实例化怪物模型的对象方法 */
-- (instancetype)initWithDict:(NSDictionary *)dict;
++ (instancetype)creatureModelWithType:(CreatureType)type;
 
 @end

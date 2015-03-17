@@ -13,14 +13,24 @@
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     if (self = [super init]) {
+        
         [self setValuesForKeysWithDictionary:dict];
     }
     return self;
 }
 
-+ (instancetype)creatureWithDict:(NSDictionary *)dict
++ (instancetype)creatureModelWithDict:(NSDictionary *)dict
 {
-    return [[self alloc] initWithDict:dict];
+   return [[self alloc] initWithDict:dict];
+}
+
++ (instancetype)creatureModelWithType:(CreatureType)type
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"creature.plist" ofType:nil];
+    NSArray *array = [NSArray arrayWithContentsOfFile:path];
+    NSDictionary *dict = array[type];
+    
+    return [self creatureModelWithDict:dict];
 }
 
 @end

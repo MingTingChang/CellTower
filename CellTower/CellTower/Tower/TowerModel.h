@@ -4,9 +4,11 @@
 //
 //  Created by 刘奥明 on 15-3-17.
 //  Copyright (c) 2015年 MingTingChang. All rights reserved.
-//  基础塔类
+//
 
 #import <Foundation/Foundation.h>
+@class Creature;
+
 typedef enum{
     TowerTypeAir, // 高成本的中程防守武器,对飞信鬼造成极 大伤害.
     TowerTypeCannon, // 高成本防守武器,射出的炮弹具有毒性, 对地面入侵者造成山伤害,但是载弹慢.
@@ -17,8 +19,17 @@ typedef enum{
     TowerTypeSniper // 最便宜和最快速的射手,能攻击地面和空 中的入侵者.
 } TowerType;
 
+typedef enum{
+    BulletTypeSigle, // 单攻
+    BulletTypeMore,  // 群攻
+    BulletTypeSpurting,  // 溅射
+    BulletTypeSlowDown   // 减速
+} BulletType;
+
 @interface TowerModel : NSObject
-#pragma mark - 属性
+/** 图片名称 */
+@property (nonatomic, copy) NSString *imageName;
+
 /** 攻击距离 */
 @property (nonatomic , assign) int range;
 
@@ -29,7 +40,7 @@ typedef enum{
 @property (nonatomic , assign) int damage;
 
 /** 炮台类型 */
-@property (nonatomic , assign) TowerType type;
+@property (nonatomic , assign ,readonly) TowerType type;
 
 /** 当前等级 */
 @property (nonatomic , assign) int level;
@@ -52,11 +63,16 @@ typedef enum{
 /** 所占栅格 */
 @property (nonatomic , assign) int grid;
 
-#pragma mark - 方法
-/** 根据字典实例化塔模型的类方法 */
-+ (instancetype)TowerModelWithDict:(NSDictionary *)dict;
+/** 子弹类型 */
+@property (nonatomic , assign ,readonly) BulletType bulletType;
 
-/** 根据字典实例化塔模型的对象方法 */
-- (instancetype)initWithDict:(NSDictionary *)dict;
+/** 攻击目标 */
+@property (nonatomic , strong) Creature *target;
+
+/** 是否正在攻击 */
+@property (nonatomic , assign ,getter=isWorking) BOOL working;
+
+#pragma mark - 方法
++ (instancetype)towerModelWithType:(TowerType)type;
 
 @end

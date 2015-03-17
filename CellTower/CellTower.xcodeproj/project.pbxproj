@@ -16,9 +16,7 @@
 		B507885A1AB7F11600D5864E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B50788591AB7F11600D5864E /* Images.xcassets */; };
 		B507885D1AB7F11600D5864E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B507885B1AB7F11600D5864E /* LaunchScreen.xib */; };
 		B50788691AB7F11600D5864E /* CellTowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B50788681AB7F11600D5864E /* CellTowerTests.m */; };
-		B50F76941AB7F5270007FF1F /* CreatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76931AB7F5270007FF1F /* CreatureModel.m */; };
 		B50F76971AB7F89F0007FF1F /* Creature.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76961AB7F89F0007FF1F /* Creature.m */; };
-		B51128CD1AB809E8005C8B2E /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CC1AB809E8005C8B2E /* TowerModel.m */; };
 		B51128D01AB80D23005C8B2E /* Tower.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CF1AB80D23005C8B2E /* Tower.m */; };
 		B59334F71AB81C540039A94C /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B59334F61AB81C540039A94C /* Map.m */; };
 		B593350B1AB81E580039A94C /* air_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334F91AB81E570039A94C /* air_fire.wav */; };
@@ -39,6 +37,10 @@
 		B593351A1AB81E580039A94C /* slowdown_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335081AB81E580039A94C /* slowdown_fire.wav */; };
 		B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335091AB81E580039A94C /* sniper_fire.wav */; };
 		B593351C1AB81E580039A94C /* upgrade_tower.wav in Resources */ = {isa = PBXBuildFile; fileRef = B593350A1AB81E580039A94C /* upgrade_tower.wav */; };
+		B5CE09941AB833C500C44123 /* creature.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5CE09931AB833C500C44123 /* creature.plist */; };
+		B5D702581AB84071003FE835 /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D702571AB84071003FE835 /* TowerModel.m */; };
+		B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D7025A1AB84095003FE835 /* CreatureModel.m */; };
+		B5D7025D1AB848C1003FE835 /* tower.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D7025C1AB848C1003FE835 /* tower.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,12 +70,8 @@
 		B50788621AB7F11600D5864E /* CellTowerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CellTowerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50788671AB7F11600D5864E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50788681AB7F11600D5864E /* CellTowerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellTowerTests.m; sourceTree = "<group>"; };
-		B50F76921AB7F5270007FF1F /* CreatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatureModel.h; sourceTree = "<group>"; };
-		B50F76931AB7F5270007FF1F /* CreatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatureModel.m; sourceTree = "<group>"; };
 		B50F76951AB7F89F0007FF1F /* Creature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creature.h; sourceTree = "<group>"; };
 		B50F76961AB7F89F0007FF1F /* Creature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creature.m; sourceTree = "<group>"; };
-		B51128CB1AB809E8005C8B2E /* TowerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerModel.h; sourceTree = "<group>"; };
-		B51128CC1AB809E8005C8B2E /* TowerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerModel.m; sourceTree = "<group>"; };
 		B51128CE1AB80D23005C8B2E /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
 		B59334F51AB81C540039A94C /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -96,6 +94,12 @@
 		B59335081AB81E580039A94C /* slowdown_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slowdown_fire.wav; sourceTree = "<group>"; };
 		B59335091AB81E580039A94C /* sniper_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_fire.wav; sourceTree = "<group>"; };
 		B593350A1AB81E580039A94C /* upgrade_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = upgrade_tower.wav; sourceTree = "<group>"; };
+		B5CE09931AB833C500C44123 /* creature.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = creature.plist; sourceTree = "<group>"; };
+		B5D702561AB84071003FE835 /* TowerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerModel.h; sourceTree = "<group>"; };
+		B5D702571AB84071003FE835 /* TowerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerModel.m; sourceTree = "<group>"; };
+		B5D702591AB84095003FE835 /* CreatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatureModel.h; sourceTree = "<group>"; };
+		B5D7025A1AB84095003FE835 /* CreatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatureModel.m; sourceTree = "<group>"; };
+		B5D7025C1AB848C1003FE835 /* tower.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tower.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,10 +189,11 @@
 		B50F76911AB7F4B70007FF1F /* Creature */ = {
 			isa = PBXGroup;
 			children = (
-				B50F76921AB7F5270007FF1F /* CreatureModel.h */,
-				B50F76931AB7F5270007FF1F /* CreatureModel.m */,
 				B50F76951AB7F89F0007FF1F /* Creature.h */,
 				B50F76961AB7F89F0007FF1F /* Creature.m */,
+				B5D702591AB84095003FE835 /* CreatureModel.h */,
+				B5D7025A1AB84095003FE835 /* CreatureModel.m */,
+				B5CE09931AB833C500C44123 /* creature.plist */,
 			);
 			path = Creature;
 			sourceTree = "<group>";
@@ -196,10 +201,11 @@
 		B51128CA1AB809A2005C8B2E /* Tower */ = {
 			isa = PBXGroup;
 			children = (
-				B51128CB1AB809E8005C8B2E /* TowerModel.h */,
-				B51128CC1AB809E8005C8B2E /* TowerModel.m */,
 				B51128CE1AB80D23005C8B2E /* Tower.h */,
 				B51128CF1AB80D23005C8B2E /* Tower.m */,
+				B5D702561AB84071003FE835 /* TowerModel.h */,
+				B5D702571AB84071003FE835 /* TowerModel.m */,
+				B5D7025C1AB848C1003FE835 /* tower.plist */,
 			);
 			path = Tower;
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 				B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */,
 				B507885D1AB7F11600D5864E /* LaunchScreen.xib in Resources */,
 				B59335181AB81E580039A94C /* rocket_fire.wav in Resources */,
+				B5CE09941AB833C500C44123 /* creature.plist in Resources */,
 				B59335111AB81E580039A94C /* explosion.wav in Resources */,
 				B507885A1AB7F11600D5864E /* Images.xcassets in Resources */,
 				B593351C1AB81E580039A94C /* upgrade_tower.wav in Resources */,
@@ -339,6 +346,7 @@
 				B59335151AB81E580039A94C /* next_level.wav in Resources */,
 				B593350B1AB81E580039A94C /* air_fire.wav in Resources */,
 				B50788581AB7F11600D5864E /* Main.storyboard in Resources */,
+				B5D7025D1AB848C1003FE835 /* tower.plist in Resources */,
 				B59335191AB81E580039A94C /* sell_tower.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,12 +365,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B51128CD1AB809E8005C8B2E /* TowerModel.m in Sources */,
-				B50F76941AB7F5270007FF1F /* CreatureModel.m in Sources */,
 				B50788551AB7F11600D5864E /* GameViewController.m in Sources */,
+				B5D702581AB84071003FE835 /* TowerModel.m in Sources */,
 				B59334F71AB81C540039A94C /* Map.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
+				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
 				B507884D1AB7F11600D5864E /* AppDelegate.m in Sources */,
 				B50788501AB7F11600D5864E /* GameScene.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,

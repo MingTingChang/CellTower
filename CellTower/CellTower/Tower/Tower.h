@@ -6,25 +6,51 @@
 //  Copyright (c) 2015年 MingTingChang. All rights reserved.
 //  基础塔类
 
-#import <Foundation/Foundation.h>
-@class TowerModel;
+#import <SpriteKit/SpriteKit.h>
+#import "TowerModel.h"
 @class Creature;
 
-typedef enum{
-    BulletTypeSigle, // 单攻
-    BulletTypeMore,  // 群攻
-    BulletTypeSpurting,  // 溅射
-    BulletTypeSlowDown   // 减速
-} BulletType;
-
-@interface Tower : NSObject
+@interface Tower : SKSpriteNode
 
 #pragma mark - 属性
-/** 塔模型 */
-@property (nonatomic , strong) TowerModel *model;
+/** 图片名称 */
+@property (nonatomic, copy) NSString *imageName;
+
+/** 攻击距离 */
+@property (nonatomic , assign) int range;
+
+/** 攻击速度 */
+@property (nonatomic , assign) int speed;
+
+/** 攻击力 */
+@property (nonatomic , assign) int damage;
+
+/** 炮台类型 */
+@property (nonatomic , assign , readonly) TowerType type;
+
+/** 当前等级 */
+@property (nonatomic , assign) int level;
+
+/** 最大等级 */
+@property (nonatomic , assign) int maxLevel;
+
+/** 攻击力随等级提升数值 */
+@property (nonatomic , assign) int damageIncerment;
+
+/** 建立消耗金币 */
+@property (nonatomic , assign) int bulidCoin;
+
+/** 升级消耗金币 */
+@property (nonatomic , assign) int upgradeCoin;
+
+/** 拆除获得金币比值 */
+@property (nonatomic , assign) double destoryCoinRatio;
+
+/** 所占栅格 */
+@property (nonatomic , assign) int grid;
 
 /** 子弹类型 */
-@property (nonatomic , assign) BulletType bulletType;
+@property (nonatomic , assign , readonly) BulletType bulletType;
 
 /** 攻击目标 */
 @property (nonatomic , strong) Creature *target;
@@ -33,8 +59,28 @@ typedef enum{
 @property (nonatomic , assign ,getter=isWorking) BOOL working;
 
 #pragma mark - 方法
-/** 打怪物 */
-- (void)fireWithCreature:(Creature *)creature;
+/**
+ *  实例化塔
+ *
+ *  @param model 塔模型
+ */
++ (instancetype)towerWithModel:(TowerModel*)model;
+
+/**
+ *  实例化塔
+ *
+ *  @param model    塔模型
+ *  @param position 位置
+ */
++ (instancetype)towerWithModel:(TowerModel*)model position:(CGPoint)position;
+
+/**
+ *  打怪物
+ *
+ *  @param creature 怪物节点
+ *  @param bullet   子弹节点
+ */
+- (void)fireWithCreature:(Creature *)creature bullet:(SKSpriteNode *)bullet;
 
 /** 升级 */
 - (void)upgrade;
