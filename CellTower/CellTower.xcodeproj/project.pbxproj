@@ -93,9 +93,6 @@
 				B50788511AB7F11600D5864E /* GameScene.sks */,
 				B50788531AB7F11600D5864E /* GameViewController.h */,
 				B50788541AB7F11600D5864E /* GameViewController.m */,
-				B50788561AB7F11600D5864E /* Main.storyboard */,
-				B50788591AB7F11600D5864E /* Images.xcassets */,
-				B507885B1AB7F11600D5864E /* LaunchScreen.xib */,
 				B50788471AB7F11600D5864E /* Supporting Files */,
 			);
 			path = CellTower;
@@ -104,6 +101,9 @@
 		B50788471AB7F11600D5864E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B50788561AB7F11600D5864E /* Main.storyboard */,
+				B50788591AB7F11600D5864E /* Images.xcassets */,
+				B507885B1AB7F11600D5864E /* LaunchScreen.xib */,
 				B50788481AB7F11600D5864E /* Info.plist */,
 				B50788491AB7F11600D5864E /* main.m */,
 			);
