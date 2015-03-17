@@ -6,42 +6,32 @@
 //  Copyright (c) 2015年 MingTingChang. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 
 typedef enum
 {
-    MapTypeTwoDoor,         //2个门
-    MapTypeFourDoor         //4个门
+    MapTypeOneEnterDoor,         //1个出怪点
+    MapTypeTwoEnterDoor         //2个出怪点
 } MapType;
 
-@interface Map : NSObject
+@interface Map : SKSpriteNode
 
 @property (nonatomic , strong) NSMutableArray *grid;
 
-/**
-    像素尺寸
- */
-@property (nonatomic , assign) CGSize pixelSize;
+/** 栅格尺寸 */
+@property (nonatomic , assign , readonly) CGSize gridSize;
 
-/**
-    栅格尺寸
- */
-@property (nonatomic , assign) CGSize gridSize;
-
-/**
-    单位栅格所占像素点范围 gridPixel * gridPixel
- */
+/** 单位栅格所占像素点范围 gridPixel * gridPixel */
 @property (nonatomic , assign) int gridPixel;
 
-/**
-    地图类型
- */
+/** 地图类型 */
 @property (nonatomic , assign) MapType mapType;
 
-+ (instancetype)shareMap;
 
-+ (void)initMapWithPixelSize:(CGSize)pixelSize gridPixel:(int)pixel type:(MapType)mapType;
+- (instancetype)initWithTexture:(SKTexture *)texture gridPixel:(int)pixel type:(MapType)type;
++ (instancetype)spriteWithTexture:(SKTexture *)texture gridPixel:(int)pixel type:(MapType)type;
 
-- (void)makeMapGridDisableWithPoint:(CGPoint)point;
+
+- (NSArray *)findOutPathFrom:(CGPoint)from to:(CGPoint)to;
 
 @end

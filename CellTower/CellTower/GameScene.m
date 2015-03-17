@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+<<<<<<< Updated upstream
 #import "Creature.h"
 #import "Tower.h"
 
@@ -17,10 +18,14 @@
 }
 
 @end
+=======
+#import "Map.h"
+>>>>>>> Stashed changes
 
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
+<<<<<<< Updated upstream
     
     [self test];
 }
@@ -60,6 +65,13 @@
     [_creature runAction:[SKAction moveToY:300 duration:3.0f]];
     
     [_tower fireWithCreature:_creature bullet:bullet];
+=======
+//    Map *map = [Map spriteWithTexture:[SKTexture textureWithImageNamed:@"tower_shock"]
+//                            gridPixel:10
+//                                 type:MapTypeOneEnterDoor];
+//    [map findOutPathFrom:CGPointMake(12, 16) to:CGPointMake(35, 59)];
+//    [self addChild:map];
+>>>>>>> Stashed changes
 }
 
 -(void)update:(CFTimeInterval)currentTime {
