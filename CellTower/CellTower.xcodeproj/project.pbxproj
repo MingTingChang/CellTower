@@ -21,6 +21,24 @@
 		B51128CD1AB809E8005C8B2E /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CC1AB809E8005C8B2E /* TowerModel.m */; };
 		B51128D01AB80D23005C8B2E /* Tower.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CF1AB80D23005C8B2E /* Tower.m */; };
 		B59334F71AB81C540039A94C /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B59334F61AB81C540039A94C /* Map.m */; };
+		B593350B1AB81E580039A94C /* air_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334F91AB81E570039A94C /* air_fire.wav */; };
+		B593350C1AB81E580039A94C /* congratulation.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FA1AB81E570039A94C /* congratulation.wav */; };
+		B593350D1AB81E580039A94C /* create_tower.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FB1AB81E580039A94C /* create_tower.wav */; };
+		B593350E1AB81E580039A94C /* creature_die.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FC1AB81E580039A94C /* creature_die.wav */; };
+		B593350F1AB81E580039A94C /* creature_rich_dest.WAV in Resources */ = {isa = PBXBuildFile; fileRef = B59334FD1AB81E580039A94C /* creature_rich_dest.WAV */; };
+		B59335101AB81E580039A94C /* earthquake_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FE1AB81E580039A94C /* earthquake_fire.wav */; };
+		B59335111AB81E580039A94C /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FF1AB81E580039A94C /* explosion.wav */; };
+		B59335121AB81E580039A94C /* game_bg.mod in Resources */ = {isa = PBXBuildFile; fileRef = B59335001AB81E580039A94C /* game_bg.mod */; };
+		B59335131AB81E580039A94C /* gameover.WAV in Resources */ = {isa = PBXBuildFile; fileRef = B59335011AB81E580039A94C /* gameover.WAV */; };
+		B59335141AB81E580039A94C /* menu_bg.mod in Resources */ = {isa = PBXBuildFile; fileRef = B59335021AB81E580039A94C /* menu_bg.mod */; };
+		B59335151AB81E580039A94C /* next_level.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335031AB81E580039A94C /* next_level.wav */; };
+		B59335161AB81E580039A94C /* radar_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335041AB81E580039A94C /* radar_fire.wav */; };
+		B59335171AB81E580039A94C /* range_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335051AB81E580039A94C /* range_fire.wav */; };
+		B59335181AB81E580039A94C /* rocket_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335061AB81E580039A94C /* rocket_fire.wav */; };
+		B59335191AB81E580039A94C /* sell_tower.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335071AB81E580039A94C /* sell_tower.wav */; };
+		B593351A1AB81E580039A94C /* slowdown_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335081AB81E580039A94C /* slowdown_fire.wav */; };
+		B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335091AB81E580039A94C /* sniper_fire.wav */; };
+		B593351C1AB81E580039A94C /* upgrade_tower.wav in Resources */ = {isa = PBXBuildFile; fileRef = B593350A1AB81E580039A94C /* upgrade_tower.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +78,24 @@
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
 		B59334F51AB81C540039A94C /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		B59334F61AB81C540039A94C /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		B59334F91AB81E570039A94C /* air_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = air_fire.wav; sourceTree = "<group>"; };
+		B59334FA1AB81E570039A94C /* congratulation.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = congratulation.wav; sourceTree = "<group>"; };
+		B59334FB1AB81E580039A94C /* create_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = create_tower.wav; sourceTree = "<group>"; };
+		B59334FC1AB81E580039A94C /* creature_die.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creature_die.wav; sourceTree = "<group>"; };
+		B59334FD1AB81E580039A94C /* creature_rich_dest.WAV */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = creature_rich_dest.WAV; sourceTree = "<group>"; };
+		B59334FE1AB81E580039A94C /* earthquake_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earthquake_fire.wav; sourceTree = "<group>"; };
+		B59334FF1AB81E580039A94C /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		B59335001AB81E580039A94C /* game_bg.mod */ = {isa = PBXFileReference; lastKnownFileType = file; path = game_bg.mod; sourceTree = "<group>"; };
+		B59335011AB81E580039A94C /* gameover.WAV */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameover.WAV; sourceTree = "<group>"; };
+		B59335021AB81E580039A94C /* menu_bg.mod */ = {isa = PBXFileReference; lastKnownFileType = file; path = menu_bg.mod; sourceTree = "<group>"; };
+		B59335031AB81E580039A94C /* next_level.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = next_level.wav; sourceTree = "<group>"; };
+		B59335041AB81E580039A94C /* radar_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = radar_fire.wav; sourceTree = "<group>"; };
+		B59335051AB81E580039A94C /* range_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = range_fire.wav; sourceTree = "<group>"; };
+		B59335061AB81E580039A94C /* rocket_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rocket_fire.wav; sourceTree = "<group>"; };
+		B59335071AB81E580039A94C /* sell_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sell_tower.wav; sourceTree = "<group>"; };
+		B59335081AB81E580039A94C /* slowdown_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slowdown_fire.wav; sourceTree = "<group>"; };
+		B59335091AB81E580039A94C /* sniper_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_fire.wav; sourceTree = "<group>"; };
+		B593350A1AB81E580039A94C /* upgrade_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = upgrade_tower.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +155,7 @@
 		B50788471AB7F11600D5864E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B59334F81AB81E570039A94C /* music */,
 				B50788561AB7F11600D5864E /* Main.storyboard */,
 				B50788591AB7F11600D5864E /* Images.xcassets */,
 				B507885B1AB7F11600D5864E /* LaunchScreen.xib */,
@@ -174,6 +211,31 @@
 				B59334F61AB81C540039A94C /* Map.m */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		B59334F81AB81E570039A94C /* music */ = {
+			isa = PBXGroup;
+			children = (
+				B59334F91AB81E570039A94C /* air_fire.wav */,
+				B59334FA1AB81E570039A94C /* congratulation.wav */,
+				B59334FB1AB81E580039A94C /* create_tower.wav */,
+				B59334FC1AB81E580039A94C /* creature_die.wav */,
+				B59334FD1AB81E580039A94C /* creature_rich_dest.WAV */,
+				B59334FE1AB81E580039A94C /* earthquake_fire.wav */,
+				B59334FF1AB81E580039A94C /* explosion.wav */,
+				B59335001AB81E580039A94C /* game_bg.mod */,
+				B59335011AB81E580039A94C /* gameover.WAV */,
+				B59335021AB81E580039A94C /* menu_bg.mod */,
+				B59335031AB81E580039A94C /* next_level.wav */,
+				B59335041AB81E580039A94C /* radar_fire.wav */,
+				B59335051AB81E580039A94C /* range_fire.wav */,
+				B59335061AB81E580039A94C /* rocket_fire.wav */,
+				B59335071AB81E580039A94C /* sell_tower.wav */,
+				B59335081AB81E580039A94C /* slowdown_fire.wav */,
+				B59335091AB81E580039A94C /* sniper_fire.wav */,
+				B593350A1AB81E580039A94C /* upgrade_tower.wav */,
+			);
+			path = music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,10 +318,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B593350E1AB81E580039A94C /* creature_die.wav in Resources */,
+				B59335101AB81E580039A94C /* earthquake_fire.wav in Resources */,
+				B59335131AB81E580039A94C /* gameover.WAV in Resources */,
+				B593351A1AB81E580039A94C /* slowdown_fire.wav in Resources */,
+				B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */,
 				B507885D1AB7F11600D5864E /* LaunchScreen.xib in Resources */,
+				B59335181AB81E580039A94C /* rocket_fire.wav in Resources */,
+				B59335111AB81E580039A94C /* explosion.wav in Resources */,
 				B507885A1AB7F11600D5864E /* Images.xcassets in Resources */,
+				B593351C1AB81E580039A94C /* upgrade_tower.wav in Resources */,
+				B593350F1AB81E580039A94C /* creature_rich_dest.WAV in Resources */,
+				B593350C1AB81E580039A94C /* congratulation.wav in Resources */,
+				B59335121AB81E580039A94C /* game_bg.mod in Resources */,
+				B59335171AB81E580039A94C /* range_fire.wav in Resources */,
+				B59335161AB81E580039A94C /* radar_fire.wav in Resources */,
+				B593350D1AB81E580039A94C /* create_tower.wav in Resources */,
+				B59335141AB81E580039A94C /* menu_bg.mod in Resources */,
 				B50788521AB7F11600D5864E /* GameScene.sks in Resources */,
+				B59335151AB81E580039A94C /* next_level.wav in Resources */,
+				B593350B1AB81E580039A94C /* air_fire.wav in Resources */,
 				B50788581AB7F11600D5864E /* Main.storyboard in Resources */,
+				B59335191AB81E580039A94C /* sell_tower.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +490,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CellTower/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -420,6 +501,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CellTower/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
