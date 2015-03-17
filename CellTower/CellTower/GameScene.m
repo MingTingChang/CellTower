@@ -21,7 +21,7 @@
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
-    
+
     [self test];
     [self test];
 }
@@ -61,6 +61,7 @@
     [_creature runAction:[SKAction moveToY:300 duration:3.0f]];
     
     [_tower fireWithCreature:_creature bullet:bullet];
+
 }
 
 -(void)update:(CFTimeInterval)currentTime {
