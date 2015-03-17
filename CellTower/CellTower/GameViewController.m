@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "GameScene.h"
+#import "Map.h"
 
 @implementation SKScene (Unarchive)
 
@@ -30,23 +31,28 @@
 
 @implementation GameViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
 
-    // Configure the view.
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
     SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    /* Sprite Kit applies additional optimizations to improve rendering performance */
-    skView.ignoresSiblingOrder = YES;
-    
-    // Create and configure the scene.
-    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    // Present the scene.
-    [skView presentScene:scene];
+  
+    if (skView.scene == nil) {
+        
+        skView.showsFPS = YES;
+        skView.showsNodeCount = YES;
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = YES;
+        
+        // Create and configure the scene.
+        GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
+        scene.size = skView.bounds.size;
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        // Present the scene.
+        [skView presentScene:scene];
+    }
 }
 
 - (BOOL)shouldAutorotate
