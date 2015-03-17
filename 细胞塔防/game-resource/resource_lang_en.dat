@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language value="English">
+	<Strings>
+		<string id="200">继续游戏</string>
+		<string id="201">快速游戏</string>
+		<string id="202">游戏结束</string>
+		<string id="203">你赢了!</string>
+		<string id="204">菜鸟级</string>
+		<string id="205">中鸟级</string>
+		<string id="206">老鸟级</string>
+		<string id="207">骨灰级</string>
+		<string id="251">提交失败</string>
+		<string id="252">无法连接</string>
+		<string id="260">快枪手</string>
+		<string id="261">火箭手</string>
+		<string id="262">加农炮</string>
+		<string id="263">冲击炮</string>
+		<string id="264">气压波</string>
+		<string id="265">震荡波</string>
+		<string id="266">雷达</string>
+		<string id="280">跟尾鬼</string>
+		<string id="281">大只鬼</string>
+		<string id="282">敢死鬼</string>
+		<string id="283">快跑鬼</string>
+		<string id="284">野蛮鬼</string>
+		<string id="285">飞行鬼</string>
+		<string id="286">冰鬼</string>
+		<string id="287">鬼王BOSS</string>
+		<string id="288">隐形鬼</string>
+		<string id="370">
+          HOW TO UNLOCK:
+          To unlock this game you need a code, which will be sent to you via e-mail after you purchase the game. Tap the 'Enter unlock code' button and enter your unlock code.
+
+          HOW TO PURCHASE:
+          This game can be purchase at
+		</string>
+		<string id="400">重命名用户名:</string>
+		<string id="401">创建新用户:</string>
+		<string id="402">输入解锁码:</string>
+		<string id="403">main_help_en.html</string>
+		<string id="404">towers_help_en.html</string>
+		<string id="405">creatures_help_en.html</string>
+		<string id="406">重玩将结束当前游戏.</string>
+		<string id="407">警告</string>
+		<string id="408">游戏结束</string>
+		<string id="410">BLOCK</string>
+		<string id="411">时间奖励</string>
+		<string id="501">这个是菜单键,但不是用左键激
+活的,必须是光标选中图标按确
+定才可用,想暂停游戏,按右键
+也可以.</string>
+		<string id="502">这些都是入侵者,不同的类型各
+有不同的能力.</string>
+		<string id="503">这个是入侵者的入口.</string>
+		<string id="504">这里是出口,一旦入侵者到达此
+处,他们将消耗你的生命,所以
+你的任务是在它们到达出口前
+把他们全部消灭.</string>
+		<string id="505">当入侵者到达你的阵地,将消耗
+你一条生命.</string>
+		<string id="506">为了防止入侵,你有7种防守武
+器可用,布置成最佳位置防守它
+们猛烈的进攻.</string>
+		<string id="507">防守武器只在有效的射程内攻击入侵者,
+超出射程范围即无效.</string>
+		<string id="508">注意,某些入侵者是可以影响破坏你的
+防守武器,并从空隙中穿过.</string>
+		<string id="509">防守的基本战略就是用武器
+布置出最佳位置,消灭全部入
+侵者.</string>
+		<string id="510">每一个武器都可以升级或者出售,
+浅绿色背景按钮显示的数字是升
+级的价格,红色按钮显示数字的是
+出售价格,升级和出售都不是即时
+发生的,所以看好时机做出最佳选
+择.</string>
+		<string id="511">当光标选中武器时,此处显示的
+是武器的各种信息,如攻击
+力,速度和射程.</string>
+		<string id="512">当没有选中武器时,此处显示的
+是游戏的难度.</string>
+		<string id="513">防守一段时间后,你可以升级较弱的武
+器,或者出售更换更强大的武器以更好
+的防守入侵者.</string>
+		<string id="514">按此按钮以提前释放入侵者,每
+轮剩余的时间将加入总分,所以
+越早释放入侵者,分数奖励越多.</string>
+		<string id="515">当有"隐形鬼"入侵,只有用雷达才能看到它
+们,武器对它们的攻击才有效,当然,如
+果他们超出了雷达扫描范围,武器对它
+们攻击无效.</string>
+		<string id="516">"冰鬼"是非常危险的,它们可以冻结你的
+武器一段时间,冻结时武器不能进行
+攻击,必须好好防住它们.</string>
+		<string id="517">这里显示的是你的金币.</string>
+		<string id="518">这里显示的是你的分数.</string>
+		<string id="519">这里显示的是入侵者到来的
+倒计时.</string>
+		<string id="520">这里显示的是你的剩余生命!
+塔防游戏,快乐无限,更多
+精彩请访问www.huozu.com
+______yomerlin汉化______
+		</string>
+		<string id="1100">Towers Trap installation:</string>
+		<string id="1101">塔防游戏是一个挑战,挑战你的
+战略性头脑,你接受挑战吗?</string>
+		<string id="1102">Towers Trap installation:</string>
+		<string id="1103">面对众多的入侵者,展示你的塔
+防战术.</string>
+		<string id="1104">Towers Trap installation:</string>
+		<string id="1105">把你最好的战绩提交到网上,证
+明你的天才头脑.</string>
+		<string id="1106">Towers Trap installation:</string>
+		<string id="1107">尽一切努力阻止入侵者入侵,保
+护好你的阵地.</string>
+		<string id="1108">Towers Trap installation:</string>
+		<string id="1109">不要忽略每一处防守,否则入侵
+者将从你的身上碾过,你将一败涂地.</string>
+		<string id="1110">Towers Trap installation:</string>
+		<string id="1111">展示你最佳的防守战略,消灭入
+侵者.</string>
+		<string id="1112">Towers Trap installation:</string>
+		<string id="1113">感谢你对塔防游戏的支持,快乐
+将在紧张的防守中获得.</string>
+		<string id="2000">注册成功!</string>
+		<string id="2005">注册:</string>
+		<string id="2001">
+          HOW TO UNLOCK:
+          To unlock this game you need a code, which will be sent to you via e-mail after you purchase the game. Tap the 'Enter unlock code' button and enter your unlock code.
+
+          HOW TO PURCHASE:
+          This game can be purchase at
+		</string>
+		<string id="2002">
+          My code is not working!
+
+          If your code is correctly entered but does not work, please send this service code to support@towerstrap.com
+		</string>
+		<string id="2003">
+          What is this code?
+
+          The most probable reason due to which your code is not working, is that upon purchase you have filled in incorrectly your Owner name. The unlock code is generated on the basis of the Owner name specified by you to prevent illegal use of the code on other devices. You can see what Owner name you have specified in the e-mail with the unlock code you have received. The Owner name is case sensitive. In case of discrepancy, send your correct Owner name to support@towerstrap.com to allow us to generate another unlock code. If the Owner name you have supplied is correct, send the service code to support@towerstrap.com.
+          The service code is a digital presentation of your Owner name where each digit corresponds to one symbol - for example 'r' = 114, '7' = 55, empty symbol = 32, etc. This code will help us generate your correct unlock code.
+		</string>
+		<string id="2004">
+          如果你有任何问题,请联系我们:www.huozu.com
+		</string>
+		<string id="3000">检测到新版本!</string>
+		<string id="3001">现在下载吗?</string>
+		<string id="1000">
+火族手机论坛: www.huozu.com</string>
+		<string id="1001">游戏汉化: yomerlin </string>
+		<string id="1002">版本:</string>
+		<string id="1003">游戏开发:</string>
+	</Strings>
+	<widget_strings>
+		<string id="2">菜单</string>
+		<string id="3">菜鸟级</string>
+		<string id="4">帮助</string>
+		<string id="5">提交到网上:</string>
+		<string id="6">X</string>
+		<string id="7">新建</string>
+		<string id="8">输入解锁码</string>
+		<string id="9">帮助</string>
+		<string id="10">关于</string>
+		<string id="11">删除用户</string>
+		<string id="12">选项</string>
+		<string id="13">游戏结束</string>
+		<string id="14">游戏得分</string>
+		<string id="15">玩家名称</string>
+		<string id="16">警告</string>
+		<string id="17">确定</string>
+		<string id="18">更改语言</string>
+		<string id="19">提示信息</string>
+		<string id="20">注册:</string>
+		<string id="21">玩家名称</string>
+		<string id="22">首先安装布置</string>
+		<string id="23">演示</string>
+		<string id="24">演示开始</string>
+		<string id="25">提示信息</string>
+		<string id="26">提示信息</string>
+		<string id="27">提示信息</string>
+		<string id="28">提示信息</string>
+		<string id="29">提示信息</string>
+		<string id="30">提示信息</string>
+		<string id="31">提示信息</string>
+		<string id="32">提示信息</string>
+		<string id="33">提示信息</string>
+		<string id="34">提示信息</string>
+		<string id="35">提示信息</string>
+		<string id="36">提示信息</string>
+		<string id="37">提示信息</string>
+		<string id="38">隐形鬼</string>
+		<string id="39">冰鬼</string>
+		<string id="40">提示信息</string>
+		<string id="41">提示信息</string>
+		<string id="42">提示信息</string>
+		<string id="43">提示信息</string>
+		<string id="44">未知用户</string>
+		<string id="45">中鸟级</string>
+		<string id="47">提交公布</string>
+		<string id="48">暂停</string>
+		<string id="49">编辑</string>
+		<string id="50">以后注册</string>
+		<string id="51">游戏简介</string>
+		<string id="53">确定</string>
+		<string id="54">开启声音</string>
+		<string id="55">确定</string>
+		<string id="56">注册码无效</string>
+		<string id="57">是否确定</string>
+		<string id="58">载入中,请稍等...</string>
+		<string id="59">确定</string>
+		<string id="60">确定</string>
+		<string id="61">跳过</string>
+		<string id="62">继续</string>
+		<string id="63">右</string>
+		<string id="64">左</string>
+		<string id="65">左</string>
+		<string id="66">右</string>
+		<string id="67">右</string>
+		<string id="68">下</string>
+		<string id="69">左</string>
+		<string id="70">上</string>
+		<string id="71">下</string>
+		<string id="72">左</string>
+		<string id="73">下</string>
+		<string id="74">下</string>
+		<string id="75">左</string>
+		<string id="76">下</string>
+		<string id="77">左</string>
+		<string id="78">上</string>
+		<string id="79">上</string>
+		<string id="80">上</string>
+		<string id="81">下</string>
+		<string id="82">下</string>
+		<string id="83">...</string>
+		<string id="84">下一关</string>
+		<string id="85">老鸟级</string>
+		<string id="86">确定</string>
+		<string id="87">取消</string>
+		<string id="88">开始</string>
+		<string id="89">删除</string>
+		<string id="91">塔防武器</string>
+		<string id="92">确定</string>
+		<string id="93">取消</string>
+		<string id="94">确定</string>
+		<string id="95">确定</string>
+		<string id="96">确定</string>
+		<string id="97">取消</string>
+		<string id="99">帮助</string>
+		<string id="100">确定</string>
+		<string id="101">注册成功</string>
+		<string id="102">取消</string>
+		<string id="103">继续</string>
+		<string id="104">升级</string>
+		<string id="105">骨灰级</string>
+		<string id="107">编辑用户名</string>
+		<string id="108">FORWARD</string>
+		<string id="109">确定</string>
+		<string id="110">注册</string>
+		<string id="111">入侵者介绍</string>
+		<string id="113">是否确定</string>
+		<string id="115">提交至网上</string>
+		<string id="116">网上分数</string>
+		<string id="117">用户名</string>
+		<string id="118">取消</string>
+		<string id="119">用户名</string>
+		<string id="120">First install</string>
+		<string id="121">Text</string>
+		<string id="122">新游戏</string>
+		<string id="123">Sell</string>
+		<string id="124">菜单</string>
+		<string id="125">group-edit</string>
+		<string id="127">玩家名称: </string>
+		<string id="128">音量</string>
+		<string id="131">确定</string>
+		<string id="133">用户名</string>
+		<string id="134">高分榜</string>
+		<string id="137">用户名</string>
+		<string id="138">用户</string>
+		<string id="139">确定</string>
+		<string id="141">分数:</string>
+		<string id="142">combobox</string>
+		<string id="143">选项</string>
+		<string id="144">info</string>
+		<string id="145">演示</string>
+		<string id="146">团队</string>
+		<string id="150">音效</string>
+		<string id="151">生命奖励:</string>
+		<string id="152">难度:</string>
+		<string id="153">帮助</string>
+		<string id="154">武器简介</string>
+		<string id="155">新游戏</string>
+		<string id="157">时间奖励:</string>
+		<string id="159">关于</string>
+		<string id="160">拥挤</string>
+		<string id="161">更换语言</string>
+		<string id="162">总得分:</string>
+		<string id="163">退出</string>
+		<string id="164">塔防</string>
+		<string id="165">Score 12</string>
+		<string id="167">金币</string>
+		<string id="168">Lives Bonus 13 </string>
+		<string id="169">分数</string>
+		<string id="170">Time Bonus 14</string>
+		<string id="171">时间</string>
+		<string id="172">Final Score 15</string>
+		<string id="173">生命</string>
+		<string id="174">提交到网上</string>
+		<string id="175">下一关</string>
+		<string id="176">难度:</string>
+		<string id="177">Dificulty 16</string>
+		<string id="178">下一关:</string>
+		<string id="179">Last level 16</string>
+	</widget_strings>
+</Language>
