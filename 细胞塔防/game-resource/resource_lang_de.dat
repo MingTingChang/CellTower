@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language value="Deutsch">
+	<Strings>
+		<string id="200">WEITER</string>
+		<string id="201">SCHNELLSTART</string>
+		<string id="202">Spelende</string>
+		<string id="203">Gewinner</string>
+		<string id="204">leicht</string>
+		<string id="205">mittel</string>
+		<string id="206">schwer</string>
+		<string id="207">8k gold</string>
+		<string id="251">Fehlgeschlagen!</string>
+		<string id="252">Keine Verbindung</string>
+		<string id="260">Scharfschütze</string>
+		<string id="261">Haubitze</string>
+		<string id="262">Kanonenturm</string>
+		<string id="263">Turm Schock</string>
+		<string id="264">Luftabwehr</string>
+		<string id="265">Turm Erdbeben</string>
+		<string id="266">Radarturm</string>
+		<string id="280">Bande</string>
+		<string id="281">Tank</string>
+		<string id="282">Bombe</string>
+		<string id="283">Blitz</string>
+		<string id="284">Esel</string>
+		<string id="285">UFO</string>
+		<string id="286">Eismann</string>
+		<string id="287">Riese</string>
+		<string id="288">Geist</string>
+		<string id="370">
+        Wie kann Ich das Spiel registrieren?
+        Um das Spiel zu registrieren brauchen Sie einen Schlüssel. Er wird Ihnen per Email zugeschickt, nachdem Sie Towers Trap gekauft haben. Klicken Sie einfach auf die Registrieren - Taste und tippen Sie Ihr Schlüssel ein um das Spiel zu registrieren.
+
+        Wo kann ich das Spiel kaufen?
+        Kaufen bei
+		</string>
+		<string id="400">Benutzer umbenennen:</string>
+		<string id="401">Neuen Benutzer anlegen:</string>
+		<string id="402">Schlüssel eingeben:</string>
+		<string id="403">main_help_de.html</string>
+		<string id="404">towers_help_de.html</string>
+		<string id="405">creatures_help_de.html</string>
+		<string id="406">Das laufende Spiel wird abgebrochen!</string>
+		<string id="407">Achtung!</string>
+		<string id="408">REPLAY OVER</string>
+		<string id="410">Blokade!</string>
+		<string id="411">Zeitbonus!</string>
+		<string id="501">Diese Anleitung wird Ihnen die Grundsteine im Towers Trap zeigen. Um Sie abzubrechen tippen Sie einfach auf 'Menü'!</string>
+		<string id="502">Das sind die 'bösen' Jungs.</string>
+		<string id="503">Das ist der Ort wovon die Kreaturen wellenweise angreifen.</string>
+		<string id="504">Das ist das Ziel von allen Kreaturen. Sie müssen den Ausgang mit allen Mittel verteidigen!</string>
+		<string id="505">Wenn eine Kreatur Ihr ziel erreicht, verlieren Sie einen Lebenspunkt.</string>
+		<string id="506">Es gibt 7 verschiedene Arten von Türme. Wählen Sie einen davon und und platzieren Sie Ihm irgenwo auf dem Spielfeld.</string>
+		<string id="507">Wenn Sie einen Turm auf dem Spielfeld platziert haben, fängt er an auf die Kreaturen zu schiessen.</string>
+		<string id="508">Die Kreaturen können an die Türme nichts antun. Natürlich gibt es Ausnahmen.</string>
+		<string id="509">Es ist sinnvoll, dass Sie die Türme auf dem Spielfeld so platzieren, dass der Weg zum Ausgang am längsten ist.</string>
+		<string id="510">Wenn Sie einen Turm auf dem Spielfeld auswahlen, haben Sie 2  Moglichkeiten - ihn zu verbessern oder ihn abzureissen. Die Zahl auf dem grunen Hintergrund zeigt was Sie fur das Upgrade bezahlen mussen und die Zahl auf dem roten Hintergrund, was Sie zuruckbekommen, falls Sie den Turm abreissen.</string>
+		<string id="511">Hier können Sie unterschiedliche Informationen ablesen, abhängig davon, was Sie ausgewählt haben. Wenn Sie einen Turm ausgewählt haben, werden Sie verschiendene Informationen über den Turm sehen.</string>
+		<string id="512">Wenn nichts ausgewählt ist, das Infopanel zeigt die Schwierigkeitsstufe des Spiels.</string>
+		<string id="513">Nach der Anfangsphase des Spiels ist es sinnvoll, dass Sie anfangen die Türme auf dem Spielfeld mit bessere und stärkere Türme auszuwechseln.</string>
+		<string id="514">Mit dieser Taste lassen Sie die nächste Welle Kreaturen frei und wenn die Zeit nicht abgelaufen ist, werden Ihnen die restliche Sekunden, die Sie nicht ausgenutzt haben, als Zeitbonus angerechnet.</string>
+		<string id="515">Die Geist-Kreaturen werden sichtbar nur in der Reichweite von dem Radarturm.</string>
+		<string id="516">Jeder Turm, der der Eismann berührt wird frieren und aufhören zu schießen bis er sich entfernt.</string>
+		<string id="517">Hier sehen Sie das Geld mit dem Sie verfügen.</string>
+		<string id="518">Das sind Ihre Punkte.</string>
+		<string id="519">Die Uhr zeigt die Zeit bis zur nächsten Welle Kreaturen.</string>
+		<string id="520">
+        Das sind Ihre Lebenspunkte. Am Anfang des Spiels haben Sie 50 Punkte und mit jeder vorbeigekommener Kreatur verlieren Sie ein Lebenspunkt.
+
+        Danke für Ihre Aufmerksamkeit! Mehr über Towers Trap erfahren Sie in der Gebrauchsanleitung.
+        Viel Spaß wünscht Ihr Zone Projects Team.
+		</string>
+		<string id="1100">Towers Trap installation:</string>
+		<string id="1101">Stellen Sie sich unserer Herausforderung und zeigen Sie Ihre strategischen Fähigkeiten. Glauben Sie,
+dass Sie ein guter Stratege sind, oder vielleicht der Beste?</string>
+		<string id="1102">Towers Trap installation:</string>
+		<string id="1103">Zeigen Sie allen anderen was Sie können und messen Sie sich mit den Besten... Veröffentlichen Sie Ihre Ergebnisse auf der Webseite von Towers Trap, zeigen Sie was Sie können und verewigen Sie sich auf der Liste aller besten Spieler.</string>
+		<string id="1104">Towers Trap installation:</string>
+		<string id="1105">Im Towers Trap verteidigen Sie die Front von den vielen Kreaturen, die nur wollen an Ihren Barrikaden vorbei zu kommen.</string>
+		<string id="1106">Towers Trap installation:</string>
+		<string id="1107">Je mehr Kreaturen Ihr Ziel erreichen, desto mehr Stellungen verlieren Sie, bis Sie im Endeffekt von den angeströmt kommenden Mengen überwältigt werden.</string>
+		<string id="1108">Towers Trap installation:</string>
+		<string id="1109">Bedauerlicherweise scheinen die Kreaturen so viel zu sein, dass Ihr Schicksal schon entschieden ist und Sie werden den Kampf verlieren, oder vielleicht halten Sie doch bis zum Schluss aus...</string>
+		<string id="1110">Towers Trap installation:</string>
+		<string id="1111">Zeigen Sie woraus Sie gemacht sind und beweisen Sie, dass Sie der beste Stratege sind, indem Sie nicht zulassen, dass die Kreaturen an den Barrikaden vorbei kommen...</string>
+		<string id="1112">Towers Trap installation:</string>
+		<string id="1113">Danke, dass Sie unser Produkt ausgewählt haben und wir hoffen, dass Sie viele interessante und spannende Minuten mit Towers Trap erleben werden.</string>
+		<string id="2000">Die Registration war erfolgreich! Danke!</string>
+		<string id="2005">Registration:</string>
+		<string id="2001">
+        Wie kann Ich das Spiel registrieren?
+        Um das Spiel zu registrieren brauchen Sie einen Schlüssel. Er wird Ihnen per Email zugeschickt, nachdem Sie Towers Trap gekauft haben. Klicken Sie einfach auf die Registrieren - Taste und tippen Sie Ihr Schlüssel ein um das Spiel zu registrieren.
+
+        Wo kann ich das Spiel kaufen?
+        Kaufen bei
+		</string>
+		<string id="2002">
+        Mein Schlüssel geht nicht!
+
+        Falls Sie Ihren Schlüssel korrekt eingetippt haben, aber trotzden eine Fehlermeldung bekommen, schicken Sie Bitte dieser Servicecode an: support@towerstrap.com
+		</string>
+		<string id="2003">
+
+        Was bedeutet diesen Servicecode?
+        Der wahrscheinlichste Grund, dass Ihr Schlüssel nicht geht ist, dass Sie beim Kauf Ihr Besitzername nicht richtig ausgefüllt haben. Der Registrierungsschlüssel wird auf Basis des Besitzernamens generiert, damit Ihr Schlüssel nur auf Ihr Gerät benutzt werden kann. Der Besitzername, der Sie beim Kauf eingegeben haben, können Sie von der Email mit dem Registrierungskode für das Spiel auslesen. Im Falle einer Abweichung von dem Besitzername schicken Sie uns Bitte den richtigen Name an: support@towerstrap.com, damit wir ein anderen Schlüssel für Sie generieren können. Falls der Besitzername korrekt ist senden Sie uns Bitte den Servicecode an: support@towerstrap.com
+
+        Dieser Servicecode ist eine digitale Darstellung Ihres Besitzernamens, wo zum Beispiel ein 'r' = 114, ein '7' = 55 etc. Der Servicecode wird uns helfen den richtigen Schlüssel für Sie zu generieren.
+		</string>
+		<string id="2004">
+        Kontakte: Falls Sie Fragen haben, schreiben Sie uns bitte an
+		</string>
+		<string id="3000">Eine neue Version von Towers Trap ist verfügbar!.</string>
+		<string id="3001">Jetzt herunterladen?</string>
+		<string id="1000">www.towerstrap.com</string>
+		<string id="1001">Kaufen bei </string>
+		<string id="1002">version</string>
+		<string id="1003">еntwickelt von</string>
+	</Strings>
+	<widget_strings>
+		<string id="2">MENÜ</string>
+		<string id="3">LEICHT</string>
+		<string id="4">HILFE:</string>
+		<string id="5">Ergebnisse veröffentlichen:</string>
+		<string id="6">zurück</string>
+		<string id="7">Neu</string>
+		<string id="8">Schlüssel eingeben</string>
+		<string id="9">HILFE:</string>
+		<string id="10">Über:</string>
+		<string id="11">Benutzer löschen:</string>
+		<string id="12">EINSTELLUNGEN:</string>
+		<string id="13">SPIELENDE!</string>
+		<string id="14">Bestenliste:</string>
+		<string id="15">Benutzername</string>
+		<string id="16">Hinweis:</string>
+		<string id="17">OK</string>
+		<string id="18">Sprache ändern</string>
+		<string id="19">Info:</string>
+		<string id="20">Hinweis:</string>
+		<string id="21">Benutzername</string>
+		<string id="22">First instal</string>
+		<string id="23">Anleitung:</string>
+		<string id="24">Anleitung:</string>
+		<string id="25">Kreaturen:</string>
+		<string id="26">Eingang:</string>
+		<string id="27">Ausgang:</string>
+		<string id="28">Glückliche Kreatur:</string>
+		<string id="29">Türme:</string>
+		<string id="30">Turm auf dem Spielfeld:</string>
+		<string id="31">Kreatur auf dem Spielfeld:</string>
+		<string id="32">Strategie:</string>
+		<string id="33">Turmfunktionen:</string>
+		<string id="34">Infopanel:</string>
+		<string id="35">Schwierigkeitsgrad:</string>
+		<string id="36">Türme abreißen:</string>
+		<string id="37">Taste 'Nächste Welle':</string>
+		<string id="38">Geist:</string>
+		<string id="39">Eismann:</string>
+		<string id="40">Geld:</string>
+		<string id="41">Punkte:</string>
+		<string id="42">Zeit:</string>
+		<string id="43">Lebenspunkte:</string>
+		<string id="44">Unbekannt</string>
+		<string id="45">MITTEL</string>
+		<string id="47">OK</string>
+		<string id="48">Pause</string>
+		<string id="49">Bearbeiten</string>
+		<string id="50">Demoversion</string>
+		<string id="51">ALLES</string>
+		<string id="53">OK</string>
+		<string id="54">Ton</string>
+		<string id="55">OK</string>
+		<string id="56">Ungültiger Schlüssel!</string>
+		<string id="57">Sind Sie sicher?</string>
+		<string id="58">Bitte warten...</string>
+		<string id="59">OK</string>
+		<string id="60">OK</string>
+		<string id="61">SKIP</string>
+		<string id="62">weiter</string>
+		<string id="63">RIGHT</string>
+		<string id="64">LEFT</string>
+		<string id="65">LEFT</string>
+		<string id="66">RIGHT</string>
+		<string id="67">RIGHT</string>
+		<string id="68">DOWN</string>
+		<string id="69">LEFT</string>
+		<string id="70">UP</string>
+		<string id="71">DOWN</string>
+		<string id="72">LEFT</string>
+		<string id="73">DOWN</string>
+		<string id="74">DOWN</string>
+		<string id="75">LEFT</string>
+		<string id="76">DOWN</string>
+		<string id="77">LEFT</string>
+		<string id="78">UP</string>
+		<string id="79">UP</string>
+		<string id="80">UP</string>
+		<string id="81">DOWN</string>
+		<string id="82">DOWN</string>
+		<string id="83">...</string>
+		<string id="84">nächste Welle</string>
+		<string id="85">SCHWER</string>
+		<string id="86">OK</string>
+		<string id="87">Abbruch</string>
+		<string id="88">fortfahren</string>
+		<string id="89">Löschen</string>
+		<string id="91">TÜRME</string>
+		<string id="92">OK</string>
+		<string id="93">Abbruch</string>
+		<string id="94">ОК</string>
+		<string id="95">OK</string>
+		<string id="96">OK</string>
+		<string id="97">Abbruch</string>
+		<string id="99">Hilfe:</string>
+		<string id="100">OK</string>
+		<string id="101">Die Registrierung ist erfolgreich!</string>
+		<string id="102">Abbruch</string>
+		<string id="103">WEITER</string>
+		<string id="104">Verbesserung</string>
+		<string id="105">8k GOLD</string>
+		<string id="107">benutzer-edit</string>
+		<string id="108">weiter</string>
+		<string id="109">OK</string>
+		<string id="110">Registrieren:</string>
+		<string id="111">KREATUREN</string>
+		<string id="113">Sind Sie sicher?</string>
+		<string id="115">Veröffentlichen</string>
+		<string id="116">Bestenliste im Web</string>
+		<string id="117">Benutzername:</string>
+		<string id="118">Abbruch</string>
+		<string id="119">Benutzername:</string>
+		<string id="120">First instal</string>
+		<string id="121">Text</string>
+		<string id="122">NEUES SPIEL</string>
+		<string id="123">Verkaufen</string>
+		<string id="124">MENÜ</string>
+		<string id="125">gruppe-edit</string>
+		<string id="127">Bisitzername: </string>
+		<string id="128">Musik</string>
+		<string id="131">OK</string>
+		<string id="133">Benutzername</string>
+		<string id="134">BESTENLISTE</string>
+		<string id="137">Benutzer:</string>
+		<string id="138">BENUTZER:</string>
+		<string id="139">ОK</string>
+		<string id="141">Bestenliste:</string>
+		<string id="142">combobox</string>
+		<string id="143">EINSTELLUNGEN</string>
+		<string id="144">Info:</string>
+		<string id="145">ANLEITUNG</string>
+		<string id="146">Gruppe:</string>
+		<string id="150">Effekte</string>
+		<string id="151">Bonus Leben:</string>
+		<string id="152">Schwierigkeit:</string>
+		<string id="153">HILFE</string>
+		<string id="154">Türme</string>
+		<string id="155">Neues Spiel:</string>
+		<string id="157">Zeitbonus:</string>
+		<string id="159">ÜBER UNS</string>
+		<string id="160">BLOKADE!</string>
+		<string id="161">Sprache ändern</string>
+		<string id="162">Endergebnis</string>
+		<string id="163">BEENDEN</string>
+		<string id="164">TOWERS TRAP</string>
+		<string id="165">Score 12</string>
+		<string id="167">money</string>
+		<string id="168">Lives Bonus 13 </string>
+		<string id="169">score</string>
+		<string id="170">Time Bonus 14</string>
+		<string id="171">time</string>
+		<string id="172">Total Score 15</string>
+		<string id="173">life</string>
+		<string id="174">Veröffentlicht!</string>
+		<string id="175">next level</string>
+		<string id="176">Schwierigkeit:</string>
+		<string id="177">Трудност 16</string>
+		<string id="178">Letztes Level:</string>
+		<string id="179">Текущо ниво 18</string>
+	</widget_strings>
+</Language>
