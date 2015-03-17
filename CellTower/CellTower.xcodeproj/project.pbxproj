@@ -20,6 +20,7 @@
 		B50F76971AB7F89F0007FF1F /* Creature.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76961AB7F89F0007FF1F /* Creature.m */; };
 		B51128CD1AB809E8005C8B2E /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CC1AB809E8005C8B2E /* TowerModel.m */; };
 		B51128D01AB80D23005C8B2E /* Tower.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CF1AB80D23005C8B2E /* Tower.m */; };
+		B59334F71AB81C540039A94C /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B59334F61AB81C540039A94C /* Map.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		B51128CC1AB809E8005C8B2E /* TowerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerModel.m; sourceTree = "<group>"; };
 		B51128CE1AB80D23005C8B2E /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
+		B59334F51AB81C540039A94C /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		B59334F61AB81C540039A94C /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,7 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
+				B59334F41AB81C540039A94C /* Map */,
 				B51128CA1AB809A2005C8B2E /* Tower */,
 				B50F76911AB7F4B70007FF1F /* Creature */,
 				B507884B1AB7F11600D5864E /* AppDelegate.h */,
@@ -161,6 +165,15 @@
 				B51128CF1AB80D23005C8B2E /* Tower.m */,
 			);
 			path = Tower;
+			sourceTree = "<group>";
+		};
+		B59334F41AB81C540039A94C /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				B59334F51AB81C540039A94C /* Map.h */,
+				B59334F61AB81C540039A94C /* Map.m */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +280,7 @@
 				B51128CD1AB809E8005C8B2E /* TowerModel.m in Sources */,
 				B50F76941AB7F5270007FF1F /* CreatureModel.m in Sources */,
 				B50788551AB7F11600D5864E /* GameViewController.m in Sources */,
+				B59334F71AB81C540039A94C /* Map.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
 				B507884D1AB7F11600D5864E /* AppDelegate.m in Sources */,
