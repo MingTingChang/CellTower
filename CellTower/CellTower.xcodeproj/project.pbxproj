@@ -16,7 +16,12 @@
 		B507885A1AB7F11600D5864E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B50788591AB7F11600D5864E /* Images.xcassets */; };
 		B507885D1AB7F11600D5864E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B507885B1AB7F11600D5864E /* LaunchScreen.xib */; };
 		B50788691AB7F11600D5864E /* CellTowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B50788681AB7F11600D5864E /* CellTowerTests.m */; };
+<<<<<<< HEAD
 		B59334F31AB7FFCB0039A94C /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B59334F21AB7FFCB0039A94C /* Map.m */; };
+=======
+		B50F76941AB7F5270007FF1F /* CreatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76931AB7F5270007FF1F /* CreatureModel.m */; };
+		B50F76971AB7F89F0007FF1F /* Creature.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76961AB7F89F0007FF1F /* Creature.m */; };
+>>>>>>> origin/master
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +51,15 @@
 		B50788621AB7F11600D5864E /* CellTowerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CellTowerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50788671AB7F11600D5864E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50788681AB7F11600D5864E /* CellTowerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellTowerTests.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		B59334F11AB7FFCB0039A94C /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		B59334F21AB7FFCB0039A94C /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+=======
+		B50F76921AB7F5270007FF1F /* CreatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatureModel.h; sourceTree = "<group>"; };
+		B50F76931AB7F5270007FF1F /* CreatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatureModel.m; sourceTree = "<group>"; };
+		B50F76951AB7F89F0007FF1F /* Creature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creature.h; sourceTree = "<group>"; };
+		B50F76961AB7F89F0007FF1F /* Creature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creature.m; sourceTree = "<group>"; };
+>>>>>>> origin/master
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +101,11 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				B59334F01AB7FF920039A94C /* Map */,
+=======
+				B50F76911AB7F4B70007FF1F /* Creature */,
+>>>>>>> origin/master
 				B507884B1AB7F11600D5864E /* AppDelegate.h */,
 				B507884C1AB7F11600D5864E /* AppDelegate.m */,
 				B507884E1AB7F11600D5864E /* GameScene.h */,
@@ -131,6 +147,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		B59334F01AB7FF920039A94C /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +155,17 @@
 				B59334F21AB7FFCB0039A94C /* Map.m */,
 			);
 			path = Map;
+=======
+		B50F76911AB7F4B70007FF1F /* Creature */ = {
+			isa = PBXGroup;
+			children = (
+				B50F76921AB7F5270007FF1F /* CreatureModel.h */,
+				B50F76931AB7F5270007FF1F /* CreatureModel.m */,
+				B50F76951AB7F89F0007FF1F /* Creature.h */,
+				B50F76961AB7F89F0007FF1F /* Creature.m */,
+			);
+			path = Creature;
+>>>>>>> origin/master
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,8 +269,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B50F76941AB7F5270007FF1F /* CreatureModel.m in Sources */,
 				B50788551AB7F11600D5864E /* GameViewController.m in Sources */,
+<<<<<<< HEAD
 				B59334F31AB7FFCB0039A94C /* Map.m in Sources */,
+=======
+				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
+>>>>>>> origin/master
 				B507884D1AB7F11600D5864E /* AppDelegate.m in Sources */,
 				B50788501AB7F11600D5864E /* GameScene.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,
