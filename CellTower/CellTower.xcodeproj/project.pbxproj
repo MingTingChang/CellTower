@@ -41,9 +41,6 @@
 		B5D702581AB84071003FE835 /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D702571AB84071003FE835 /* TowerModel.m */; };
 		B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D7025A1AB84095003FE835 /* CreatureModel.m */; };
 		B5D7025D1AB848C1003FE835 /* tower.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D7025C1AB848C1003FE835 /* tower.plist */; };
-
-		B593351F1AB83E140039A94C /* MapStep.m in Sources */ = {isa = PBXBuildFile; fileRef = B593351E1AB83E140039A94C /* MapStep.m */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,17 +94,12 @@
 		B59335081AB81E580039A94C /* slowdown_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slowdown_fire.wav; sourceTree = "<group>"; };
 		B59335091AB81E580039A94C /* sniper_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_fire.wav; sourceTree = "<group>"; };
 		B593350A1AB81E580039A94C /* upgrade_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = upgrade_tower.wav; sourceTree = "<group>"; };
-
 		B5CE09931AB833C500C44123 /* creature.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = creature.plist; sourceTree = "<group>"; };
 		B5D702561AB84071003FE835 /* TowerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerModel.h; sourceTree = "<group>"; };
 		B5D702571AB84071003FE835 /* TowerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerModel.m; sourceTree = "<group>"; };
 		B5D702591AB84095003FE835 /* CreatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatureModel.h; sourceTree = "<group>"; };
 		B5D7025A1AB84095003FE835 /* CreatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatureModel.m; sourceTree = "<group>"; };
 		B5D7025C1AB848C1003FE835 /* tower.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tower.plist; sourceTree = "<group>"; };
-
-		B593351D1AB83E140039A94C /* MapStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapStep.h; sourceTree = "<group>"; };
-		B593351E1AB83E140039A94C /* MapStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapStep.m; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,8 +215,6 @@
 			children = (
 				B59334F61AB81C540039A94C /* Map.m */,
 				B59334F51AB81C540039A94C /* Map.h */,
-				B593351D1AB83E140039A94C /* MapStep.h */,
-				B593351E1AB83E140039A94C /* MapStep.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -383,7 +373,6 @@
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
 				B507884D1AB7F11600D5864E /* AppDelegate.m in Sources */,
 				B50788501AB7F11600D5864E /* GameScene.m in Sources */,
-				B593351F1AB83E140039A94C /* MapStep.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
