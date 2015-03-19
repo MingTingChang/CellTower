@@ -34,7 +34,7 @@ typedef enum{
 @property (nonatomic , assign) int range;
 
 /** 攻击速度 */
-@property (nonatomic , assign) int speed;
+@property (nonatomic , assign) int attackSpeed;
 
 /** 攻击力 */
 @property (nonatomic , assign) int damage;

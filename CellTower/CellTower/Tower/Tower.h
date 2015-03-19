@@ -9,6 +9,19 @@
 #import <SpriteKit/SpriteKit.h>
 #import "TowerModel.h"
 @class Creature;
+@class Tower;
+
+@protocol TowerDelegate <NSObject>
+@optional
+/**
+ *  塔已经消灭怪物的代理方法 (死亡怪物未销毁)
+ *
+ *  @param tower    塔
+ *  @param creature 被消灭的怪物
+ */
+- (void)tower:(Tower *)tower didDefeatCreature:(Creature *)creature;
+
+@end
 
 @interface Tower : SKSpriteNode
 
@@ -20,7 +33,7 @@
 @property (nonatomic , assign) int range;
 
 /** 攻击速度 */
-@property (nonatomic , assign) int speed;
+@property (nonatomic , assign) int attackSpeed;
 
 /** 攻击力 */
 @property (nonatomic , assign) int damage;
@@ -58,6 +71,9 @@
 /** 是否正在攻击 */
 @property (nonatomic , assign ,getter=isWorking) BOOL working;
 
+/** 代理 */
+@property (nonatomic , weak) id<TowerDelegate> delegate;
+
 #pragma mark - 方法
 /**
  *  实例化塔
@@ -86,6 +102,6 @@
 - (void)upgrade;
 
 /** 拆除 */
-- (void)destory;
+- (int)destory;
 
 @end

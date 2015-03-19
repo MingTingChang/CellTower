@@ -75,10 +75,16 @@
 		B50F76961AB7F89F0007FF1F /* Creature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creature.m; sourceTree = "<group>"; };
 		B51128CE1AB80D23005C8B2E /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
+
 		B53483101ABB173600A8D950 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		B53483111ABB173600A8D950 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		B53483121ABB173600A8D950 /* NSMutableArray+Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Point.h"; sourceTree = "<group>"; };
 		B53483131ABB173600A8D950 /* NSMutableArray+Point.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Point.m"; sourceTree = "<group>"; };
+
+		B5686DC51ABAB1500037EA42 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = pch/PrefixHeader.pch; sourceTree = "<group>"; };
+		B59334F51AB81C540039A94C /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		B59334F61AB81C540039A94C /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+
 		B59334F91AB81E570039A94C /* air_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = air_fire.wav; sourceTree = "<group>"; };
 		B59334FA1AB81E570039A94C /* congratulation.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = congratulation.wav; sourceTree = "<group>"; };
 		B59334FB1AB81E580039A94C /* create_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = create_tower.wav; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 				B507885B1AB7F11600D5864E /* LaunchScreen.xib */,
 				B50788481AB7F11600D5864E /* Info.plist */,
 				B50788491AB7F11600D5864E /* main.m */,
+				B5686DC51ABAB1500037EA42 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -503,6 +510,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = "$(SRCROOT)/pch/";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CellTower/pch/PrefixHeader.pch";
 				INFOPLIST_FILE = CellTower/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -514,6 +523,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = "$(SRCROOT)/pch/";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CellTower/pch/PrefixHeader.pch";
 				INFOPLIST_FILE = CellTower/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

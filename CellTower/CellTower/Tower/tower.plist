@@ -7,7 +7,7 @@
 		<string>tower_air</string>
 		<key>range</key>
 		<integer>10</integer>
-		<key>speed</key>
+		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
 		<integer>20</integer>
@@ -37,7 +37,7 @@
 		<string>tower_cannon</string>
 		<key>range</key>
 		<integer>10</integer>
-		<key>speed</key>
+		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
 		<integer>20</integer>
@@ -67,7 +67,7 @@
 		<string>tower_radar</string>
 		<key>range</key>
 		<integer>10</integer>
-		<key>speed</key>
+		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
 		<integer>20</integer>
@@ -97,7 +97,7 @@
 		<string>tower_rocket</string>
 		<key>range</key>
 		<integer>10</integer>
-		<key>speed</key>
+		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
 		<integer>20</integer>
@@ -127,7 +127,7 @@
 		<string>tower_shock</string>
 		<key>range</key>
 		<integer>10</integer>
-		<key>speed</key>
+		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
 		<integer>20</integer>
@@ -157,7 +157,7 @@
 		<string>tower_slowdown</string>
 		<key>range</key>
 		<integer>10</integer>
-		<key>speed</key>
+		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
 		<integer>20</integer>
@@ -187,7 +187,7 @@
 		<string>tower_sniper</string>
 		<key>range</key>
 		<integer>10</integer>
-		<key>speed</key>
+		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
 		<integer>20</integer>

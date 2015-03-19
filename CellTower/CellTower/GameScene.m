@@ -10,7 +10,7 @@
 #import "Creature.h"
 #import "Tower.h"
 
-@interface GameScene ()
+@interface GameScene () <TowerDelegate>
 {
     Creature *_creature;
     Tower *_tower;
@@ -21,44 +21,40 @@
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
+    self.backgroundColor = [SKColor whiteColor];
 
-    [self test];
     [self test];
 }
 
 - (void)test
 {
-    
     // 1.创建怪物
-    Creature *creature = [Creature spriteNodeWithImageNamed:@"creature_bomb"];
-    creature.HP = 100;
-    creature.size = CGSizeMake(15, 15);
-    creature.position = CGPointMake(100, 100);
+    CreatureModel *model = [CreatureModel creatureModelWithType:CreatureTypeBoss];
+    Creature *creature = [Creature creatureWithModel:model position:CGPointMake(100, 100)];
     [self addChild:creature];
-    _creature  = creature;
-    
-    TowerModel *model = [TowerModel towerModelWithType:TowerTypeAir];
-    
-    Tower *t1 = [Tower towerWithModel:model position:CGPointMake(150, 150)];
-    [self addChild:t1];
+    _creature = creature;
     
     // 2.创建塔
-    Tower *tower = [Tower spriteNodeWithImageNamed:@"tower_cannon"];
-    tower.damage = 5;
-    tower.size = CGSizeMake(30, 30);
-    tower.position = CGPointMake(150, 100);
+    TowerModel *towerModel = [TowerModel towerModelWithType:TowerTypeCannon];
+    Tower *tower =[Tower towerWithModel:towerModel position:CGPointMake(50, 50)];
     [self addChild:tower];
+    tower.delegate = self;
     _tower = tower;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    NSValue *p1 = [NSValue valueWithCGPoint:CGPointMake(100, 150)];
+    NSValue *p2 = [NSValue valueWithCGPoint:CGPointMake(150, 150)];
+    NSValue *p3 = [NSValue valueWithCGPoint:CGPointMake(150, 200)];
     
-    SKSpriteNode *bullet = [SKSpriteNode spriteNodeWithImageNamed:@"creature_bomb"];
-    bullet.size = CGSizeMake(10, 10);
+    
+    [_creature moveWithPath:@[p1, p2, p3]];
+    
+    CreatureModel *model = [CreatureModel creatureModelWithType:CreatureTypeBomb];
+    Creature *bullet = [Creature creatureWithModel:model];
+    bullet.size = CGSizeMake(8, 8);
     [self addChild:bullet];
-    
-    [_creature runAction:[SKAction moveToY:300 duration:3.0f]];
     
     [_tower fireWithCreature:_creature bullet:bullet];
 
@@ -66,6 +62,13 @@
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+}
+
+#pragma mark - 代理方法
+- (void)tower:(Tower *)tower didDefeatCreature:(Creature *)creature
+{
+    [creature removeFromParent];
+    _creature = nil;
 }
 
 @end
