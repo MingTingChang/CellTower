@@ -7,7 +7,7 @@
 		<string>creature_bomb</string>
 		<key>HP</key>
 		<integer>100</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>20</integer>
 		<key>coin</key>
 		<integer>10</integer>
@@ -23,7 +23,7 @@
 		<string>creature_boss</string>
 		<key>HP</key>
 		<integer>400</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>15</integer>
 		<key>coin</key>
 		<integer>40</integer>
@@ -39,7 +39,7 @@
 		<string>creature_coward</string>
 		<key>HP</key>
 		<integer>150</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>25</integer>
 		<key>coin</key>
 		<integer>15</integer>
@@ -55,7 +55,7 @@
 		<string>creature_fast</string>
 		<key>HP</key>
 		<integer>50</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>40</integer>
 		<key>coin</key>
 		<integer>10</integer>
@@ -71,7 +71,7 @@
 		<string>creature_fly</string>
 		<key>HP</key>
 		<integer>100</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>15</integer>
 		<key>coin</key>
 		<integer>10</integer>
@@ -87,7 +87,7 @@
 		<string>creature_ice</string>
 		<key>HP</key>
 		<integer>150</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>22</integer>
 		<key>coin</key>
 		<integer>20</integer>
@@ -103,7 +103,7 @@
 		<string>creature_normal</string>
 		<key>HP</key>
 		<integer>100</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>20</integer>
 		<key>coin</key>
 		<integer>10</integer>
@@ -119,7 +119,7 @@
 		<string>creature_strong</string>
 		<key>HP</key>
 		<integer>200</integer>
-		<key>speed</key>
+		<key>moveSpeed</key>
 		<integer>10</integer>
 		<key>coin</key>
 		<integer>20</integer>

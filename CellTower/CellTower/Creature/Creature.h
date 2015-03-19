@@ -8,7 +8,11 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "CreatureModel.h"
-@class MovePath;
+
+typedef enum{
+    CreatureOutletUp, // 上面出
+    CreatureOutletLeft // 左边出来
+} CreatureOutlet;
 
 @interface Creature : SKSpriteNode
 #pragma mark - 属性
@@ -18,7 +22,7 @@
 @property (nonatomic , assign) int HP;
 
 /** 移动速度 */
-@property (nonatomic , assign) int speed;
+@property (nonatomic , assign) int moveSpeed;
 
 /** 怪物价值 */
 @property (nonatomic , assign) int coin;
@@ -31,6 +35,9 @@
 
 /** 怪物是否被减速 */
 @property (nonatomic , assign, getter=isSlowDown) BOOL slowDown;
+
+/** 怪物从那个出口出来 */
+@property (nonatomic , assign) CreatureOutlet outlet;
 
 #pragma mark - 方法
 
@@ -51,6 +58,6 @@
 
 
 /** 根据路径进行移动 */
-- (void)moveWith:(MovePath *)movePath;
+- (void)moveWithPath:(NSArray *)movePath;
 
 @end

@@ -1,0 +1,25 @@
+//
+//  PrefixHeader.pch
+//  CellTower
+//
+//  Created by 刘奥明 on 15-3-19.
+//  Copyright (c) 2015年 MingTingChang. All rights reserved.
+//
+
+#ifndef CellTower_PrefixHeader_pch
+#define CellTower_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+
+#ifndef __OPTIMIZE__
+#define CTLog(...) NSLog(__VA_ARGS__)
+#else
+#define CTLog(...) {}
+#endif
+
+#endif
+
+#endif

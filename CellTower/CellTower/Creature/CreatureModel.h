@@ -27,7 +27,7 @@ typedef enum {
 @property (nonatomic , assign) int HP;
 
 /** 移动速度 */
-@property (nonatomic , assign) int speed;
+@property (nonatomic , assign) int moveSpeed;
 
 /** 怪物价值 */
 @property (nonatomic , assign) int coin;
