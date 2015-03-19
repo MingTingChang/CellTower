@@ -1,14 +1,58 @@
 //
 //  Map.h
-//  CellTower
+//  Map
 //
-//  Created by 刘挺 on 15-3-17.
-//  Copyright (c) 2015年 MingTingChang. All rights reserved.
+//  Created by 刘挺 on 15-3-19.
+//  Copyright (c) 2015年 liuting. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
+#import <UIKit/UIKit.h>
 
-@interface Map : SKSpriteNode
+typedef enum
+{
+    PathDirectLeftToRight = 0,      //行走方向为从左往右
+    PathDirectTopToBottom = 1       //行走方向为从上往下
+}PathDirect;
 
+/** 图的节点类 */
+@interface MapPoint : NSObject
+
+@property (nonatomic , assign) CGPoint point;
+
+@property (nonatomic , assign) int value;
+
+- (instancetype)initWithPoint:(CGPoint)point value:(int)value;
++ (instancetype)pointWithPoint:(CGPoint)point value:(int)value;
+
+@end
+
+
+/** 图类 */
+@interface Map : NSObject
+/** 墙的集合 */
+@property (nonatomic , strong) NSMutableSet *walls;
+/** 图的尺寸 */
+@property (nonatomic , assign) CGSize size;
+/** 从左往右行走的右终点坐标 */
+@property (nonatomic , assign) CGPoint rightTarget;
+/** 从左往右行走的搜索图 */
+@property (nonatomic , strong) NSMutableArray *rightPathMap;
+/** 从上往下行走的下终点坐标 */
+@property (nonatomic , assign) CGPoint bottomTarget;
+/** 从上往下行走的搜索图 */
+@property (nonatomic , strong) NSMutableArray *bottomPathMap;
+/** 原始图有没有被修改 */
+@property (nonatomic , assign , getter=isChange) BOOL change;
+
+/** 初始化方法 rightDoor为右终点 bottomDoor为下终点 */
+- (instancetype)initWithSize:(CGSize)size rightDoor:(CGPoint)right bottomDoor:(CGPoint)bottom;
++ (instancetype)mapWithSize:(CGSize)size rightDoor:(CGPoint)right bottomDoor:(CGPoint)bottom;
+
+/** 添加和删除墙的方法 */
+- (void)addMapWallWithPoint:(CGPoint)point;
+- (void)removeMapWallWithPoint:(CGPoint)point;
+
+/** 根据起点和行走方向搜索路径 */
+- (NSMutableArray *)findPathFromPoint:(CGPoint)from direction:(PathDirect)direct;
 
 @end
