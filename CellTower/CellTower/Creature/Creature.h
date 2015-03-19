@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "CreatureModel.h"
+@class Tower;
 
 typedef enum{
     CreatureOutletUp, // 上面出
@@ -57,7 +58,18 @@ typedef enum{
 + (instancetype)creatureWithModel:(CreatureModel *)model position:(CGPoint)position;
 
 
-/** 根据路径进行移动 */
+/**
+ *  移动
+ *
+ *  @param movePath 移动路径
+ */
 - (void)moveWithPath:(NSArray *)movePath;
+
+/**
+ *  被减速
+ *
+ *  @param tower 减速的塔
+ */
+- (void)beSlowDown:(Tower *)tower;
 
 @end

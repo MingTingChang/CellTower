@@ -17,29 +17,33 @@
 
 @implementation Creature
 #pragma mark - 私有方法
+#pragma mark 初始化
+- (instancetype)initWithModel:(CreatureModel *)model
+{
+    if (model == nil) return nil;
+    
+    if (self = [super initWithImageNamed:model.imageName]) {
+        self.size = CGSizeMake(15, 15);
+        self.zPosition = 1;
+        self.position = CGPointMake(-100, -100);
+        
+        self.imageName = [model.imageName copy];
+        self.HP = model.HP;
+        self.moveSpeed = model.moveSpeed;
+        self.coin = model.coin;
+        self.type = model.type;
+        self.hidden = model.hidden;
+        self.slowDown = model.slowDown;
+    }
+    return self;
+}
 
 #pragma mark - 共有方法
 #pragma mark 根据模型实例化怪物
 + (instancetype)creatureWithModel:(CreatureModel *)model
 {
-    if (model == nil) return nil;
     
-    // 1.实例化怪物
-    Creature *creature = [self spriteNodeWithImageNamed:model.imageName];
-    
-    // 2.设置数据
-    creature.size = CGSizeMake(15, 15);
-    creature.position = CGPointMake(-100, -100);
-    
-    creature.imageName = [model.imageName copy];
-    creature.HP = model.HP;
-    creature.moveSpeed = model.moveSpeed;
-    creature.coin = model.coin;
-    creature.type = model.type;
-    creature.hidden = model.hidden;
-    creature.slowDown = model.slowDown;
-    
-    return creature;
+    return [[self alloc] initWithModel:model];
 }
 
 #pragma mark 根据模型和点实例化怪物
@@ -91,6 +95,24 @@
     SKAction *moveSequeue = [SKAction sequence:arrayM];
     
     [self runAction:moveSequeue];
+}
+
+#pragma mark 被减速
+- (void)beSlowDown:(Tower *)tower
+{
+    if (self.slowDown) return;
+    
+    self.slowDown = YES;
+    
+    // 1.减慢移动速度
+    self.moveSpeed *= 0.5;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.moveSpeed *= 2;
+        self.slowDown = NO;
+    });
+    
+    // 2.添加减速效果
 }
 
 @end

@@ -37,6 +37,9 @@
 		B593351A1AB81E580039A94C /* slowdown_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335081AB81E580039A94C /* slowdown_fire.wav */; };
 		B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335091AB81E580039A94C /* sniper_fire.wav */; };
 		B593351C1AB81E580039A94C /* upgrade_tower.wav in Resources */ = {isa = PBXBuildFile; fileRef = B593350A1AB81E580039A94C /* upgrade_tower.wav */; };
+		B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BF25211ABAC838005CEAC1 /* SlowDownTower.m */; };
+		B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BF25241ABACE05005CEAC1 /* ShockTower.m */; };
+		B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BF25271ABACF54005CEAC1 /* CTGeometryTool.m */; };
 		B5CE09941AB833C500C44123 /* creature.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5CE09931AB833C500C44123 /* creature.plist */; };
 		B5D702581AB84071003FE835 /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D702571AB84071003FE835 /* TowerModel.m */; };
 		B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D7025A1AB84095003FE835 /* CreatureModel.m */; };
@@ -95,6 +98,12 @@
 		B59335081AB81E580039A94C /* slowdown_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slowdown_fire.wav; sourceTree = "<group>"; };
 		B59335091AB81E580039A94C /* sniper_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_fire.wav; sourceTree = "<group>"; };
 		B593350A1AB81E580039A94C /* upgrade_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = upgrade_tower.wav; sourceTree = "<group>"; };
+		B5BF25201ABAC838005CEAC1 /* SlowDownTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowDownTower.h; sourceTree = "<group>"; };
+		B5BF25211ABAC838005CEAC1 /* SlowDownTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowDownTower.m; sourceTree = "<group>"; };
+		B5BF25231ABACE05005CEAC1 /* ShockTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShockTower.h; sourceTree = "<group>"; };
+		B5BF25241ABACE05005CEAC1 /* ShockTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShockTower.m; sourceTree = "<group>"; };
+		B5BF25261ABACF54005CEAC1 /* CTGeometryTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGeometryTool.h; sourceTree = "<group>"; };
+		B5BF25271ABACF54005CEAC1 /* CTGeometryTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGeometryTool.m; sourceTree = "<group>"; };
 		B5CE09931AB833C500C44123 /* creature.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = creature.plist; sourceTree = "<group>"; };
 		B5D702561AB84071003FE835 /* TowerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerModel.h; sourceTree = "<group>"; };
 		B5D702571AB84071003FE835 /* TowerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerModel.m; sourceTree = "<group>"; };
@@ -142,6 +151,7 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
+				B5BF25291ABACF61005CEAC1 /* Tool */,
 				B59334F41AB81C540039A94C /* Map */,
 				B51128CA1AB809A2005C8B2E /* Tower */,
 				B50F76911AB7F4B70007FF1F /* Creature */,
@@ -191,11 +201,11 @@
 		B50F76911AB7F4B70007FF1F /* Creature */ = {
 			isa = PBXGroup;
 			children = (
-				B50F76951AB7F89F0007FF1F /* Creature.h */,
-				B50F76961AB7F89F0007FF1F /* Creature.m */,
+				B5CE09931AB833C500C44123 /* creature.plist */,
 				B5D702591AB84095003FE835 /* CreatureModel.h */,
 				B5D7025A1AB84095003FE835 /* CreatureModel.m */,
-				B5CE09931AB833C500C44123 /* creature.plist */,
+				B50F76951AB7F89F0007FF1F /* Creature.h */,
+				B50F76961AB7F89F0007FF1F /* Creature.m */,
 			);
 			path = Creature;
 			sourceTree = "<group>";
@@ -203,11 +213,15 @@
 		B51128CA1AB809A2005C8B2E /* Tower */ = {
 			isa = PBXGroup;
 			children = (
-				B51128CE1AB80D23005C8B2E /* Tower.h */,
-				B51128CF1AB80D23005C8B2E /* Tower.m */,
+				B5D7025C1AB848C1003FE835 /* tower.plist */,
 				B5D702561AB84071003FE835 /* TowerModel.h */,
 				B5D702571AB84071003FE835 /* TowerModel.m */,
-				B5D7025C1AB848C1003FE835 /* tower.plist */,
+				B51128CE1AB80D23005C8B2E /* Tower.h */,
+				B51128CF1AB80D23005C8B2E /* Tower.m */,
+				B5BF25201ABAC838005CEAC1 /* SlowDownTower.h */,
+				B5BF25211ABAC838005CEAC1 /* SlowDownTower.m */,
+				B5BF25231ABACE05005CEAC1 /* ShockTower.h */,
+				B5BF25241ABACE05005CEAC1 /* ShockTower.m */,
 			);
 			path = Tower;
 			sourceTree = "<group>";
@@ -244,6 +258,16 @@
 				B593350A1AB81E580039A94C /* upgrade_tower.wav */,
 			);
 			path = music;
+			sourceTree = "<group>";
+		};
+		B5BF25291ABACF61005CEAC1 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				B5BF25261ABACF54005CEAC1 /* CTGeometryTool.h */,
+				B5BF25271ABACF54005CEAC1 /* CTGeometryTool.m */,
+			);
+			name = Tool;
+			path = Creature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,8 +395,11 @@
 				B5D702581AB84071003FE835 /* TowerModel.m in Sources */,
 				B59334F71AB81C540039A94C /* Map.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
+				B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
+				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
+				B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */,
 				B507884D1AB7F11600D5864E /* AppDelegate.m in Sources */,
 				B50788501AB7F11600D5864E /* GameScene.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,

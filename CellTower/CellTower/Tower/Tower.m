@@ -8,6 +8,7 @@
 
 #import "Tower.h"
 #import "Creature.h"
+#import "CTGeometryTool.h"
 
 @interface Tower ()
 
@@ -18,30 +19,39 @@
 
 @implementation Tower
 
+#pragma mark - 私有方法
+#pragma mark 初始化
+- (instancetype)initWithModel:(TowerModel *)model
+{
+    if (self = [super initWithImageNamed:model.imageName]) {
+        
+        self.size = CGSizeMake(30, 30);
+        self.zPosition = 1;
+        
+        self.imageName = [model.imageName copy];
+        self.range = model.range;
+        self.attackSpeed = model.attackSpeed;
+        self.damage = model.damage;
+        self.type = model.type;
+        self.level = model.level;
+        self.maxLevel = model.maxLevel;
+        self.damageIncerment = model.damageIncerment;
+        self.bulidCoin = model.bulidCoin;
+        self.upgradeCoin = model.upgradeCoin;
+        self.destoryCoinRatio = model.destoryCoinRatio;
+        self.grid = model.grid;
+        self.bulletType = model.bulletType;
+        self.working = model.working;
+        
+    }
+    return self;
+}
+
 #pragma mark - 公共方法
 #pragma mark 根据模型实例化塔
 + (instancetype)towerWithModel:(TowerModel *)model
 {
-    Tower *tower = [Tower spriteNodeWithImageNamed:model.imageName];
-    tower.size = CGSizeMake(30, 30);
-    tower.zPosition = 1;
-    
-    tower.imageName = [model.imageName copy];
-    tower.range = model.range;
-    tower.attackSpeed = model.attackSpeed;
-    tower.damage = model.damage;
-    tower.type = model.type;
-    tower.level = model.level;
-    tower.maxLevel = model.maxLevel;
-    tower.damageIncerment = model.damageIncerment;
-    tower.bulidCoin = model.bulidCoin;
-    tower.upgradeCoin = model.upgradeCoin;
-    tower.destoryCoinRatio = model.destoryCoinRatio;
-    tower.grid = model.grid;
-    tower.bulletType = model.bulletType;
-    tower.working = model.working;
-    
-    return tower;
+    return [[self alloc] initWithModel:model];
 }
 
 #pragma mark 根据模型和位置实例化塔
@@ -53,12 +63,6 @@
     return tower;
 }
 
-#pragma mark 塔是否在工作
-- (BOOL)isWorking
-{
-    return (self.target != nil);
-}
-
 #pragma mark 攻击
 - (void)fireWithCreature:(Creature *)creature bullet:(SKSpriteNode *)bullet
 {
@@ -68,22 +72,20 @@
     self.target = creature;
     
     // 2.旋转
-    // 计算角度
-    CGPoint offset = CGPointMake(creature.position.x - self.position.x, creature.position.y - self.position.y);
-    CGFloat angle = atan2f(offset.y, offset.x);
-
-    [self runAction:[SKAction rotateToAngle:angle duration:0.1f] completion:^{
+    [self runAction:[SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:creature.position andPoint2:self.position] duration:0.1f] completion:^{
+        
         // 3.发射子弹
         bullet.position = self.position;
-        
         bullet.hidden = NO;
-        [bullet runAction:[SKAction moveTo:creature.position duration:0.2f] completion:^{
+        [bullet runAction:[SKAction moveTo:creature.position duration:0.5f] completion:^{
             bullet.hidden = YES;
         }];
         
         // 4.扣血判断怪物是否死亡
         creature.HP -= self.damage;
-        CTLog(@"%d", creature.HP);
+        // 5.判断怪物是否离开射程
+        CGRect towerAttactRect = CGRectMake(self.position.x - self.range*10, self.position.y - self.range*10, self.range*80, self.range*80);
+        BOOL IsLeave = ![CTGeometryTool isOveriapBetweenCircle1:creature.frame andCircle2:towerAttactRect];
         
         if (creature.HP <= 0) { // 死亡
             // 清除攻击目标
@@ -93,23 +95,26 @@
             if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
                 [self.delegate tower:self didDefeatCreature:creature];
             }
-        } else { // 未死亡
-            
+        } else if (IsLeave){ // 离开射程
+            // 清除攻击目标
+            self.target = nil;
+        } else {
             // 5.等待攻击间隔
             NSTimeInterval attackWait = 1 / self.attackSpeed;
             SKAction *attackWaitAction = [SKAction waitForDuration:attackWait];
             [self runAction:attackWaitAction completion:^{
                 [self fireWithCreature:creature bullet:bullet];
             }];
-            
         }
-        
-        
-        
     }];
-    
-    
 }
+
+#pragma mark 塔是否在工作
+- (BOOL)isWorking
+{
+    return (self.target != nil);
+}
+
 
 #pragma mark 升级
 - (void)upgrade

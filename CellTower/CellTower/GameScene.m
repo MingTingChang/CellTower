@@ -8,7 +8,8 @@
 
 #import "GameScene.h"
 #import "Creature.h"
-#import "Tower.h"
+#import "SlowDownTower.h"
+#import "CTGeometryTool.h"
 
 @interface GameScene () <TowerDelegate>
 {
@@ -35,8 +36,8 @@
     _creature = creature;
     
     // 2.创建塔
-    TowerModel *towerModel = [TowerModel towerModelWithType:TowerTypeCannon];
-    Tower *tower =[Tower towerWithModel:towerModel position:CGPointMake(50, 50)];
+    TowerModel *towerModel = [TowerModel towerModelWithType:TowerTypeSlowDown];
+    SlowDownTower *tower =[SlowDownTower towerWithModel:towerModel position:CGPointMake(50, 50)];
     [self addChild:tower];
     tower.delegate = self;
     _tower = tower;
@@ -51,12 +52,13 @@
     
     [_creature moveWithPath:@[p1, p2, p3]];
     
-    CreatureModel *model = [CreatureModel creatureModelWithType:CreatureTypeBomb];
-    Creature *bullet = [Creature creatureWithModel:model];
+    CreatureModel *creatureModel = [CreatureModel creatureModelWithType:CreatureTypeBomb];
+    Creature *bullet = [Creature creatureWithModel:creatureModel];
     bullet.size = CGSizeMake(8, 8);
     [self addChild:bullet];
     
     [_tower fireWithCreature:_creature bullet:bullet];
+    CTLog(@"%@", [_tower class]);
 
 }
 
