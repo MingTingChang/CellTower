@@ -33,4 +33,18 @@
     return atan2f(offset.y, offset.x);
 }
 
++ (CGPoint)gridPointFromPixelPoint:(CGPoint)point gridPixel:(int)gridPixel
+{
+    int gridX = point.x / gridPixel;
+    int gridY = point.y / gridPixel;
+    return CGPointMake(gridX, gridY);
+}
+
++ (CGPoint)pixelPointFromGridPoint:(CGPoint)point gridPixel:(int)gridPixel
+{
+    int pixelX = point.x * gridPixel + gridPixel * 0.5;
+    int pixelY = point.y * gridPixel + gridPixel * 0.5;
+    return CGPointMake(pixelX, pixelY);
+}
+
 @end

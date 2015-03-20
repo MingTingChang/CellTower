@@ -21,6 +21,8 @@ typedef enum
 
 @property (nonatomic , assign) int value;
 
+@property (nonatomic , assign) double dreamValue;
+
 - (instancetype)initWithPoint:(CGPoint)point value:(int)value;
 + (instancetype)pointWithPoint:(CGPoint)point value:(int)value;
 

@@ -11,6 +11,6 @@
 @interface NSMutableArray (Point)
 
 - (id)objectAtPoint:(CGPoint)point;
-- (NSMutableArray *)getNeighborPointWithCenterPoint:(CGPoint)point;
+- (NSMutableSet *)getNeighborPointWithCenterPoint:(CGPoint)point;
 
 @end

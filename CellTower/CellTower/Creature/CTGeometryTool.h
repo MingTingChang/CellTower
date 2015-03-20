@@ -28,4 +28,22 @@
  *  @return 角度
  */
 + (CGFloat)angleBetweenPoint1:(CGPoint)point1 andPoint2:(CGPoint)point2;
+/**
+ *  计算栅格坐标，像素坐标根据栅格像素单位转化为栅格坐标
+ *
+ *  @param point 像素坐标
+ *  @param gridPixel 栅格像素单位
+ *
+ *  @return 栅格坐标
+ */
++ (CGPoint)gridPointFromPixelPoint:(CGPoint)point gridPixel:(int)gridPixel;
+/**
+ *  计算像素坐标，栅格坐标根据栅格像素单位转化为像素坐标
+ *
+ *  @param point 栅格坐标
+ *  @param gridPixel 栅格像素单位
+ *
+ *  @return 像素坐标
+ */
++ (CGPoint)pixelPointFromGridPoint:(CGPoint)point gridPixel:(int)gridPixel;
 @end
