@@ -16,6 +16,7 @@
     if (self = [super init]) {
         self.point = point;
         self.value = value;
+        self.dreamValue = MAXFLOAT;
     }
     return self;
 }
@@ -110,33 +111,62 @@
         pathMap = self.bottomPathMap;
     }
     
+    if (pathMap == nil) return nil;
+    
     MapPoint *nowPoint = [pathMap objectAtPoint:from];
     
     if ((nowPoint == nil) || (nowPoint.value == -1)) {
-        NSLog(@"point not in map");
+        CTLog(@"point not in map");
         return nil;
     }
     
     // 根据搜索图搜索路径
     NSMutableArray *path = [NSMutableArray array];
-    [path addObject:nowPoint];
+
     while (nowPoint.value != 1) {
-        BOOL findFlag = NO;
-        NSMutableArray *neigh = [pathMap getNeighborPointWithCenterPoint:nowPoint.point];
         
+        NSMutableSet *neigh = [pathMap getNeighborPointWithCenterPoint:nowPoint.point];
+        NSMutableSet *both = [NSMutableSet set];
         for (MapPoint *neighPoint in neigh) {
             if (neighPoint.value == nowPoint.value - 1) {
-                [path addObject:neighPoint];
-                nowPoint = neighPoint;
-                findFlag = YES;
-                break;
+                [both addObject:neighPoint];
             }
         }
-        
-        if (findFlag == NO) return nil;
+        if (both.count == 0) return nil;
+        MapPoint *one = [both anyObject];
+        for (MapPoint *other in both) {
+            if (one.dreamValue > other.dreamValue) {
+                one = other;
+            }
+        }
+        [path addObject:one];
+        nowPoint = one;
     }
     
-    return path;
+    // 裁剪路径
+    NSMutableArray *pointPath = [NSMutableArray array];
+    
+    while (path.count >= 3) {
+        MapPoint *one = path[0];
+        MapPoint *two = path[1];
+        MapPoint *three = path[2];
+        
+        CGPoint oneToTwo = CGPointMake(abs(one.point.x - two.point.x),
+                                       abs(one.point.y - two.point.y));
+        CGPoint TwoToThree = CGPointMake(abs(two.point.x - three.point.x),
+                                         abs(two.point.y - three.point.y));
+        
+        if (!CGPointEqualToPoint(oneToTwo, TwoToThree)) {
+            [path removeObject:two];
+        }
+        [pointPath addObject:[NSValue valueWithCGPoint:one.point]];
+        [path removeObject:one];
+    }
+    
+    for (MapPoint *pathPoint in path) {
+        [pointPath addObject:[NSValue valueWithCGPoint:pathPoint.point]];
+    }
+    return pointPath;
 }
 
 #pragma mark 配置和生成搜索图
@@ -159,6 +189,7 @@
             }
             int value = isWall ? -1 : 0;
             MapPoint *pathMapPoint = [MapPoint pointWithPoint:pos value:value];
+            pathMapPoint.dreamValue = pow(pos.x - point.x, 2) + pow(pos.y - point.y, 2);
             [row addObject:pathMapPoint];
         }
         [pathMap addObject:row];
@@ -183,7 +214,7 @@
         // 下一步寻找点的集合
         NSMutableSet *nextFind = [NSMutableSet set];    //注意：这里不能使用数组，不然会重复添加
         for (MapPoint *mapPoint in find) {
-            NSMutableArray *neigh = [pathMap getNeighborPointWithCenterPoint:mapPoint.point];
+            NSMutableSet *neigh = [pathMap getNeighborPointWithCenterPoint:mapPoint.point];
             for (MapPoint *neighPoint in neigh) {
                 if (neighPoint.value == 0) {
                     [nextFind addObject:neighPoint];

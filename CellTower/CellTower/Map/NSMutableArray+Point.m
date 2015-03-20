@@ -29,9 +29,9 @@
     return nil;
 }
 
-- (NSMutableArray *)getNeighborPointWithCenterPoint:(CGPoint)point
+- (NSMutableSet *)getNeighborPointWithCenterPoint:(CGPoint)point
 {
-    NSMutableArray *neigh = [NSMutableArray array];
+    NSMutableSet *neigh = [NSMutableSet set];
     for (int y = -1; y <= 1; y++) {
         for (int x = -1; x <= 1; x++) {
             if (abs(x + y) == 1) {

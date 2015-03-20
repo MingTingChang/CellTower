@@ -20,6 +20,7 @@
 		B51128D01AB80D23005C8B2E /* Tower.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CF1AB80D23005C8B2E /* Tower.m */; };
 		B53483141ABB173600A8D950 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483111ABB173600A8D950 /* Map.m */; };
 		B53483151ABB173600A8D950 /* NSMutableArray+Point.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483131ABB173600A8D950 /* NSMutableArray+Point.m */; };
+		B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B5901B8E1ABC54CF000200FE /* GameMap.m */; };
 		B593350B1AB81E580039A94C /* air_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334F91AB81E570039A94C /* air_fire.wav */; };
 		B593350C1AB81E580039A94C /* congratulation.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FA1AB81E570039A94C /* congratulation.wav */; };
 		B593350D1AB81E580039A94C /* create_tower.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FB1AB81E580039A94C /* create_tower.wav */; };
@@ -78,16 +79,13 @@
 		B50F76961AB7F89F0007FF1F /* Creature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creature.m; sourceTree = "<group>"; };
 		B51128CE1AB80D23005C8B2E /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
-
 		B53483101ABB173600A8D950 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		B53483111ABB173600A8D950 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		B53483121ABB173600A8D950 /* NSMutableArray+Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Point.h"; sourceTree = "<group>"; };
 		B53483131ABB173600A8D950 /* NSMutableArray+Point.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Point.m"; sourceTree = "<group>"; };
-
 		B5686DC51ABAB1500037EA42 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = pch/PrefixHeader.pch; sourceTree = "<group>"; };
-		B59334F51AB81C540039A94C /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
-		B59334F61AB81C540039A94C /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
-
+		B5901B8D1ABC54CF000200FE /* GameMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMap.h; sourceTree = "<group>"; };
+		B5901B8E1ABC54CF000200FE /* GameMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameMap.m; sourceTree = "<group>"; };
 		B59334F91AB81E570039A94C /* air_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = air_fire.wav; sourceTree = "<group>"; };
 		B59334FA1AB81E570039A94C /* congratulation.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = congratulation.wav; sourceTree = "<group>"; };
 		B59334FB1AB81E580039A94C /* create_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = create_tower.wav; sourceTree = "<group>"; };
@@ -159,12 +157,8 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
-
 				B5BF25291ABACF61005CEAC1 /* Tool */,
-				B59334F41AB81C540039A94C /* Map */,
-
 				B534830F1ABB173600A8D950 /* Map */,
-
 				B51128CA1AB809A2005C8B2E /* Tower */,
 				B50F76911AB7F4B70007FF1F /* Creature */,
 				B507884B1AB7F11600D5864E /* AppDelegate.h */,
@@ -241,6 +235,8 @@
 		B534830F1ABB173600A8D950 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				B5901B8D1ABC54CF000200FE /* GameMap.h */,
+				B5901B8E1ABC54CF000200FE /* GameMap.m */,
 				B53483101ABB173600A8D950 /* Map.h */,
 				B53483111ABB173600A8D950 /* Map.m */,
 				B53483121ABB173600A8D950 /* NSMutableArray+Point.h */,
@@ -409,11 +405,9 @@
 				B50788551AB7F11600D5864E /* GameViewController.m in Sources */,
 				B5D702581AB84071003FE835 /* TowerModel.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
-
+				B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */,
 				B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */,
-
 				B53483141ABB173600A8D950 /* Map.m in Sources */,
-
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
