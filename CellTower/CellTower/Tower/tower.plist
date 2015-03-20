@@ -4,43 +4,13 @@
 <array>
 	<dict>
 		<key>imageName</key>
-		<string>tower_air</string>
-		<key>range</key>
-		<integer>10</integer>
-		<key>attackSpeed</key>
-		<integer>1</integer>
-		<key>damage</key>
-		<integer>20</integer>
-		<key>type</key>
-		<integer>0</integer>
-		<key>level</key>
-		<integer>1</integer>
-		<key>maxLevel</key>
-		<integer>5</integer>
-		<key>damageIncerment</key>
-		<integer>40</integer>
-		<key>bulidCoin</key>
-		<integer>50</integer>
-		<key>upgradeCoin</key>
-		<integer>50</integer>
-		<key>destoryCoinRatio</key>
-		<real>0.5</real>
-		<key>grid</key>
-		<integer>4</integer>
-		<key>bulletType</key>
-		<integer>0</integer>
-		<key>working</key>
-		<false/>
-	</dict>
-	<dict>
-		<key>imageName</key>
 		<string>tower_cannon</string>
 		<key>range</key>
-		<integer>10</integer>
+		<integer>80</integer>
 		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
-		<integer>20</integer>
+		<integer>1</integer>
 		<key>type</key>
 		<integer>0</integer>
 		<key>level</key>
@@ -57,68 +27,6 @@
 		<real>0.5</real>
 		<key>grid</key>
 		<integer>4</integer>
-		<key>bulletType</key>
-		<integer>0</integer>
-		<key>working</key>
-		<false/>
-	</dict>
-	<dict>
-		<key>imageName</key>
-		<string>tower_radar</string>
-		<key>range</key>
-		<integer>10</integer>
-		<key>attackSpeed</key>
-		<integer>1</integer>
-		<key>damage</key>
-		<integer>20</integer>
-		<key>type</key>
-		<integer>0</integer>
-		<key>level</key>
-		<integer>1</integer>
-		<key>maxLevel</key>
-		<integer>5</integer>
-		<key>damageIncerment</key>
-		<integer>40</integer>
-		<key>bulidCoin</key>
-		<integer>50</integer>
-		<key>upgradeCoin</key>
-		<integer>50</integer>
-		<key>destoryCoinRatio</key>
-		<real>0.5</real>
-		<key>grid</key>
-		<integer>4</integer>
-		<key>bulletType</key>
-		<integer>0</integer>
-		<key>working</key>
-		<false/>
-	</dict>
-	<dict>
-		<key>imageName</key>
-		<string>tower_rocket</string>
-		<key>range</key>
-		<integer>10</integer>
-		<key>attackSpeed</key>
-		<integer>1</integer>
-		<key>damage</key>
-		<integer>20</integer>
-		<key>type</key>
-		<integer>0</integer>
-		<key>level</key>
-		<integer>1</integer>
-		<key>maxLevel</key>
-		<integer>5</integer>
-		<key>damageIncerment</key>
-		<integer>40</integer>
-		<key>bulidCoin</key>
-		<integer>50</integer>
-		<key>upgradeCoin</key>
-		<integer>50</integer>
-		<key>destoryCoinRatio</key>
-		<real>0.5</real>
-		<key>grid</key>
-		<integer>4</integer>
-		<key>bulletType</key>
-		<integer>0</integer>
 		<key>working</key>
 		<false/>
 	</dict>
@@ -126,13 +34,13 @@
 		<key>imageName</key>
 		<string>tower_shock</string>
 		<key>range</key>
-		<integer>10</integer>
+		<integer>80</integer>
 		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
-		<integer>20</integer>
+		<integer>1</integer>
 		<key>type</key>
-		<integer>0</integer>
+		<integer>4</integer>
 		<key>level</key>
 		<integer>1</integer>
 		<key>maxLevel</key>
@@ -147,8 +55,90 @@
 		<real>0.5</real>
 		<key>grid</key>
 		<integer>4</integer>
-		<key>bulletType</key>
-		<integer>0</integer>
+		<key>working</key>
+		<false/>
+	</dict>
+	<dict>
+		<key>imageName</key>
+		<string>tower_radar</string>
+		<key>range</key>
+		<integer>80</integer>
+		<key>attackSpeed</key>
+		<integer>1</integer>
+		<key>damage</key>
+		<integer>1</integer>
+		<key>type</key>
+		<integer>2</integer>
+		<key>level</key>
+		<integer>1</integer>
+		<key>maxLevel</key>
+		<integer>5</integer>
+		<key>damageIncerment</key>
+		<integer>40</integer>
+		<key>bulidCoin</key>
+		<integer>50</integer>
+		<key>upgradeCoin</key>
+		<integer>50</integer>
+		<key>destoryCoinRatio</key>
+		<real>0.5</real>
+		<key>grid</key>
+		<integer>4</integer>
+		<key>working</key>
+		<false/>
+	</dict>
+	<dict>
+		<key>imageName</key>
+		<string>tower_shock</string>
+		<key>range</key>
+		<integer>80</integer>
+		<key>attackSpeed</key>
+		<integer>1</integer>
+		<key>damage</key>
+		<integer>1</integer>
+		<key>type</key>
+		<integer>4</integer>
+		<key>level</key>
+		<integer>1</integer>
+		<key>maxLevel</key>
+		<integer>5</integer>
+		<key>damageIncerment</key>
+		<integer>40</integer>
+		<key>bulidCoin</key>
+		<integer>50</integer>
+		<key>upgradeCoin</key>
+		<integer>50</integer>
+		<key>destoryCoinRatio</key>
+		<real>0.5</real>
+		<key>grid</key>
+		<integer>4</integer>
+		<key>working</key>
+		<false/>
+	</dict>
+	<dict>
+		<key>imageName</key>
+		<string>tower_shock</string>
+		<key>range</key>
+		<integer>80</integer>
+		<key>attackSpeed</key>
+		<real>0.5</real>
+		<key>damage</key>
+		<integer>1</integer>
+		<key>type</key>
+		<integer>4</integer>
+		<key>level</key>
+		<integer>1</integer>
+		<key>maxLevel</key>
+		<integer>5</integer>
+		<key>damageIncerment</key>
+		<integer>40</integer>
+		<key>bulidCoin</key>
+		<integer>50</integer>
+		<key>upgradeCoin</key>
+		<integer>50</integer>
+		<key>destoryCoinRatio</key>
+		<real>0.5</real>
+		<key>grid</key>
+		<integer>4</integer>
 		<key>working</key>
 		<false/>
 	</dict>
@@ -156,13 +146,13 @@
 		<key>imageName</key>
 		<string>tower_slowdown</string>
 		<key>range</key>
-		<integer>10</integer>
+		<integer>80</integer>
 		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
-		<integer>20</integer>
+		<integer>1</integer>
 		<key>type</key>
-		<integer>0</integer>
+		<integer>5</integer>
 		<key>level</key>
 		<integer>1</integer>
 		<key>maxLevel</key>
@@ -177,22 +167,20 @@
 		<real>0.5</real>
 		<key>grid</key>
 		<integer>4</integer>
-		<key>bulletType</key>
-		<integer>0</integer>
 		<key>working</key>
 		<false/>
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>tower_sniper</string>
+		<string>tower_shock</string>
 		<key>range</key>
-		<integer>10</integer>
+		<integer>80</integer>
 		<key>attackSpeed</key>
 		<integer>1</integer>
 		<key>damage</key>
-		<integer>20</integer>
+		<integer>1</integer>
 		<key>type</key>
-		<integer>0</integer>
+		<integer>4</integer>
 		<key>level</key>
 		<integer>1</integer>
 		<key>maxLevel</key>
@@ -207,8 +195,6 @@
 		<real>0.5</real>
 		<key>grid</key>
 		<integer>4</integer>
-		<key>bulletType</key>
-		<integer>0</integer>
 		<key>working</key>
 		<false/>
 	</dict>

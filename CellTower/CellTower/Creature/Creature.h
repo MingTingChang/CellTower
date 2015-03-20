@@ -32,7 +32,7 @@ typedef enum{
 @property (nonatomic , assign ,readonly) CreatureType type;
 
 /** 怪物是否隐形 */
-@property (nonatomic , assign, getter=isHidden) BOOL hidden;
+@property (nonatomic , assign, getter=isCreatureHidden) BOOL creatureHidden;
 
 /** 怪物是否被减速 */
 @property (nonatomic , assign, getter=isSlowDown) BOOL slowDown;

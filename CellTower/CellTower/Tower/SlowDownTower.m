@@ -7,14 +7,20 @@
 //
 
 #import "SlowDownTower.h"
+#import "CTGeometryTool.h"
 #import "Creature.h"
 
 @implementation SlowDownTower
 
-- (void)fireWithCreature:(Creature *)creature bullet:(SKSpriteNode *)bullet
+#pragma mark 重写攻击方法
+- (void)attack
 {
+    // 1.减速
+    Creature *creature = self.targets[0];
     [creature beSlowDown:self];
-    [super fireWithCreature:creature bullet:bullet];
+    
+    // 2.攻击
+    [super attack];
 }
 
 @end

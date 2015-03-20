@@ -18,7 +18,7 @@
     
     // 2.取出圆心
     CGPoint c1 = CGPointMake(circle1.origin.x + radius1, circle1.origin.y + radius1);
-    CGPoint c2 = CGPointMake(circle2.origin.x + radius1, circle2.origin.y + radius1);
+    CGPoint c2 = CGPointMake(circle2.origin.x + radius2, circle2.origin.y + radius2);
     
     // 计算圆心距
     CGPoint offset = CGPointMake(c1.x - c2.x, c1.y - c2.y);

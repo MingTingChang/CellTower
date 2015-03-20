@@ -8,6 +8,7 @@
 
 #import "Creature.h"
 #import "CreatureModel.h"
+#import "CTGeometryTool.h"
 
 @interface Creature ()
 
@@ -32,13 +33,22 @@
         self.moveSpeed = model.moveSpeed;
         self.coin = model.coin;
         self.type = model.type;
-        self.hidden = model.hidden;
+        self.creatureHidden = model.creatureHidden;
+        self.alpha = self.creatureHidden ? 0.5 : 1.0;
         self.slowDown = model.slowDown;
     }
+    
     return self;
 }
 
-#pragma mark - 共有方法
+#pragma mark 是否隐形
+- (void)setCreatureHidden:(BOOL)creatureHidden
+{
+    _creatureHidden = creatureHidden;
+    self.alpha = self.creatureHidden ? 0.5 : 1.0;
+}
+
+#pragma mark - 公有方法
 #pragma mark 根据模型实例化怪物
 + (instancetype)creatureWithModel:(CreatureModel *)model
 {
@@ -63,7 +73,7 @@
     
     NSMutableArray *arrayM = [NSMutableArray arrayWithCapacity:movePath.count];
     
-    // 2.便利所有点
+    // 2.遍历所有点
     for(int i = 0; i<movePath.count; i++) {
         
         // 2.1取出当前点
@@ -85,10 +95,12 @@
         CGFloat distance = sqrtf(offset.x*offset.x + offset.y*offset.y);
         NSTimeInterval durarion = distance / self.moveSpeed;
  
+        // 创建rotiaeAction
+        SKAction *rotateAction = [SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:nest andPoint2:location] duration:0.2f];
         
-        // 创建action
-        SKAction *move = [SKAction moveTo:nest duration:durarion];
-        [arrayM addObject:move];
+        // 创建moveAction
+        SKAction *moveAction = [SKAction moveTo:nest duration:durarion];
+        [arrayM addObject:[SKAction group:@[rotateAction, moveAction]]];
     }
     
     // 3.创建行为队列
@@ -111,6 +123,7 @@
         self.moveSpeed *= 2;
         self.slowDown = NO;
     });
+#warning 新移动速度 未刷新move方法
     
     // 2.添加减速效果
 }

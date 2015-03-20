@@ -33,7 +33,7 @@
 @property (nonatomic , assign) int range;
 
 /** 攻击速度 */
-@property (nonatomic , assign) int attackSpeed;
+@property (nonatomic , assign) double attackSpeed;
 
 /** 攻击力 */
 @property (nonatomic , assign) int damage;
@@ -62,17 +62,22 @@
 /** 所占栅格 */
 @property (nonatomic , assign) int grid;
 
-/** 子弹类型 */
-@property (nonatomic , assign , readonly) BulletType bulletType;
-
 /** 攻击目标 */
 @property (nonatomic , strong) Creature *target;
+
+/**
+ *  攻击目标数组
+ */
+@property (nonatomic , strong) NSMutableArray *targets;
 
 /** 是否正在攻击 */
 @property (nonatomic , assign ,getter=isWorking) BOOL working;
 
 /** 代理 */
 @property (nonatomic , weak) id<TowerDelegate> delegate;
+
+/** 子弹节点 */
+@property (nonatomic , strong) SKSpriteNode *bullet;
 
 #pragma mark - 方法
 /**
@@ -91,12 +96,23 @@
 + (instancetype)towerWithModel:(TowerModel*)model position:(CGPoint)position;
 
 /**
- *  打怪物
+ *  怪物进入攻击范围
  *
  *  @param creature 怪物节点
- *  @param bullet   子弹节点
  */
-- (void)fireWithCreature:(Creature *)creature bullet:(SKSpriteNode *)bullet;
+- (void)creatureIntoAttackRange:(Creature *)creature;
+
+/**
+ *  怪物离开攻击范围
+ *
+ *  @param creature 怪物节点
+ */
+- (void)creatureLeaveAttackRange:(Creature *)creature;
+
+/**
+ *  攻击
+ */
+- (void)attack;
 
 /** 升级 */
 - (void)upgrade;

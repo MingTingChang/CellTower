@@ -25,7 +25,7 @@
 {
     if (self = [super initWithImageNamed:model.imageName]) {
         
-        self.size = CGSizeMake(30, 30);
+        self.size = CGSizeMake(20, 20);
         self.zPosition = 1;
         
         self.imageName = [model.imageName copy];
@@ -40,14 +40,69 @@
         self.upgradeCoin = model.upgradeCoin;
         self.destoryCoinRatio = model.destoryCoinRatio;
         self.grid = model.grid;
-        self.bulletType = model.bulletType;
         self.working = model.working;
         
     }
     return self;
 }
 
+#pragma mark 攻击
+- (void)attack
+{
+    // 1.添加攻击目标
+    self.target = [self.targets firstObject];
+    
+    // 2.旋转
+    [self runAction:[SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:self.target.position andPoint2:self.position] duration:0.1f] completion:^{
+        // 3.发射子弹
+        if (self.bullet.scene == nil) {
+            [self.scene addChild:self.bullet];
+        }
+        self.bullet.position = self.position;
+        self.bullet.hidden = NO;
+        [self.bullet runAction:[SKAction moveTo:self.target.position duration:0.4f] completion:^{
+            self.bullet.hidden = YES;
+            self.target.HP -= self.damage;
+        }];
+    }];
+    
+    if (self.target.HP <= 0) { // 死亡
+        // 清除攻击目标
+        self.target = nil;
+        [self.targets removeObject:self.target];
+        [self.bullet removeFromParent];
+        
+        // 通知代理
+        if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
+            [self.delegate tower:self didDefeatCreature:self.target];
+        }
+    }
+    
+    // 5.等待攻击间隔
+    NSTimeInterval attackWait = 1 / self.attackSpeed;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(attackWait * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.targets.count > 0) {
+            [self attack];
+            
+            if (self.target != self.targets[0]) {
+                self.target = nil;
+            }
+        } else{
+            self.target = nil;
+        }
+    });
+    
+}
+
 #pragma mark - 公共方法
+
+- (NSMutableArray *)targets{
+    if (!_targets) {
+        _targets = [NSMutableArray array];
+    }
+    return _targets;
+}
+
 #pragma mark 根据模型实例化塔
 + (instancetype)towerWithModel:(TowerModel *)model
 {
@@ -63,50 +118,21 @@
     return tower;
 }
 
-#pragma mark 攻击
-- (void)fireWithCreature:(Creature *)creature bullet:(SKSpriteNode *)bullet
+#pragma mark 怪物进入攻击范围
+- (void)creatureIntoAttackRange:(Creature *)creature
 {
-    if (creature == nil) return;
+    [self.targets addObject:creature];
     
-    // 1.添加攻击目标
-    self.target = creature;
-    
-    // 2.旋转
-    [self runAction:[SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:creature.position andPoint2:self.position] duration:0.1f] completion:^{
-        
-        // 3.发射子弹
-        bullet.position = self.position;
-        bullet.hidden = NO;
-        [bullet runAction:[SKAction moveTo:creature.position duration:0.5f] completion:^{
-            bullet.hidden = YES;
-        }];
-        
-        // 4.扣血判断怪物是否死亡
-        creature.HP -= self.damage;
-        // 5.判断怪物是否离开射程
-        CGRect towerAttactRect = CGRectMake(self.position.x - self.range*10, self.position.y - self.range*10, self.range*80, self.range*80);
-        BOOL IsLeave = ![CTGeometryTool isOveriapBetweenCircle1:creature.frame andCircle2:towerAttactRect];
-        
-        if (creature.HP <= 0) { // 死亡
-            // 清除攻击目标
-            self.target = nil;
-            
-            [bullet removeFromParent];
-            if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
-                [self.delegate tower:self didDefeatCreature:creature];
-            }
-        } else if (IsLeave){ // 离开射程
-            // 清除攻击目标
-            self.target = nil;
-        } else {
-            // 5.等待攻击间隔
-            NSTimeInterval attackWait = 1 / self.attackSpeed;
-            SKAction *attackWaitAction = [SKAction waitForDuration:attackWait];
-            [self runAction:attackWaitAction completion:^{
-                [self fireWithCreature:creature bullet:bullet];
-            }];
-        }
-    }];
+    if (self.isWorking == NO)
+    {
+        [self attack];
+    }
+}
+
+#pragma mark 怪物离开攻击范围
+- (void)creatureLeaveAttackRange:(Creature *)creature;
+{
+    [self.targets removeObject:creature];
 }
 
 #pragma mark 塔是否在工作
@@ -138,6 +164,20 @@
     }
     
     return sum * self.destoryCoinRatio;
+}
+
+#pragma mrak 子弹节点get方法
+- (SKSpriteNode *)bullet
+{
+    if (!_bullet) {
+        if (self.type == TowerTypeShock) {
+            _bullet = [SKSpriteNode spriteNodeWithImageNamed:@"shock"];
+        } else {
+            _bullet = [SKSpriteNode spriteNodeWithImageNamed:@"bullet"];
+        }
+        _bullet.size = CGSizeMake(5, 5);
+    }
+    return _bullet;
 }
 
 @end

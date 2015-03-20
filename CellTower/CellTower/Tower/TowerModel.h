@@ -34,7 +34,7 @@ typedef enum{
 @property (nonatomic , assign) int range;
 
 /** 攻击速度 */
-@property (nonatomic , assign) int attackSpeed;
+@property (nonatomic , assign) double attackSpeed;
 
 /** 攻击力 */
 @property (nonatomic , assign) int damage;
@@ -62,9 +62,6 @@ typedef enum{
 
 /** 所占栅格 */
 @property (nonatomic , assign) int grid;
-
-/** 子弹类型 */
-@property (nonatomic , assign ,readonly) BulletType bulletType;
 
 /** 攻击目标 */
 @property (nonatomic , strong) Creature *target;
