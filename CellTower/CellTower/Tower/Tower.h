@@ -76,8 +76,8 @@
 /** 代理 */
 @property (nonatomic , weak) id<TowerDelegate> delegate;
 
-/** 子弹节点 */
-@property (nonatomic , strong) SKSpriteNode *bullet;
+/** 子弹集 */
+@property (nonatomic , strong) NSMutableArray *bullets;
 
 #pragma mark - 方法
 /**
@@ -112,7 +112,7 @@
 /**
  *  攻击
  */
-- (void)attack;
+- (void)attack:(Creature *)creature;
 
 /** 升级 */
 - (void)upgrade;

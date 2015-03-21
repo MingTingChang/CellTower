@@ -13,14 +13,13 @@
 @implementation SlowDownTower
 
 #pragma mark 重写攻击方法
-- (void)attack
+- (void)attack:(Creature *)creature
 {
     // 1.减速
-    Creature *creature = self.targets[0];
     [creature beSlowDown:self];
     
     // 2.攻击
-    [super attack];
+    [super attack:creature];
 }
 
 @end

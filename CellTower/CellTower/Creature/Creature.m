@@ -45,7 +45,7 @@
 - (void)setCreatureHidden:(BOOL)creatureHidden
 {
     _creatureHidden = creatureHidden;
-    self.alpha = self.creatureHidden ? 0.5 : 1.0;
+    self.alpha = self.creatureHidden ? 0.2 : 1.0;
 }
 
 #pragma mark - 公有方法

@@ -10,26 +10,57 @@
 #import "Creature.h"
 #import "CTGeometryTool.h"
 
+@interface ShockTower()
+
+@property (nonatomic , strong) SKSpriteNode *bullet;
+
+@end
+
 @implementation ShockTower
 
-@synthesize working = _working;
-
-- (BOOL)isWorking
-{
-    return _working;
+- (SKSpriteNode *)bullet {
+    if (!_bullet) {
+        _bullet = [SKSpriteNode spriteNodeWithImageNamed:@"shock"];
+        _bullet.size = CGSizeMake(2, 2);
+    }
+    return _bullet;
 }
 
 - (void)creatureIntoAttackRange:(Creature *)creature
 {
     [self.targets addObject:creature];
-    
-    if (self.isWorking == NO) {
-        [self attack];
-    }
+    [self attack];
 }
 
-#pragma mrak 攻击
+#pragma mark 攻击
 - (void)attack
+{
+    if (self.isWorking == YES) return;
+    self.working = YES;
+    
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (Creature *child in self.targets) {
+        if (child.creatureHidden == YES) {
+            [arrayM addObject:child];
+        }
+    }
+    for (Creature *child in arrayM) {
+        [self.targets removeObject:child];
+    }
+    
+    if (self.targets.count < 1) return;
+    [self attack:nil];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.targets.count > 0) {
+            self.working = NO;
+            [self attack];
+        }
+    });
+}
+
+#pragma mrak 攻击目标
+- (void)attack:(Creature *)creature
 {
     self.working = YES;
     
@@ -56,17 +87,6 @@
             }
         }
     }
-    
-    // 3.等待攻击间隔
-    NSTimeInterval attackWait = 1.0 / self.attackSpeed;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(attackWait * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (self.targets.count > 0) {
-            [self attack];
-        } else {
-            self.working = NO;
-            [self.bullet removeFromParent];
-        }
-    });
 }
 
 @end

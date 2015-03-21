@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>imageName</key>
-		<string>tower_cannon</string>
+		<string>tower_air</string>
 		<key>range</key>
 		<integer>80</integer>
 		<key>attackSpeed</key>
@@ -32,7 +32,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>tower_shock</string>
+		<string>tower_cannon</string>
 		<key>range</key>
 		<integer>80</integer>
 		<key>attackSpeed</key>
@@ -40,7 +40,7 @@
 		<key>damage</key>
 		<integer>1</integer>
 		<key>type</key>
-		<integer>4</integer>
+		<integer>1</integer>
 		<key>level</key>
 		<integer>1</integer>
 		<key>maxLevel</key>
@@ -88,7 +88,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>tower_shock</string>
+		<string>tower_rocket</string>
 		<key>range</key>
 		<integer>80</integer>
 		<key>attackSpeed</key>
@@ -96,7 +96,7 @@
 		<key>damage</key>
 		<integer>1</integer>
 		<key>type</key>
-		<integer>4</integer>
+		<integer>3</integer>
 		<key>level</key>
 		<integer>1</integer>
 		<key>maxLevel</key>
@@ -172,7 +172,7 @@
 	</dict>
 	<dict>
 		<key>imageName</key>
-		<string>tower_shock</string>
+		<string>tower_sniper</string>
 		<key>range</key>
 		<integer>80</integer>
 		<key>attackSpeed</key>
@@ -180,7 +180,7 @@
 		<key>damage</key>
 		<integer>1</integer>
 		<key>type</key>
-		<integer>4</integer>
+		<integer>6</integer>
 		<key>level</key>
 		<integer>1</integer>
 		<key>maxLevel</key>

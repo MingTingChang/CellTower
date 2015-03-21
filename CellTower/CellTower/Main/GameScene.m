@@ -8,9 +8,12 @@
 
 #import "GameScene.h"
 #import "Creature.h"
-#import "SlowDownTower.h"
 #import "CTGeometryTool.h"
+#import "SniperTower.h"
+#import "RocketTower.h"
+#import "AirTower.h"
 #import "ShockTower.h"
+#import "CannonTower.h"
 #import "RadarTower.h"
 
 #pragma mark 设置碰撞掩码
@@ -18,12 +21,14 @@
 static uint32_t creatureCategory = 1 << 0;
 // 塔类别
 static uint32_t towerCategory = 1 << 1;
+// 雷达类别
+static uint32_t radarTowerCategory = 1 << 2;
 
 
 @interface GameScene () <TowerDelegate, SKPhysicsContactDelegate>
 {
     NSMutableArray *_creatures;
-    Tower *_tower;
+    NSMutableArray *_towers;
 }
 
 @end
@@ -32,13 +37,14 @@ static uint32_t towerCategory = 1 << 1;
 
 #pragma mark 加载到view时调用
 -(void)didMoveToView:(SKView *)view {
-    self.backgroundColor = [SKColor whiteColor];
+    self.backgroundColor = [SKColor lightGrayColor];
     
     _creatures = [NSMutableArray array];
+    _towers = [NSMutableArray array];
 
     [self setupPhysical];
-    [self setupTower];
-    [self setupCreature];
+    [self setupAllTower];
+    [self setupAllCreature];
     [self test];
 }
 
@@ -50,7 +56,7 @@ static uint32_t towerCategory = 1 << 1;
     NSValue *p4 = [NSValue valueWithCGPoint:CGPointMake(400, 160)];
     
     for (Creature *creature in _creatures) {
-        [creature moveWithPath:@[p1, p2, p3, p4]];
+        [creature moveWithPath:@[p4, p3, p2, p1]];
     }
 }
 
@@ -66,6 +72,8 @@ static uint32_t towerCategory = 1 << 1;
 - (void)tower:(Tower *)tower didDefeatCreature:(Creature *)creature
 {
     [creature removeFromParent];
+    if (creature == nil) return;
+
     [_creatures removeObject:creature];
 }
 
@@ -76,33 +84,55 @@ static uint32_t towerCategory = 1 << 1;
     // 1.取出碰撞的怪物和塔
     Tower *tower = nil;
     Creature *creature = nil;
-    if (contact.bodyA.categoryBitMask == towerCategory ||
-        contact.bodyB.categoryBitMask == creatureCategory) {
-        tower = (Tower *)contact.bodyA.node;
-        creature = (Creature *)contact.bodyB.node;
-    } else if ( contact.bodyA.categoryBitMask == creatureCategory||
-               contact.bodyB.categoryBitMask == towerCategory ){
+    
+    if (contact.bodyA.categoryBitMask == creatureCategory &&
+        contact.bodyB.categoryBitMask == towerCategory) { // 怪撞塔
         tower = (Tower *)contact.bodyB.node;
         creature = (Creature *)contact.bodyA.node;
-    } else {
-        return;
+        [tower creatureIntoAttackRange:creature];
+    } else if (contact.bodyA.categoryBitMask == towerCategory &&
+       contact.bodyB.categoryBitMask == creatureCategory) { // 塔撞怪
+        tower = (Tower *)contact.bodyA.node;
+        creature = (Creature *)contact.bodyB.node;
+        [tower creatureIntoAttackRange:creature];
+    } else if ( contact.bodyA.categoryBitMask == creatureCategory &&
+               contact.bodyB.categoryBitMask == radarTowerCategory ){ // 怪撞雷达
+        tower = (Tower *)contact.bodyB.node;
+        creature = (Creature *)contact.bodyA.node;
+        [tower creatureIntoAttackRange:creature];
+    } else if ( contact.bodyA.categoryBitMask == radarTowerCategory &&
+               contact.bodyB.categoryBitMask == creatureCategory ){ // 雷达撞怪
+        tower = (Tower *)contact.bodyA.node;
+        creature = (Creature *)contact.bodyB.node;
+        [tower creatureIntoAttackRange:creature];
     }
-    
-    // 2.通知塔怪物进入范围
-    [tower creatureIntoAttackRange:creature];
 }
 
+#pragma mark 碰撞结束
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
     // 1.取出碰撞的怪物和塔
     Tower *tower = nil;
     Creature *creature = nil;
-    if (contact.bodyA.categoryBitMask == towerCategory) {
+    
+    if (contact.bodyA.categoryBitMask == towerCategory &&
+        contact.bodyB.categoryBitMask == creatureCategory) {
+        tower = (Tower *)contact.bodyA.node;
+        creature = (Creature *)contact.bodyB.node;
+    } else if ( contact.bodyA.categoryBitMask == creatureCategory &&
+               contact.bodyB.categoryBitMask == towerCategory ){
+        tower = (Tower *)contact.bodyB.node;
+        creature = (Creature *)contact.bodyA.node;
+    } else if ( contact.bodyA.categoryBitMask == creatureCategory &&
+               contact.bodyB.categoryBitMask == radarTowerCategory ){
+        tower = (Tower *)contact.bodyB.node;
+        creature = (Creature *)contact.bodyA.node;
+    } else if ( contact.bodyA.categoryBitMask == radarTowerCategory &&
+               contact.bodyB.categoryBitMask == creatureCategory ){
         tower = (Tower *)contact.bodyA.node;
         creature = (Creature *)contact.bodyB.node;
     } else {
-        tower = (Tower *)contact.bodyB.node;
-        creature = (Creature *)contact.bodyA.node;
+        return;
     }
     // 2.通知塔怪物离开范围
     [tower creatureLeaveAttackRange:creature];
@@ -128,7 +158,11 @@ static uint32_t towerCategory = 1 << 1;
     // 3) 设置类别掩码
     creature.physicsBody.categoryBitMask = creatureCategory;
     // 4) 设置碰撞检测类别掩码
-    creature.physicsBody.contactTestBitMask = towerCategory;
+    if (creature.creatureHidden == YES) {
+        creature.physicsBody.contactTestBitMask = radarTowerCategory;
+    } else {
+        creature.physicsBody.contactTestBitMask = towerCategory;
+    }
     // 5) 设置回弹掩码
     creature.physicsBody.collisionBitMask = 0;
     // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
@@ -144,9 +178,13 @@ static uint32_t towerCategory = 1 << 1;
     // 2) 标示物体的移动是否由仿真引擎负责
     tower.physicsBody.dynamic = YES;
     // 3) 设置类别掩码
-    tower.physicsBody.categoryBitMask = towerCategory;
+    if (tower.type == TowerTypeRadar) {
+        tower.physicsBody.categoryBitMask = radarTowerCategory;
+    } else {
+        tower.physicsBody.categoryBitMask = towerCategory;
+    }
     // 4) 设置碰撞检测类别掩码
-    tower.physicsBody.contactTestBitMask = creatureCategory;
+//    tower.physicsBody.contactTestBitMask = creatureCategory;
     // 5) 设置回弹掩码
     tower.physicsBody.collisionBitMask = 0;
     // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
@@ -155,42 +193,64 @@ static uint32_t towerCategory = 1 << 1;
 
 
 #pragma mark - 私有方法
+#pragma mark 创建所有怪物
+- (void)setupAllCreature
+{
+    for (int i = 0; i < 30; i++) {
+        int type = arc4random_uniform(8);
+        int x = 500 + arc4random_uniform(50);
+        int y = arc4random_uniform(320);
+        
+        [self setupCreature:type position:CGPointMake(x, y)];
+    }
+
+//    [self setupCreature:1 position:CGPointMake(400, 160)];
+    
+}
+
+#pragma mark 创建所有塔
+- (void)setupAllTower
+{
+    TowerModel *airTowerModel = [TowerModel towerModelWithType:TowerTypeAir];
+    AirTower *airTower = [AirTower towerWithModel:airTowerModel position:CGPointMake(160, 160)];
+    [self setupTower:airTower];
+    
+    TowerModel *airTowerModel2 = [TowerModel towerModelWithType:TowerTypeAir];
+    AirTower *airTower2 = [AirTower towerWithModel:airTowerModel2 position:CGPointMake(160, 100)];
+    [self setupTower:airTower2];
+    
+    TowerModel *cannonTowerModel = [TowerModel towerModelWithType:TowerTypeShock];
+    ShockTower *cannonTower = [ShockTower towerWithModel:cannonTowerModel position:CGPointMake(160, 200)];
+    [self setupTower:cannonTower];
+    
+    TowerModel *radarTowerModel = [TowerModel towerModelWithType:TowerTypeRadar];
+    RadarTower *radarTower = [RadarTower towerWithModel:radarTowerModel position:CGPointMake(140, 160)];
+    [self setupTower:radarTower];
+
+}
+
 #pragma mark 创建怪物
-- (void)setupCreature
+- (void)setupCreature:(CreatureType)type position:(CGPoint)position
 {
     // 1.创建怪物
-    CreatureModel *model1 = [CreatureModel creatureModelWithType:CreatureTypeBoss];
+    CreatureModel *model1 = [CreatureModel creatureModelWithType:type];
     model1.creatureHidden = YES;
-    Creature *creature1 = [Creature creatureWithModel:model1 position:CGPointMake(200, 160)];
+    Creature *creature1 = [Creature creatureWithModel:model1 position:position];
     [self addChild:creature1];
     [_creatures addObject:creature1];
     
     // 2.设置物理刚体属性
     [self setupCreaturePhysicsBody:creature1];
     
-    // 1.创建怪物
-    CreatureModel *model2 = [CreatureModel creatureModelWithType:CreatureTypeFly];
-    model2.creatureHidden = YES;
-    Creature *creature2 = [Creature creatureWithModel:model2 position:CGPointMake(300, 160)];
-    [self addChild:creature2];
-    [_creatures addObject:creature2];;
-    
-    // 2.设置物理刚体属性
-    [self setupCreaturePhysicsBody:creature2];
-    
 }
 
 #pragma mark 创建塔
-- (void)setupTower
+- (void)setupTower:(Tower *)tower
 {
-    // 1.创建塔
-    TowerModel *towerModel = [TowerModel towerModelWithType:TowerTypeRadar];
-    RadarTower *tower =[RadarTower towerWithModel:towerModel position:CGPointMake(160, 160)];
     [self addChild:tower];
     tower.delegate = self;
-    _tower = tower;
-    
-    [self setupTowerPhysicsBody:_tower];
+    [_towers addObject:tower];
+    [self setupTowerPhysicsBody:tower];
 }
 
 @end

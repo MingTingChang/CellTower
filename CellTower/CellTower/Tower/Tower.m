@@ -13,16 +13,22 @@
 @interface Tower ()
 
 @property (nonatomic , assign , readwrite) TowerType type;
-@property (nonatomic , assign , readwrite) BulletType bulletType;
+
 
 @end
 
 @implementation Tower
 
+- (NSMutableArray *)bullets {
+    if (!_bullets) {
+        _bullets = [NSMutableArray array];
+    }
+    return _bullets;
+}
+
 #pragma mark - 私有方法
 #pragma mark 初始化
-- (instancetype)initWithModel:(TowerModel *)model
-{
+- (instancetype)initWithModel:(TowerModel *)model {
     if (self = [super initWithImageNamed:model.imageName]) {
         
         self.size = CGSizeMake(20, 20);
@@ -46,57 +52,108 @@
     return self;
 }
 
+#pragma mrak 添加子弹
+- (SKSpriteNode *)addBullet {
+    SKSpriteNode *bullet = nil;
+    
+    if (self.type == TowerTypeShock) {
+        bullet = [SKSpriteNode spriteNodeWithImageNamed:@"shock"];
+        bullet.size = CGSizeMake(2, 2);
+    } else if (self.type == TowerTypeCannon){
+        bullet = [SKSpriteNode spriteNodeWithImageNamed:@"bullet"];
+        bullet.size = CGSizeMake(6, 6);
+    } else if (self.type == TowerTypeRocker){
+        bullet = [SKSpriteNode spriteNodeWithImageNamed:@"rocker"];
+        bullet.size = CGSizeMake(8, 8);
+    } else {
+        bullet = [SKSpriteNode spriteNodeWithImageNamed:@"bullet"];
+        bullet.size = CGSizeMake(2, 2);
+    }
+    
+    return bullet;
+}
+
 #pragma mark 攻击
 - (void)attack
 {
-    // 1.添加攻击目标
-    self.target = [self.targets firstObject];
+    if (self.isWorking == YES) return;
+    self.working = YES;
     
-    // 2.旋转
-    [self runAction:[SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:self.target.position andPoint2:self.position] duration:0.1f] completion:^{
-        // 3.发射子弹
-        if (self.bullet.scene == nil) {
-            [self.scene addChild:self.bullet];
-        }
-        self.bullet.position = self.position;
-        self.bullet.hidden = NO;
-        [self.bullet runAction:[SKAction moveTo:self.target.position duration:0.4f] completion:^{
-            self.bullet.hidden = YES;
-            self.target.HP -= self.damage;
-        }];
-    }];
-    
-    if (self.target.HP <= 0) { // 死亡
-        // 清除攻击目标
-        self.target = nil;
-        [self.targets removeObject:self.target];
-        [self.bullet removeFromParent];
-        
-        // 通知代理
-        if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
-            [self.delegate tower:self didDefeatCreature:self.target];
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (Creature *child in self.targets) {
+        if (child.creatureHidden == YES) {
+            [arrayM addObject:child];
         }
     }
+    for (Creature *child in arrayM) {
+        [self.targets removeObject:child];
+    }
     
-    // 5.等待攻击间隔
-    NSTimeInterval attackWait = 1 / self.attackSpeed;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(attackWait * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    if (self.targets.count < 1) return;
+    
+    self.target = [self.targets firstObject];
+    [self attack:self.target];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (self.targets.count > 0) {
+            self.working = NO;
             [self attack];
-            
-            if (self.target != self.targets[0]) {
-                self.target = nil;
-            }
-        } else{
-            self.target = nil;
         }
     });
     
 }
 
+#pragma mark 攻击某个怪物
+- (void)attack:(Creature *)creature
+{
+    [self.bullets addObject:[self addBullet]];
+    SKSpriteNode *bullet = [self.bullets lastObject];
+    
+    // 2.旋转
+    SKAction *rotateAction = [SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:creature.position andPoint2:self.position] duration:0.1f];
+    [self runAction: rotateAction completion:^{
+        // 3.发射子弹
+        if (bullet.scene == nil) {
+            [self.scene addChild:bullet];
+        }
+        bullet.position = self.position;
+        bullet.hidden = NO;
+        creature.HP -= self.damage;
+        
+        SKAction *moveAction = [SKAction moveTo:creature.position duration:0.4f];
+        [bullet runAction:[SKAction sequence:@[rotateAction, moveAction]] completion:^{
+            bullet.hidden = YES;
+        }];
+    }];
+    
+    // 5.等待攻击间隔
+    NSTimeInterval attackWait = 1 / self.attackSpeed;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(attackWait * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 5.1.检测死亡
+        if (creature.HP <= 0) { // 死亡
+            // 清除攻击目标
+            self.target = nil;
+            [self.targets removeObject:creature];
+            
+            // 通知代理
+            if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
+                [self.delegate tower:self didDefeatCreature:creature];
+            }
+        }
+        
+        // 5.3删除子弹
+        if ( bullet.scene != nil) {
+            [bullet removeFromParent];
+            [self.bullets removeObject:bullet];
+        }
+    });
+    
+    
+}
+
 #pragma mark - 公共方法
 
-- (NSMutableArray *)targets{
+- (NSMutableArray *)targets {
     if (!_targets) {
         _targets = [NSMutableArray array];
     }
@@ -123,24 +180,18 @@
 {
     [self.targets addObject:creature];
     
-    if (self.isWorking == NO)
-    {
-        [self attack];
-    }
+    [self attack];
 }
 
 #pragma mark 怪物离开攻击范围
 - (void)creatureLeaveAttackRange:(Creature *)creature;
 {
     [self.targets removeObject:creature];
+    
+    if (self.targets.count < 1) {
+        self.working = NO;
+    }
 }
-
-#pragma mark 塔是否在工作
-- (BOOL)isWorking
-{
-    return (self.target != nil);
-}
-
 
 #pragma mark 升级
 - (void)upgrade
@@ -164,20 +215,6 @@
     }
     
     return sum * self.destoryCoinRatio;
-}
-
-#pragma mrak 子弹节点get方法
-- (SKSpriteNode *)bullet
-{
-    if (!_bullet) {
-        if (self.type == TowerTypeShock) {
-            _bullet = [SKSpriteNode spriteNodeWithImageNamed:@"shock"];
-        } else {
-            _bullet = [SKSpriteNode spriteNodeWithImageNamed:@"bullet"];
-        }
-        _bullet.size = CGSizeMake(5, 5);
-    }
-    return _bullet;
 }
 
 @end

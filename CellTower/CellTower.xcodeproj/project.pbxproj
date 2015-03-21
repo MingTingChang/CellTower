@@ -44,6 +44,10 @@
 		B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BF25271ABACF54005CEAC1 /* CTGeometryTool.m */; };
 		B5C9E73B1ABC4E64003CA711 /* RadarTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9E73A1ABC4E64003CA711 /* RadarTower.m */; };
 		B5CE09941AB833C500C44123 /* creature.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5CE09931AB833C500C44123 /* creature.plist */; };
+		B5D2FADC1ABD3803009BB190 /* CannonTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D2FADB1ABD3803009BB190 /* CannonTower.m */; };
+		B5D2FADF1ABD390E009BB190 /* SniperTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D2FADE1ABD390E009BB190 /* SniperTower.m */; };
+		B5D2FAE31ABD3A82009BB190 /* RocketTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D2FAE21ABD3A82009BB190 /* RocketTower.m */; };
+		B5D2FAE61ABD4491009BB190 /* AirTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D2FAE51ABD4491009BB190 /* AirTower.m */; };
 		B5D702581AB84071003FE835 /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D702571AB84071003FE835 /* TowerModel.m */; };
 		B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D7025A1AB84095003FE835 /* CreatureModel.m */; };
 		B5D7025D1AB848C1003FE835 /* tower.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D7025C1AB848C1003FE835 /* tower.plist */; };
@@ -114,6 +118,14 @@
 		B5C9E7391ABC4E64003CA711 /* RadarTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarTower.h; sourceTree = "<group>"; };
 		B5C9E73A1ABC4E64003CA711 /* RadarTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarTower.m; sourceTree = "<group>"; };
 		B5CE09931AB833C500C44123 /* creature.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = creature.plist; sourceTree = "<group>"; };
+		B5D2FADA1ABD3803009BB190 /* CannonTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CannonTower.h; sourceTree = "<group>"; };
+		B5D2FADB1ABD3803009BB190 /* CannonTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CannonTower.m; sourceTree = "<group>"; };
+		B5D2FADD1ABD390E009BB190 /* SniperTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SniperTower.h; sourceTree = "<group>"; };
+		B5D2FADE1ABD390E009BB190 /* SniperTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SniperTower.m; sourceTree = "<group>"; };
+		B5D2FAE11ABD3A82009BB190 /* RocketTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketTower.h; sourceTree = "<group>"; };
+		B5D2FAE21ABD3A82009BB190 /* RocketTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketTower.m; sourceTree = "<group>"; };
+		B5D2FAE41ABD4491009BB190 /* AirTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirTower.h; sourceTree = "<group>"; };
+		B5D2FAE51ABD4491009BB190 /* AirTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirTower.m; sourceTree = "<group>"; };
 		B5D702561AB84071003FE835 /* TowerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerModel.h; sourceTree = "<group>"; };
 		B5D702571AB84071003FE835 /* TowerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerModel.m; sourceTree = "<group>"; };
 		B5D702591AB84095003FE835 /* CreatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatureModel.h; sourceTree = "<group>"; };
@@ -227,6 +239,14 @@
 				B5BF25241ABACE05005CEAC1 /* ShockTower.m */,
 				B5C9E7391ABC4E64003CA711 /* RadarTower.h */,
 				B5C9E73A1ABC4E64003CA711 /* RadarTower.m */,
+				B5D2FADA1ABD3803009BB190 /* CannonTower.h */,
+				B5D2FADB1ABD3803009BB190 /* CannonTower.m */,
+				B5D2FADD1ABD390E009BB190 /* SniperTower.h */,
+				B5D2FADE1ABD390E009BB190 /* SniperTower.m */,
+				B5D2FAE11ABD3A82009BB190 /* RocketTower.h */,
+				B5D2FAE21ABD3A82009BB190 /* RocketTower.m */,
+				B5D2FAE41ABD4491009BB190 /* AirTower.h */,
+				B5D2FAE51ABD4491009BB190 /* AirTower.m */,
 			);
 			path = Tower;
 			sourceTree = "<group>";
@@ -420,15 +440,19 @@
 				B5C9E73B1ABC4E64003CA711 /* RadarTower.m in Sources */,
 				B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */,
 				B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */,
+				B5D2FADC1ABD3803009BB190 /* CannonTower.m in Sources */,
 				B53483141ABB173600A8D950 /* Map.m in Sources */,
+				B5D2FADF1ABD390E009BB190 /* SniperTower.m in Sources */,
 				B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
 				B5ADD2EB1ABD35C200DF4163 /* GameViewController.m in Sources */,
 				B5ADD2E91ABD35C200DF4163 /* GameScene.m in Sources */,
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
+				B5D2FAE31ABD3A82009BB190 /* RocketTower.m in Sources */,
 				B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,
+				B5D2FAE61ABD4491009BB190 /* AirTower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import "RadarTower.h"
 #import "Creature.h"
+#import "GameScene.h"
 
 @implementation RadarTower
 
@@ -25,9 +26,8 @@
         [self.targets addObject:creature];
     }
     
-    if (self.isWorking == NO) {
-        [self attack];
-    }
+    [self attack];
+    
 }
 
 #pragma mark 离开侦测范围
@@ -43,6 +43,7 @@
     
     if (leaveCreature != nil) {
         leaveCreature.creatureHidden = YES;
+        leaveCreature.physicsBody.contactTestBitMask = 1 << 2;
         [self.targets removeObject:leaveCreature];
     }
 }
@@ -50,6 +51,18 @@
 #pragma mark 侦测
 - (void)attack
 {
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (Creature *child in self.targets) {
+        if (child.HP <= 0) {
+            [arrayM addObject:child];
+        }
+    }
+    for (Creature *child in arrayM) {
+        [self.targets removeObject:child];
+    }
+    
+    if (self.targets.count < 1) return;
+    
     self.working = YES;
     
     
@@ -61,6 +74,7 @@
     
     for (Creature *creature in self.targets) {
         creature.creatureHidden = NO;
+        creature.physicsBody.contactTestBitMask = 1 << 1 | 1 << 2;
     }
     
     // 2.等待攻击间隔
@@ -69,7 +83,6 @@
             [self attack];
         } else {
             self.working = NO;
-            [self.bullet removeFromParent];
         }
     });
     
