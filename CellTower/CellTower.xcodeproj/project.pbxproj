@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B507884A1AB7F11600D5864E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B50788491AB7F11600D5864E /* main.m */; };
-		B507884D1AB7F11600D5864E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B507884C1AB7F11600D5864E /* AppDelegate.m */; };
-		B50788501AB7F11600D5864E /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B507884F1AB7F11600D5864E /* GameScene.m */; };
-		B50788521AB7F11600D5864E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B50788511AB7F11600D5864E /* GameScene.sks */; };
-		B50788551AB7F11600D5864E /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B50788541AB7F11600D5864E /* GameViewController.m */; };
 		B50788581AB7F11600D5864E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B50788561AB7F11600D5864E /* Main.storyboard */; };
 		B507885A1AB7F11600D5864E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B50788591AB7F11600D5864E /* Images.xcassets */; };
 		B507885D1AB7F11600D5864E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B507885B1AB7F11600D5864E /* LaunchScreen.xib */; };
@@ -39,6 +35,10 @@
 		B593351A1AB81E580039A94C /* slowdown_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335081AB81E580039A94C /* slowdown_fire.wav */; };
 		B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59335091AB81E580039A94C /* sniper_fire.wav */; };
 		B593351C1AB81E580039A94C /* upgrade_tower.wav in Resources */ = {isa = PBXBuildFile; fileRef = B593350A1AB81E580039A94C /* upgrade_tower.wav */; };
+		B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD2E21ABD35C200DF4163 /* AppDelegate.m */; };
+		B5ADD2E91ABD35C200DF4163 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD2E41ABD35C200DF4163 /* GameScene.m */; };
+		B5ADD2EA1ABD35C200DF4163 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5ADD2E51ABD35C200DF4163 /* GameScene.sks */; };
+		B5ADD2EB1ABD35C200DF4163 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5ADD2E71ABD35C200DF4163 /* GameViewController.m */; };
 		B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BF25211ABAC838005CEAC1 /* SlowDownTower.m */; };
 		B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BF25241ABACE05005CEAC1 /* ShockTower.m */; };
 		B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BF25271ABACF54005CEAC1 /* CTGeometryTool.m */; };
@@ -63,13 +63,6 @@
 		B50788441AB7F11600D5864E /* CellTower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CellTower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50788481AB7F11600D5864E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B50788491AB7F11600D5864E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B507884B1AB7F11600D5864E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B507884C1AB7F11600D5864E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B507884E1AB7F11600D5864E /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		B507884F1AB7F11600D5864E /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
-		B50788511AB7F11600D5864E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		B50788531AB7F11600D5864E /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		B50788541AB7F11600D5864E /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		B50788571AB7F11600D5864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B50788591AB7F11600D5864E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B507885C1AB7F11600D5864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -105,6 +98,13 @@
 		B59335081AB81E580039A94C /* slowdown_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = slowdown_fire.wav; sourceTree = "<group>"; };
 		B59335091AB81E580039A94C /* sniper_fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sniper_fire.wav; sourceTree = "<group>"; };
 		B593350A1AB81E580039A94C /* upgrade_tower.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = upgrade_tower.wav; sourceTree = "<group>"; };
+		B5ADD2E11ABD35C200DF4163 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B5ADD2E21ABD35C200DF4163 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B5ADD2E31ABD35C200DF4163 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		B5ADD2E41ABD35C200DF4163 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		B5ADD2E51ABD35C200DF4163 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		B5ADD2E61ABD35C200DF4163 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		B5ADD2E71ABD35C200DF4163 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		B5BF25201ABAC838005CEAC1 /* SlowDownTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowDownTower.h; sourceTree = "<group>"; };
 		B5BF25211ABAC838005CEAC1 /* SlowDownTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowDownTower.m; sourceTree = "<group>"; };
 		B5BF25231ABACE05005CEAC1 /* ShockTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShockTower.h; sourceTree = "<group>"; };
@@ -160,17 +160,11 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
+				B5ADD2E01ABD35C200DF4163 /* Main */,
 				B5BF25291ABACF61005CEAC1 /* Tool */,
 				B534830F1ABB173600A8D950 /* Map */,
 				B51128CA1AB809A2005C8B2E /* Tower */,
 				B50F76911AB7F4B70007FF1F /* Creature */,
-				B507884B1AB7F11600D5864E /* AppDelegate.h */,
-				B507884C1AB7F11600D5864E /* AppDelegate.m */,
-				B507884E1AB7F11600D5864E /* GameScene.h */,
-				B507884F1AB7F11600D5864E /* GameScene.m */,
-				B50788511AB7F11600D5864E /* GameScene.sks */,
-				B50788531AB7F11600D5864E /* GameViewController.h */,
-				B50788541AB7F11600D5864E /* GameViewController.m */,
 				B50788471AB7F11600D5864E /* Supporting Files */,
 			);
 			path = CellTower;
@@ -275,6 +269,20 @@
 			path = music;
 			sourceTree = "<group>";
 		};
+		B5ADD2E01ABD35C200DF4163 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B5ADD2E11ABD35C200DF4163 /* AppDelegate.h */,
+				B5ADD2E21ABD35C200DF4163 /* AppDelegate.m */,
+				B5ADD2E31ABD35C200DF4163 /* GameScene.h */,
+				B5ADD2E41ABD35C200DF4163 /* GameScene.m */,
+				B5ADD2E51ABD35C200DF4163 /* GameScene.sks */,
+				B5ADD2E61ABD35C200DF4163 /* GameViewController.h */,
+				B5ADD2E71ABD35C200DF4163 /* GameViewController.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		B5BF25291ABACF61005CEAC1 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +377,7 @@
 				B59335101AB81E580039A94C /* earthquake_fire.wav in Resources */,
 				B59335131AB81E580039A94C /* gameover.WAV in Resources */,
 				B593351A1AB81E580039A94C /* slowdown_fire.wav in Resources */,
+				B5ADD2EA1ABD35C200DF4163 /* GameScene.sks in Resources */,
 				B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */,
 				B507885D1AB7F11600D5864E /* LaunchScreen.xib in Resources */,
 				B59335181AB81E580039A94C /* rocket_fire.wav in Resources */,
@@ -383,7 +392,6 @@
 				B59335161AB81E580039A94C /* radar_fire.wav in Resources */,
 				B593350D1AB81E580039A94C /* create_tower.wav in Resources */,
 				B59335141AB81E580039A94C /* menu_bg.mod in Resources */,
-				B50788521AB7F11600D5864E /* GameScene.sks in Resources */,
 				B59335151AB81E580039A94C /* next_level.wav in Resources */,
 				B593350B1AB81E580039A94C /* air_fire.wav in Resources */,
 				B50788581AB7F11600D5864E /* Main.storyboard in Resources */,
@@ -407,19 +415,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				B53483151ABB173600A8D950 /* NSMutableArray+Point.m in Sources */,
-				B50788551AB7F11600D5864E /* GameViewController.m in Sources */,
 				B5D702581AB84071003FE835 /* TowerModel.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
 				B5C9E73B1ABC4E64003CA711 /* RadarTower.m in Sources */,
 				B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */,
 				B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */,
 				B53483141ABB173600A8D950 /* Map.m in Sources */,
+				B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
+				B5ADD2EB1ABD35C200DF4163 /* GameViewController.m in Sources */,
+				B5ADD2E91ABD35C200DF4163 /* GameScene.m in Sources */,
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
 				B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */,
-				B507884D1AB7F11600D5864E /* AppDelegate.m in Sources */,
-				B50788501AB7F11600D5864E /* GameScene.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
