@@ -35,6 +35,7 @@
         self.creatures = [NSMutableArray array];
         self.towers = [NSMutableArray array];
         self.userInteractionEnabled = YES;
+        [self test];
     }
     return self;
 }
@@ -145,8 +146,9 @@
     
     CreatureModel *creatureModel = [CreatureModel creatureModelWithType:type];
     Creature *creature = [Creature creatureWithModel:creatureModel position:point];
+    creature.creatureHidden = YES;
     [creature moveWithPath:[self findPixelPathFromPoint:point direction:PathDirectLeftToRight]];
-    creature.HP = 20;
+    creature.HP = 5;
     [self setupCreaturePhysicsBody:creature];
     [self addChild:creature];
     [self.creatures addObject:creature];
@@ -172,11 +174,15 @@
     // 1.2 设置怪物的物理刚体属性
     // 1) 使用怪物的尺寸创建一个圆形刚体
     creature.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:creature.size.width / 2.0];
-    // 2) 标示物体的移动是否由仿真引擎负责
+    
+    /**
+       2)若打开dynamic,则节点可能由于碰撞而被引擎改变位置
+         但是若碰撞的两者都关闭,则无法发生碰撞.
+     */
     creature.physicsBody.dynamic = YES;
-    // 3) 设置类别掩码
+    // 3) 设置节点的类别掩码 , 设置之后可以被碰到
     creature.physicsBody.categoryBitMask = creatureCategory;
-    // 4) 设置碰撞检测类别掩码
+    // 4) 设置碰撞检测类别掩码 , 设置之后可以主动碰到那些类别的节点
     if (creature.creatureHidden == YES) {
         creature.physicsBody.contactTestBitMask = radarTowerCategory;
     } else {
@@ -194,16 +200,19 @@
     // 1.2 设置塔的物理刚体属性
     // 1) 使用塔的范围创建一个圆形刚体
     tower.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:tower.range];
-    // 2) 标示物体的移动是否由仿真引擎负责
-    tower.physicsBody.dynamic = YES;
-    // 3) 设置类别掩码
+    /**
+     2)若打开dynamic,则节点可能由于碰撞而被引擎改变位置
+     但是若碰撞的两者都关闭,则无法发生碰撞.
+     */
+    tower.physicsBody.dynamic = NO;
+    // 3) 设置节点的类别掩码 , 设置之后可以被碰到
     if (tower.type == TowerTypeRadar) {
         tower.physicsBody.categoryBitMask = radarTowerCategory;
     } else {
         tower.physicsBody.categoryBitMask = towerCategory;
     }
-    // 4) 设置碰撞检测类别掩码
-    //    tower.physicsBody.contactTestBitMask = creatureCategory;
+    // 4) 设置之后可以主动碰到那些类别的节点
+//        tower.physicsBody.contactTestBitMask = creatureCategory;
     // 5) 设置回弹掩码
     tower.physicsBody.collisionBitMask = 0;
     // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
@@ -281,11 +290,12 @@
     [_creatures removeObject:creature];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)test
 {
-    CGPoint point = [[touches anyObject] locationInNode:self];
-    int type = arc4random_uniform(7);
-    [self addTowerWithType:type point:point];
+    
+    for (int i = 0; i < 20; i++ ) {
+        [self addTowerWithType:arc4random_uniform(7) point:CGPointMake(arc4random_uniform(320), arc4random_uniform(320))];
+    }
     
 }
 

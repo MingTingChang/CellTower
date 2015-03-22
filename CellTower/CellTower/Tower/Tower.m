@@ -20,6 +20,16 @@
 
 @implementation Tower
 
+- (void)setPosition:(CGPoint)position
+{
+    [super setPosition:position];
+}
+
+- (void)dealloc
+{
+    
+}
+
 #pragma mark 子弹集合
 - (NSMutableArray *)bullets {
     if (!_bullets) {

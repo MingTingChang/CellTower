@@ -28,7 +28,7 @@
     _gameMap = [GameMap spriteNodeWithImageNamed:@"test.jpg" gridPixel:10 mapType:MapTypeOneInOneOut];
     _gameMap.anchorPoint = CGPointMake(0, 0);
     _gameMap.position = CGPointMake(0, 0);
-    [_gameMap setupGridMap];
+//    [_gameMap setupGridMap];
     [self addChild:_gameMap];
 
     [self setupPhysical];
