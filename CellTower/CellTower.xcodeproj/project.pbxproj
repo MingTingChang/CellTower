@@ -14,9 +14,9 @@
 		B50788691AB7F11600D5864E /* CellTowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B50788681AB7F11600D5864E /* CellTowerTests.m */; };
 		B50F76971AB7F89F0007FF1F /* Creature.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76961AB7F89F0007FF1F /* Creature.m */; };
 		B51128D01AB80D23005C8B2E /* Tower.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CF1AB80D23005C8B2E /* Tower.m */; };
-		B51AD0E11ABE7F0F00F7F1F3 /* SKNode+Expention.m in Sources */ = {isa = PBXBuildFile; fileRef = B51AD0E01ABE7F0F00F7F1F3 /* SKNode+Expention.m */; };
 		B53483141ABB173600A8D950 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483111ABB173600A8D950 /* Map.m */; };
-		B53483151ABB173600A8D950 /* NSMutableArray+Point.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483131ABB173600A8D950 /* NSMutableArray+Point.m */; };
+		B547F0B81ABE8BE2006FB1CE /* SKNode+Expention.m in Sources */ = {isa = PBXBuildFile; fileRef = B547F0B71ABE8BE2006FB1CE /* SKNode+Expention.m */; };
+		B547F0BB1ABE8BFD006FB1CE /* NSMutableArray+Point.m in Sources */ = {isa = PBXBuildFile; fileRef = B547F0BA1ABE8BFD006FB1CE /* NSMutableArray+Point.m */; };
 		B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B5901B8E1ABC54CF000200FE /* GameMap.m */; };
 		B593350B1AB81E580039A94C /* air_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334F91AB81E570039A94C /* air_fire.wav */; };
 		B593350C1AB81E580039A94C /* congratulation.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FA1AB81E570039A94C /* congratulation.wav */; };
@@ -78,12 +78,12 @@
 		B50F76961AB7F89F0007FF1F /* Creature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creature.m; sourceTree = "<group>"; };
 		B51128CE1AB80D23005C8B2E /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
-		B51AD0DF1ABE7F0F00F7F1F3 /* SKNode+Expention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SKNode+Expention.h"; path = "../../../../../Documents/SKNode+Expention.h"; sourceTree = "<group>"; };
-		B51AD0E01ABE7F0F00F7F1F3 /* SKNode+Expention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SKNode+Expention.m"; path = "../../../../../Documents/SKNode+Expention.m"; sourceTree = "<group>"; };
 		B53483101ABB173600A8D950 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		B53483111ABB173600A8D950 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
-		B53483121ABB173600A8D950 /* NSMutableArray+Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+Point.h"; path = "../Map/NSMutableArray+Point.h"; sourceTree = "<group>"; };
-		B53483131ABB173600A8D950 /* NSMutableArray+Point.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Point.m"; path = "../Map/NSMutableArray+Point.m"; sourceTree = "<group>"; };
+		B547F0B61ABE8BE2006FB1CE /* SKNode+Expention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKNode+Expention.h"; sourceTree = "<group>"; };
+		B547F0B71ABE8BE2006FB1CE /* SKNode+Expention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKNode+Expention.m"; sourceTree = "<group>"; };
+		B547F0B91ABE8BFD006FB1CE /* NSMutableArray+Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Point.h"; sourceTree = "<group>"; };
+		B547F0BA1ABE8BFD006FB1CE /* NSMutableArray+Point.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Point.m"; sourceTree = "<group>"; };
 		B5686DC51ABAB1500037EA42 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = pch/PrefixHeader.pch; sourceTree = "<group>"; };
 		B5901B8D1ABC54CF000200FE /* GameMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMap.h; sourceTree = "<group>"; };
 		B5901B8E1ABC54CF000200FE /* GameMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameMap.m; sourceTree = "<group>"; };
@@ -259,10 +259,10 @@
 		B51AD0DB1ABE7C9C00F7F1F3 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				B53483121ABB173600A8D950 /* NSMutableArray+Point.h */,
-				B53483131ABB173600A8D950 /* NSMutableArray+Point.m */,
-				B51AD0DF1ABE7F0F00F7F1F3 /* SKNode+Expention.h */,
-				B51AD0E01ABE7F0F00F7F1F3 /* SKNode+Expention.m */,
+				B547F0B91ABE8BFD006FB1CE /* NSMutableArray+Point.h */,
+				B547F0BA1ABE8BFD006FB1CE /* NSMutableArray+Point.m */,
+				B547F0B61ABE8BE2006FB1CE /* SKNode+Expention.h */,
+				B547F0B71ABE8BE2006FB1CE /* SKNode+Expention.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -449,7 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B53483151ABB173600A8D950 /* NSMutableArray+Point.m in Sources */,
+				B547F0BB1ABE8BFD006FB1CE /* NSMutableArray+Point.m in Sources */,
 				B5D702581AB84071003FE835 /* TowerModel.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
 				B5C9E73B1ABC4E64003CA711 /* RadarTower.m in Sources */,
@@ -459,13 +459,13 @@
 				B53483141ABB173600A8D950 /* Map.m in Sources */,
 				B5D2FADF1ABD390E009BB190 /* SniperTower.m in Sources */,
 				B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */,
-				B51AD0E11ABE7F0F00F7F1F3 /* SKNode+Expention.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
 				B5ADD2EB1ABD35C200DF4163 /* GameViewController.m in Sources */,
 				B5ADD2E91ABD35C200DF4163 /* GameScene.m in Sources */,
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
 				B5D2FAE31ABD3A82009BB190 /* RocketTower.m in Sources */,
+				B547F0B81ABE8BE2006FB1CE /* SKNode+Expention.m in Sources */,
 				B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,
 				B5D2FAE61ABD4491009BB190 /* AirTower.m in Sources */,
