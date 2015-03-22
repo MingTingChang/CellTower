@@ -52,14 +52,6 @@
     }
 }
 
-#pragma mark 开始点击屏幕
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    for (Creature *creature in _creatures) {
-        CTLog(@"%@----%d----%d", creature.imageName, creature.HP, creature.moveSpeed);
-    }
-}
-
 #pragma mark - Tower代理方法
 - (void)tower:(Tower *)tower didDefeatCreature:(Creature *)creature
 {
