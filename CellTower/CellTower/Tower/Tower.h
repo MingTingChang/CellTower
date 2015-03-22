@@ -11,6 +11,8 @@
 @class Creature;
 @class Tower;
 
+typedef void(^shootCompletionBlock)(Creature *creature);
+
 @protocol TowerDelegate <NSObject>
 @optional
 /**
@@ -112,7 +114,7 @@
 /**
  *  攻击
  */
-- (void)attack:(Creature *)creature;
+- (void)shootWithCreature:(Creature *)creature completion:(shootCompletionBlock)completion;
 
 /** 升级 */
 - (void)upgrade;

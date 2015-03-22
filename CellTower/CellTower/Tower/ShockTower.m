@@ -18,6 +18,7 @@
 
 @implementation ShockTower
 
+#pragma mark 子弹
 - (SKSpriteNode *)bullet {
     if (!_bullet) {
         _bullet = [SKSpriteNode spriteNodeWithImageNamed:@"shock"];
@@ -26,18 +27,16 @@
     return _bullet;
 }
 
+#pragma mark 怪物进入攻击范围
 - (void)creatureIntoAttackRange:(Creature *)creature
 {
     [self.targets addObject:creature];
     [self attack];
 }
 
-#pragma mark 攻击
-- (void)attack
+#pragma mark 清除隐藏怪物
+- (void)removeHiddenCreature
 {
-    if (self.isWorking == YES) return;
-    self.working = YES;
-    
     NSMutableArray *arrayM = [NSMutableArray array];
     for (Creature *child in self.targets) {
         if (child.creatureHidden == YES) {
@@ -47,20 +46,67 @@
     for (Creature *child in arrayM) {
         [self.targets removeObject:child];
     }
+}
+
+#pragma mark 清除死亡目标
+- (void)removeDeadCreature {
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (Creature *child in self.targets) {
+        if (child.HP <= 0) {
+            [arrayM addObject:child];
+        }
+    }
+    for (Creature *child in arrayM) {
+        [self.targets removeObject:child];
+    }
+}
+
+#pragma mark 攻击
+- (void)attack
+{
+    if (self.isWorking) return;
+    self.working = YES;
     
-    if (self.targets.count < 1) return;
-    [self attack:nil];
+    // 1.清除隐藏怪物
+    [self removeHiddenCreature];
+    [self removeDeadCreature];
     
+    if (self.targets.count < 1)
+    {
+        self.working = NO;
+        return;
+    }
+    
+    // 2.射击
+    [self shootWithCreature:nil completion:^(Creature *creature) {
+        // 3.扣血以及检测死亡
+        NSMutableArray *arrayM = [NSMutableArray array];
+        for (Creature *creature in self.targets) {
+            creature.HP -= self.damage;
+            if (creature.HP <= 0) { // 死亡
+                [arrayM addObject:creature];
+            }
+        }
+        
+        for (Creature *child in arrayM) {
+            [self.targets removeObject:child];
+            if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
+                [self.delegate tower:self didDefeatCreature:child];
+            }
+        }
+    }];
+    
+    // 3.等待攻击间隔
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.working = NO;
         if (self.targets.count > 0) {
-            self.working = NO;
             [self attack];
         }
     });
 }
 
 #pragma mrak 攻击目标
-- (void)attack:(Creature *)creature
+- (void)shootWithCreature:(Creature *)creature completion:(shootCompletionBlock)completion
 {
     self.working = YES;
     
@@ -74,19 +120,11 @@
         self.bullet.xScale = 1;
         self.bullet.yScale = 1;
         self.bullet.hidden = YES;
-    }];
-    
-    // 2.扣血以及检测死亡
-    for (Creature *creature in self.targets) {
-        creature.HP -= self.damage;
-        CTLog(@"%@    %d    %d", creature.imageName, creature.HP, creature.moveSpeed);
-        if (creature.HP <= 0) { // 死亡
-            [self.targets removeObject:creature];
-            if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
-                [self.delegate tower:self didDefeatCreature:creature];
-            }
+        
+        if (completion) {
+            completion(nil);
         }
-    }
+    }];
 }
 
 @end

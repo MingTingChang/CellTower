@@ -15,15 +15,7 @@
 #import "ShockTower.h"
 #import "CannonTower.h"
 #import "RadarTower.h"
-
-#pragma mark 设置碰撞掩码
-// 怪物类别
-static uint32_t creatureCategory = 1 << 0;
-// 塔类别
-static uint32_t towerCategory = 1 << 1;
-// 雷达类别
-static uint32_t radarTowerCategory = 1 << 2;
-
+#import "Common.h"
 
 @interface GameScene () <TowerDelegate, SKPhysicsContactDelegate>
 {
@@ -215,8 +207,8 @@ static uint32_t radarTowerCategory = 1 << 2;
     AirTower *airTower = [AirTower towerWithModel:airTowerModel position:CGPointMake(160, 160)];
     [self setupTower:airTower];
     
-    TowerModel *airTowerModel2 = [TowerModel towerModelWithType:TowerTypeAir];
-    AirTower *airTower2 = [AirTower towerWithModel:airTowerModel2 position:CGPointMake(160, 100)];
+    TowerModel *airTowerModel2 = [TowerModel towerModelWithType:TowerTypeRocker];
+    RocketTower *airTower2 = [RocketTower towerWithModel:airTowerModel2 position:CGPointMake(160, 100)];
     [self setupTower:airTower2];
     
     TowerModel *cannonTowerModel = [TowerModel towerModelWithType:TowerTypeShock];
@@ -237,6 +229,7 @@ static uint32_t radarTowerCategory = 1 << 2;
     model1.creatureHidden = YES;
     Creature *creature1 = [Creature creatureWithModel:model1 position:position];
     [self addChild:creature1];
+    creature1.HP = 5;
     [_creatures addObject:creature1];
     
     // 2.设置物理刚体属性

@@ -9,6 +9,7 @@
 #import "Tower.h"
 #import "Creature.h"
 #import "CTGeometryTool.h"
+#import "SKNode+Expention.h"
 
 @interface Tower ()
 
@@ -19,6 +20,7 @@
 
 @implementation Tower
 
+#pragma mark 子弹集合
 - (NSMutableArray *)bullets {
     if (!_bullets) {
         _bullets = [NSMutableArray array];
@@ -52,7 +54,7 @@
     return self;
 }
 
-#pragma mrak 添加子弹
+#pragma mark 添加子弹
 - (SKSpriteNode *)addBullet {
     SKSpriteNode *bullet = nil;
     
@@ -73,12 +75,8 @@
     return bullet;
 }
 
-#pragma mark 攻击
-- (void)attack
-{
-    if (self.isWorking == YES) return;
-    self.working = YES;
-    
+#pragma mark 目标数组清除隐藏怪物
+- (void)removeHiddenCreature {
     NSMutableArray *arrayM = [NSMutableArray array];
     for (Creature *child in self.targets) {
         if (child.creatureHidden == YES) {
@@ -88,67 +86,88 @@
     for (Creature *child in arrayM) {
         [self.targets removeObject:child];
     }
+}
+
+#pragma mark 清除死亡目标
+- (void)removeDeadCreature {
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (Creature *child in self.targets) {
+        if (child.HP <= 0) {
+            [arrayM addObject:child];
+        }
+    }
+    for (Creature *child in arrayM) {
+        [self.targets removeObject:child];
+    }
+}
+
+#pragma mark 周期发动攻击
+- (void)attack
+{
+    if (self.isWorking == YES) return;
+    self.working = YES;
     
-    if (self.targets.count < 1) return;
+    // 1.目标数组清除隐藏怪物和死亡怪物
+    [self removeHiddenCreature];
+    [self removeDeadCreature];
     
+    // 2.攻击怪物
+    if (self.targets.count < 1) {
+        self.working = NO;
+        return;
+    }
     self.target = [self.targets firstObject];
-    [self attack:self.target];
+    [self shootWithCreature:self.target completion:^(Creature *creature) {
+        // 扣血
+        creature.HP -= self.damage;
+        // 检测死亡
+        if (creature.HP <= 0) {
+            [self.targets removeObject:creature];
+            
+            if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
+                [self.delegate tower:self didDefeatCreature:creature];
+            }
+        }
+    }];
     
+    
+    // 2.等待攻击间隔
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.working = NO;
         if (self.targets.count > 0) {
-            self.working = NO;
             [self attack];
         }
     });
     
 }
 
-#pragma mark 攻击某个怪物
-- (void)attack:(Creature *)creature
+#pragma mark 射击
+- (void)shootWithCreature:(Creature *)creature completion:(shootCompletionBlock)completion
 {
-    [self.bullets addObject:[self addBullet]];
-    SKSpriteNode *bullet = [self.bullets lastObject];
-    
-    // 2.旋转
+    // 瞄准
     SKAction *rotateAction = [SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:creature.position andPoint2:self.position] duration:0.1f];
-    [self runAction: rotateAction completion:^{
-        // 3.发射子弹
+    [self runAction:rotateAction completion:^{
+        // 射击
+        // 1.获得子弹
+        [self.bullets addObject:[self addBullet]];
+        SKSpriteNode *bullet = [self.bullets lastObject];
         if (bullet.scene == nil) {
             [self.scene addChild:bullet];
         }
+        
+        // 2.发射子弹
+        
         bullet.position = self.position;
-        bullet.hidden = NO;
-        creature.HP -= self.damage;
-        
-        SKAction *moveAction = [SKAction moveTo:creature.position duration:0.4f];
-        [bullet runAction:[SKAction sequence:@[rotateAction, moveAction]] completion:^{
-            bullet.hidden = YES;
-        }];
-    }];
-    
-    // 5.等待攻击间隔
-    NSTimeInterval attackWait = 1 / self.attackSpeed;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(attackWait * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // 5.1.检测死亡
-        if (creature.HP <= 0) { // 死亡
-            // 清除攻击目标
-            self.target = nil;
-            [self.targets removeObject:creature];
-            
-            // 通知代理
-            if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
-                [self.delegate tower:self didDefeatCreature:creature];
-            }
-        }
-        
-        // 5.3删除子弹
-        if ( bullet.scene != nil) {
+        [bullet trackToNode:creature duration:0.4f completion:^{
             [bullet removeFromParent];
             [self.bullets removeObject:bullet];
-        }
-    });
-    
-    
+            if (completion) {
+                completion(creature);
+            }
+            
+        }];
+        
+    }];
 }
 
 #pragma mark - 公共方法
@@ -161,14 +180,12 @@
 }
 
 #pragma mark 根据模型实例化塔
-+ (instancetype)towerWithModel:(TowerModel *)model
-{
++ (instancetype)towerWithModel:(TowerModel *)model {
     return [[self alloc] initWithModel:model];
 }
 
 #pragma mark 根据模型和位置实例化塔
-+ (instancetype)towerWithModel:(TowerModel *)model position:(CGPoint)position
-{
++ (instancetype)towerWithModel:(TowerModel *)model position:(CGPoint)position {
     Tower *tower = [self towerWithModel:model];
     tower.position = position;
     
@@ -187,10 +204,6 @@
 - (void)creatureLeaveAttackRange:(Creature *)creature;
 {
     [self.targets removeObject:creature];
-    
-    if (self.targets.count < 1) {
-        self.working = NO;
-    }
 }
 
 #pragma mark 升级

@@ -14,6 +14,7 @@
 		B50788691AB7F11600D5864E /* CellTowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B50788681AB7F11600D5864E /* CellTowerTests.m */; };
 		B50F76971AB7F89F0007FF1F /* Creature.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76961AB7F89F0007FF1F /* Creature.m */; };
 		B51128D01AB80D23005C8B2E /* Tower.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CF1AB80D23005C8B2E /* Tower.m */; };
+		B51AD0E11ABE7F0F00F7F1F3 /* SKNode+Expention.m in Sources */ = {isa = PBXBuildFile; fileRef = B51AD0E01ABE7F0F00F7F1F3 /* SKNode+Expention.m */; };
 		B53483141ABB173600A8D950 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483111ABB173600A8D950 /* Map.m */; };
 		B53483151ABB173600A8D950 /* NSMutableArray+Point.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483131ABB173600A8D950 /* NSMutableArray+Point.m */; };
 		B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B5901B8E1ABC54CF000200FE /* GameMap.m */; };
@@ -77,10 +78,12 @@
 		B50F76961AB7F89F0007FF1F /* Creature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creature.m; sourceTree = "<group>"; };
 		B51128CE1AB80D23005C8B2E /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
+		B51AD0DF1ABE7F0F00F7F1F3 /* SKNode+Expention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SKNode+Expention.h"; path = "../../../../../Documents/SKNode+Expention.h"; sourceTree = "<group>"; };
+		B51AD0E01ABE7F0F00F7F1F3 /* SKNode+Expention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SKNode+Expention.m"; path = "../../../../../Documents/SKNode+Expention.m"; sourceTree = "<group>"; };
 		B53483101ABB173600A8D950 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		B53483111ABB173600A8D950 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
-		B53483121ABB173600A8D950 /* NSMutableArray+Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Point.h"; sourceTree = "<group>"; };
-		B53483131ABB173600A8D950 /* NSMutableArray+Point.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Point.m"; sourceTree = "<group>"; };
+		B53483121ABB173600A8D950 /* NSMutableArray+Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+Point.h"; path = "../Map/NSMutableArray+Point.h"; sourceTree = "<group>"; };
+		B53483131ABB173600A8D950 /* NSMutableArray+Point.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+Point.m"; path = "../Map/NSMutableArray+Point.m"; sourceTree = "<group>"; };
 		B5686DC51ABAB1500037EA42 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = pch/PrefixHeader.pch; sourceTree = "<group>"; };
 		B5901B8D1ABC54CF000200FE /* GameMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMap.h; sourceTree = "<group>"; };
 		B5901B8E1ABC54CF000200FE /* GameMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameMap.m; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		B5D702591AB84095003FE835 /* CreatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatureModel.h; sourceTree = "<group>"; };
 		B5D7025A1AB84095003FE835 /* CreatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatureModel.m; sourceTree = "<group>"; };
 		B5D7025C1AB848C1003FE835 /* tower.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tower.plist; sourceTree = "<group>"; };
+		B5E3CC521ABE5F4E005F2ECB /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
+				B51AD0DB1ABE7C9C00F7F1F3 /* Category */,
 				B5ADD2E01ABD35C200DF4163 /* Main */,
 				B5BF25291ABACF61005CEAC1 /* Tool */,
 				B534830F1ABB173600A8D950 /* Map */,
@@ -251,6 +256,17 @@
 			path = Tower;
 			sourceTree = "<group>";
 		};
+		B51AD0DB1ABE7C9C00F7F1F3 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				B53483121ABB173600A8D950 /* NSMutableArray+Point.h */,
+				B53483131ABB173600A8D950 /* NSMutableArray+Point.m */,
+				B51AD0DF1ABE7F0F00F7F1F3 /* SKNode+Expention.h */,
+				B51AD0E01ABE7F0F00F7F1F3 /* SKNode+Expention.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		B534830F1ABB173600A8D950 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,8 +274,6 @@
 				B5901B8E1ABC54CF000200FE /* GameMap.m */,
 				B53483101ABB173600A8D950 /* Map.h */,
 				B53483111ABB173600A8D950 /* Map.m */,
-				B53483121ABB173600A8D950 /* NSMutableArray+Point.h */,
-				B53483131ABB173600A8D950 /* NSMutableArray+Point.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -299,6 +313,7 @@
 				B5ADD2E51ABD35C200DF4163 /* GameScene.sks */,
 				B5ADD2E61ABD35C200DF4163 /* GameViewController.h */,
 				B5ADD2E71ABD35C200DF4163 /* GameViewController.m */,
+				B5E3CC521ABE5F4E005F2ECB /* Common.h */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -444,6 +459,7 @@
 				B53483141ABB173600A8D950 /* Map.m in Sources */,
 				B5D2FADF1ABD390E009BB190 /* SniperTower.m in Sources */,
 				B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */,
+				B51AD0E11ABE7F0F00F7F1F3 /* SKNode+Expention.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
 				B5ADD2EB1ABD35C200DF4163 /* GameViewController.m in Sources */,

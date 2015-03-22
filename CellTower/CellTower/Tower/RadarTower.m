@@ -9,24 +9,17 @@
 #import "RadarTower.h"
 #import "Creature.h"
 #import "GameScene.h"
+#import "Common.h"
 
 @implementation RadarTower
-
-@synthesize working = _working;
-
-- (BOOL)isWorking
-{
-    return _working;
-}
 
 #pragma mrak 进入侦测范围
 - (void)creatureIntoAttackRange:(Creature *)creature
 {
-    if (creature.isCreatureHidden) {
-        [self.targets addObject:creature];
-    }
     
-    [self attack];
+    [self.targets addObject:creature];
+    
+    [self detect];
     
 }
 
@@ -34,22 +27,20 @@
 - (void)creatureLeaveAttackRange:(Creature *)creature
 {
     Creature *leaveCreature = nil;
-    
     for (Creature *child in self.targets) {
         if (creature == child) {
             leaveCreature = child;
         }
     }
-    
     if (leaveCreature != nil) {
         leaveCreature.creatureHidden = YES;
-        leaveCreature.physicsBody.contactTestBitMask = 1 << 2;
+        leaveCreature.physicsBody.contactTestBitMask = radarTowerCategory;
         [self.targets removeObject:leaveCreature];
     }
 }
 
-#pragma mark 侦测
-- (void)attack
+#pragma mark 清除死亡目标
+- (void)removeDeadCreature
 {
     NSMutableArray *arrayM = [NSMutableArray array];
     for (Creature *child in self.targets) {
@@ -60,30 +51,34 @@
     for (Creature *child in arrayM) {
         [self.targets removeObject:child];
     }
+}
+
+#pragma mark 侦测
+- (void)detect
+{
+    // 1.清除死亡目标
+    [self removeDeadCreature];
     
-    if (self.targets.count < 1) return;
-    
+    if (self.working) return;
     self.working = YES;
     
     
     NSTimeInterval attackWait = 1.0 / self.attackSpeed;
-    
     // 1.旋转
     [self removeAllActions];
     [self runAction:[SKAction rotateByAngle:M_PI * 5 duration:attackWait*2]];
     
     for (Creature *creature in self.targets) {
         creature.creatureHidden = NO;
-        creature.physicsBody.contactTestBitMask = 1 << 1 | 1 << 2;
+        creature.physicsBody.contactTestBitMask = towerCategory | radarTowerCategory;
     }
     
     // 2.等待攻击间隔
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(attackWait * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.working = NO;
         if (self.targets.count > 0) {
-            [self attack];
-        } else {
-            self.working = NO;
-        }
+            [self detect];
+        } 
     });
     
 }
