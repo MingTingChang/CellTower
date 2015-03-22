@@ -11,9 +11,18 @@
 #import "Tower.h"
 #import "Creature.h"
 #import "CTGeometryTool.h"
+#import "RadarTower.h"
+#import "ShockTower.h"
+#import "SlowDownTower.h"
+#import "AirTower.h"
+#import "Common.h"
 
 //默认单元栅格像素
 #define MapGridPixelNormalValue 10
+
+@interface GameMap() <TowerDelegate>
+
+@end
 
 @implementation GameMap
 #pragma mark - 初始化方法
@@ -25,6 +34,7 @@
         self.gridPixel = gridPixel;
         self.creatures = [NSMutableArray array];
         self.towers = [NSMutableArray array];
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
@@ -52,7 +62,7 @@
     if (_map == nil) {
         [self setupGridMap];
     }
-    TowerModel *towerModel = [TowerModel towerModelWithType:type];
+    
     // 获取塔4个栅格点的左上角栅格坐标
     CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
     
@@ -85,19 +95,41 @@
     // 设置像素坐标的塔的真实位置
     CGPoint tmpPoint = [CTGeometryTool pixelPointFromGridPoint:gridHeadPoint gridPixel:_gridPixel];
     CGPoint centerPoint = CGPointMake(tmpPoint.x + _gridPixel * 0.5, tmpPoint.y + _gridPixel * 0.5);
-    Tower *tower = [Tower towerWithModel:towerModel position:centerPoint];
-    tower.size = CGSizeMake(20, 20);
     
-//    SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:@"bg_green.jpg"];
-//    node.size = CGSizeMake(20, 20);
-//    node.position = CGPointMake(centerPoint.x, centerPoint.y);
-//    [self addChild:node];
-//    [self.towers addObject:node];
+    Tower *tower = [self getRealTowerWithType:type position:centerPoint];
+    tower.size = CGSizeMake(20, 20);
+    tower.delegate = self;
+    [self setupTowerPhysicsBody:tower];
     [self addChild:tower];
     [self.towers addObject:tower];
     
     // 改变了塔图的构造，需要为所有怪重新生成路径
     [self resetCreaturePath];
+}
+
+- (Tower *)getRealTowerWithType:(TowerType)type position:(CGPoint)point
+{
+    TowerModel *towerModel = [TowerModel towerModelWithType:type];
+    Tower *tower = nil;
+    switch (type) {
+        case TowerTypeRadar:
+            tower = [RadarTower towerWithModel:towerModel position:point];
+            break;
+        case TowerTypeSlowDown:
+            tower = [SlowDownTower towerWithModel:towerModel position:point];
+            break;
+        case TowerTypeShock:
+            tower = [ShockTower towerWithModel:towerModel position:point];
+            break;
+        case TowerTypeAir:
+            tower = [AirTower towerWithModel:towerModel position:point];
+            break;
+        default:
+            tower = [Tower towerWithModel:towerModel position:point];
+            break;
+    }
+    
+    return tower;
 }
 
 #pragma mark 制造妖怪
@@ -114,6 +146,8 @@
     CreatureModel *creatureModel = [CreatureModel creatureModelWithType:type];
     Creature *creature = [Creature creatureWithModel:creatureModel position:point];
     [creature moveWithPath:[self findPixelPathFromPoint:point direction:PathDirectLeftToRight]];
+    creature.HP = 20;
+    [self setupCreaturePhysicsBody:creature];
     [self addChild:creature];
     [self.creatures addObject:creature];
 }
@@ -130,6 +164,50 @@
         [path addObject:[NSValue valueWithCGPoint:pixelPoint]];
     }
     return path;
+}
+
+#pragma mark 设置怪物的物理刚体属性
+- (void)setupCreaturePhysicsBody:(Creature *)creature
+{
+    // 1.2 设置怪物的物理刚体属性
+    // 1) 使用怪物的尺寸创建一个圆形刚体
+    creature.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:creature.size.width / 2.0];
+    // 2) 标示物体的移动是否由仿真引擎负责
+    creature.physicsBody.dynamic = YES;
+    // 3) 设置类别掩码
+    creature.physicsBody.categoryBitMask = creatureCategory;
+    // 4) 设置碰撞检测类别掩码
+    if (creature.creatureHidden == YES) {
+        creature.physicsBody.contactTestBitMask = radarTowerCategory;
+    } else {
+        creature.physicsBody.contactTestBitMask = towerCategory;
+    }
+    // 5) 设置回弹掩码
+    creature.physicsBody.collisionBitMask = 0;
+    // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
+    creature.physicsBody.usesPreciseCollisionDetection = YES;
+}
+
+#pragma mark 设置塔的物理刚体属性
+- (void)setupTowerPhysicsBody:(Tower *)tower
+{
+    // 1.2 设置塔的物理刚体属性
+    // 1) 使用塔的范围创建一个圆形刚体
+    tower.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:tower.range];
+    // 2) 标示物体的移动是否由仿真引擎负责
+    tower.physicsBody.dynamic = YES;
+    // 3) 设置类别掩码
+    if (tower.type == TowerTypeRadar) {
+        tower.physicsBody.categoryBitMask = radarTowerCategory;
+    } else {
+        tower.physicsBody.categoryBitMask = towerCategory;
+    }
+    // 4) 设置碰撞检测类别掩码
+    //    tower.physicsBody.contactTestBitMask = creatureCategory;
+    // 5) 设置回弹掩码
+    tower.physicsBody.collisionBitMask = 0;
+    // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
+    tower.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
 #pragma mark 重置妖怪路径
@@ -193,4 +271,23 @@
     }
     self.creatures = [NSMutableArray array];
 }
+
+#pragma mark - Tower代理方法
+- (void)tower:(Tower *)tower didDefeatCreature:(Creature *)creature
+{
+    [creature removeFromParent];
+    if (creature == nil) return;
+    
+    [_creatures removeObject:creature];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint point = [[touches anyObject] locationInNode:self];
+    int type = arc4random_uniform(7);
+    [self addTowerWithType:type point:point];
+    
+}
+
+
 @end
