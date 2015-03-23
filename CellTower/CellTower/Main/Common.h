@@ -13,3 +13,6 @@ static uint32_t creatureCategory = 1 << 0;
 static uint32_t towerCategory = 1 << 1;
 // 雷达类别
 static uint32_t radarTowerCategory = 1 << 2;
+
+#define CreatureTypeNumber 8
+#define TowerTypeNumber 7

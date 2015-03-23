@@ -30,11 +30,25 @@
                            mapType:(MapType)type
 {
     if (self = [super initWithImageNamed:name]) {
+        self.size = CGSizeMake(300, 300);
         self.type = type;
         self.gridPixel = gridPixel;
         self.creatures = [NSMutableArray array];
         self.towers = [NSMutableArray array];
         self.userInteractionEnabled = YES;
+        // 加载塔模型
+        self.towerModels = [NSMutableArray array];
+        for (int i = 0; i < TowerTypeNumber; i++) {
+            TowerModel *model = [TowerModel towerModelWithType:i];
+            [self.towerModels addObject:model];
+        }
+        // 加载妖怪模型
+        self.creatureModels = [NSMutableArray array];
+        for (int i = 0; i < CreatureTypeNumber; i++) {
+            CreatureModel *model = [CreatureModel creatureModelWithType:i];
+            [self.creatureModels addObject:model];
+        }
+        
         [self test];
     }
     return self;
@@ -110,7 +124,7 @@
 
 - (Tower *)getRealTowerWithType:(TowerType)type position:(CGPoint)point
 {
-    TowerModel *towerModel = [TowerModel towerModelWithType:type];
+    TowerModel *towerModel = self.towerModels[type];
     Tower *tower = nil;
     switch (type) {
         case TowerTypeRadar:
@@ -144,11 +158,12 @@
         }
     }
     
-    CreatureModel *creatureModel = [CreatureModel creatureModelWithType:type];
+    CreatureModel *creatureModel = self.creatureModels[type];
     Creature *creature = [Creature creatureWithModel:creatureModel position:point];
     creature.creatureHidden = YES;
     [creature moveWithPath:[self findPixelPathFromPoint:point direction:PathDirectLeftToRight]];
-    creature.HP = 5;
+    
+    creature.HP = 10;
     [self setupCreaturePhysicsBody:creature];
     [self addChild:creature];
     [self.creatures addObject:creature];
@@ -292,9 +307,25 @@
 
 - (void)test
 {
-    
-    for (int i = 0; i < 20; i++ ) {
-        [self addTowerWithType:arc4random_uniform(7) point:CGPointMake(arc4random_uniform(320), arc4random_uniform(320))];
+    for (int y = 0; y < 250; y+=10) {
+        CGPoint pos = CGPointMake(50, y);
+        [self addTowerWithType:arc4random_uniform(7) point:pos];
+    }
+    for (int y = 50; y < 300; y+=10) {
+        CGPoint pos = CGPointMake(100, y);
+        [self addTowerWithType:arc4random_uniform(7) point:pos];
+    }
+    for (int y = 0; y < 250; y+=10) {
+        CGPoint pos = CGPointMake(150, y);
+        [self addTowerWithType:arc4random_uniform(7) point:pos];
+    }
+    for (int y = 50; y < 300; y+=10) {
+        CGPoint pos = CGPointMake(200, y);
+        [self addTowerWithType:arc4random_uniform(7) point:pos];
+    }
+    for (int y = 0; y < 250; y+=10) {
+        CGPoint pos = CGPointMake(250, y);
+        [self addTowerWithType:arc4random_uniform(7) point:pos];
     }
     
 }

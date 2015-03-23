@@ -9,13 +9,12 @@
 #import "GameScene.h"
 #import "Creature.h"
 #import "Tower.h"
-#import "GameMap.h"
 #import "Common.h"
+#import "GameMap.h"
 
 @interface GameScene () <SKPhysicsContactDelegate>
-{
-    GameMap *_gameMap;
-}
+
+@property (nonatomic , strong) GameMap *gameMap;
 
 @end
 
@@ -27,8 +26,8 @@
     
     _gameMap = [GameMap spriteNodeWithImageNamed:@"test.jpg" gridPixel:10 mapType:MapTypeOneInOneOut];
     _gameMap.anchorPoint = CGPointMake(0, 0);
-    _gameMap.position = CGPointMake(0, 0);
-//    [_gameMap setupGridMap];
+    _gameMap.position = CGPointMake(124, 10);
+
     [self addChild:_gameMap];
 
     [self setupPhysical];
@@ -36,9 +35,10 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for (int y = 0; y < 320; y+=20) {
-        CGPoint pos = CGPointMake(10, y);
-        [_gameMap addCreatureWithType:CreatureTypeBomb point:pos];
+    for (int i = 0; i < 20; i++) {
+        int y = arc4random_uniform(20) + self.gameMap.position.y + self.gameMap.size.height * 0.5 - 20;
+        CGPoint pos = CGPointMake(0, y);
+        [_gameMap addCreatureWithType:arc4random_uniform(8) point:pos];
     }
 }
 

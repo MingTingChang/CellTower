@@ -10,6 +10,7 @@
 #import "CTGeometryTool.h"
 #import "Creature.h"
 #import "SKNode+Expention.h"
+#import "GameMap.h"
 
 @implementation AirTower
 
@@ -114,9 +115,16 @@
     SKSpriteNode *bullet = [self.bullets lastObject];
     
     // 2.发射子弹
-    if (bullet.scene == nil) {
-        [self.scene addChild:bullet];
+//    if (bullet.scene == nil) {
+//        [self.scene addChild:bullet];
+//    }
+    if (bullet.parent == nil) {
+        if ([self.parent isKindOfClass:[GameMap class]]) {
+            GameMap *gameMap = (GameMap *)self.parent;
+            [gameMap addChild:bullet];
+        }
     }
+    
     bullet.position = self.position;
     [bullet trackToNode:creature duration:0.4f completion:^{
        

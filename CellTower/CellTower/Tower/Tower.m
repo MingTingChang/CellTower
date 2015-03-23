@@ -10,6 +10,7 @@
 #import "Creature.h"
 #import "CTGeometryTool.h"
 #import "SKNode+Expention.h"
+#import "GameMap.h"
 
 @interface Tower ()
 
@@ -19,16 +20,6 @@
 @end
 
 @implementation Tower
-
-- (void)setPosition:(CGPoint)position
-{
-    [super setPosition:position];
-}
-
-- (void)dealloc
-{
-    
-}
 
 #pragma mark 子弹集合
 - (NSMutableArray *)bullets {
@@ -161,10 +152,16 @@
         // 1.获得子弹
         [self.bullets addObject:[self addBullet]];
         SKSpriteNode *bullet = [self.bullets lastObject];
-        if (bullet.scene == nil) {
-            [self.scene addChild:bullet];
+//        if (bullet.scene == nil) {
+//            [self.scene addChild:bullet];
+//        }
+        if (bullet.parent == nil) {
+            if ([self.parent isKindOfClass:[GameMap class]]) {
+                GameMap *gameMap = (GameMap *)self.parent;
+                [gameMap addChild:bullet];
+            }
         }
-        
+    
         // 2.发射子弹
         
         bullet.position = self.position;

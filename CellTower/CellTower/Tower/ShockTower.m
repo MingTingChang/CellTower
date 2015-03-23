@@ -9,6 +9,7 @@
 #import "ShockTower.h"
 #import "Creature.h"
 #import "CTGeometryTool.h"
+#import "GameMap.h"
 
 @interface ShockTower()
 
@@ -111,9 +112,17 @@
     self.working = YES;
     
     // 1.发射子弹
-    if (self.bullet.scene == nil) {
-        [self.scene addChild:self.bullet];
+//    if (self.bullet.scene == nil) {
+//        [self.scene addChild:self.bullet];
+//    }
+    
+    if (self.bullet.parent == nil) {
+        if ([self.parent isKindOfClass:[GameMap class]]) {
+            GameMap *gameMap = (GameMap *)self.parent;
+            [gameMap addChild:self.bullet];
+        }
     }
+    
     self.bullet.position = self.position;
     self.bullet.hidden = NO;
     [self.bullet runAction:[SKAction scaleTo:self.range*2/self.bullet.size.width duration:1.0f] completion:^{

@@ -31,6 +31,10 @@ typedef enum
 
 @property (nonatomic , strong) NSMutableArray *towers;
 
+@property (nonatomic , strong) NSMutableArray *towerModels;
+
+@property (nonatomic , strong) NSMutableArray *creatureModels;
+
 /**
  *  添加塔到图上
  *
