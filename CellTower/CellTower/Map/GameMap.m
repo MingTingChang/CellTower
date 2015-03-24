@@ -226,6 +226,7 @@
     Creature *creature = [Creature creatureWithModel:creatureModel position:point];
     creature.delegate = self;
     creature.creatureHidden = NO;
+    creature.realHP = 4;
     creature.HP = 4;
     creature.coin = 1;
     [self setupCreaturePhysicsBody:creature];
