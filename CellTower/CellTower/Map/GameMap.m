@@ -20,7 +20,7 @@
 //默认单元栅格像素
 #define MapGridPixelNormalValue 10
 
-@interface GameMap() <TowerDelegate>
+@interface GameMap() <TowerDelegate, CreatureDelegate>
 
 @end
 
@@ -163,8 +163,9 @@
     creature.creatureHidden = NO;
     [creature moveWithPath:[self findPixelPathFromPoint:point direction:PathDirectLeftToRight]];
     
-    creature.HP = 50;
-    creature.realHP = 50;
+    creature.HP = 5;
+    creature.realHP = 5;
+    creature.delegate = self;
     [self setupCreaturePhysicsBody:creature];
     [self addChild:creature];
     [self.creatures addObject:creature];
@@ -306,30 +307,44 @@
     [_creatures removeObject:creature];
 }
 
+#pragma mark - Creature代理方法
+- (void)creatureMoveStateDidChange:(Creature *)creature
+{
+    [creature moveWithPath:[self findPixelPathFromPoint:creature.position direction:PathDirectLeftToRight]];
+}
+
 - (void)test
 {
     for (int y = 0; y < 250; y+=10) {
         CGPoint pos = CGPointMake(50, y);
-        [self addTowerWithType:arc4random_uniform(7) point:pos];
+        [self addTowerWithType:[self getType] point:pos];
     }
     for (int y = 50; y < 300; y+=10) {
         CGPoint pos = CGPointMake(100, y);
-        [self addTowerWithType:arc4random_uniform(7) point:pos];
+        [self addTowerWithType:[self getType] point:pos];
     }
     for (int y = 0; y < 250; y+=10) {
         CGPoint pos = CGPointMake(150, y);
-        [self addTowerWithType:arc4random_uniform(7) point:pos];
+        [self addTowerWithType:[self getType] point:pos];
     }
     for (int y = 50; y < 300; y+=10) {
         CGPoint pos = CGPointMake(200, y);
-        [self addTowerWithType:arc4random_uniform(7) point:pos];
+        [self addTowerWithType:[self getType] point:pos];
     }
     for (int y = 0; y < 250; y+=10) {
         CGPoint pos = CGPointMake(250, y);
-        [self addTowerWithType:arc4random_uniform(7) point:pos];
+        [self addTowerWithType:[self getType] point:pos];
     }
     
 }
 
+- (int)getType
+{
+    int type = arc4random_uniform(7);
+//    while (type == 4) {
+//        type = arc4random_uniform(7);
+//    }
+    return type;
+}
 
 @end

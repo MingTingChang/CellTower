@@ -9,11 +9,18 @@
 #import <SpriteKit/SpriteKit.h>
 #import "CreatureModel.h"
 @class Tower;
+@class Creature;
 
 typedef enum{
     CreatureOutletUp, // 上面出
     CreatureOutletLeft // 左边出来
 } CreatureOutlet;
+
+@protocol CreatureDelegate <NSObject>
+@optional
+- (void)creatureMoveStateDidChange:(Creature *)creature;
+
+@end
 
 @interface Creature : SKSpriteNode
 #pragma mark - 属性
@@ -37,11 +44,17 @@ typedef enum{
 /** 怪物是否被减速 */
 @property (nonatomic , assign, getter=isSlowDown) BOOL slowDown;
 
+/** 减速环 */
+@property (nonatomic , strong) SKSpriteNode *SlowDownCircle;
+
 /** 怪物从那个出口出来 */
 @property (nonatomic , assign) CreatureOutlet outlet;
 
 /** 立即血量 */
 @property (nonatomic , assign) int realHP;
+
+/** 代理 */
+@property (nonatomic , weak) id<CreatureDelegate> delegate;
 
 #pragma mark - 方法
 

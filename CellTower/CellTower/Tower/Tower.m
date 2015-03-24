@@ -68,6 +68,9 @@
     } else if (self.type == TowerTypeRocker){
         bullet = [SKSpriteNode spriteNodeWithImageNamed:@"rocker"];
         bullet.size = CGSizeMake(8, 8);
+    } else if (self.type == TowerTypeSlowDown) {
+        bullet = [SKSpriteNode spriteNodeWithImageNamed:@"slowDownBullet"];
+        bullet.size = CGSizeMake(2, 2);
     } else {
         bullet = [SKSpriteNode spriteNodeWithImageNamed:@"bullet"];
         bullet.size = CGSizeMake(2, 2);

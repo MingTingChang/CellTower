@@ -11,6 +11,8 @@
 #import "CTGeometryTool.h"
 #import "GameMap.h"
 
+typedef void(^shootsCompletionBlock)(NSMutableArray *creatures);
+
 @interface ShockTower()
 
 @property (nonatomic , strong) SKSpriteNode *bullet;
@@ -68,20 +70,15 @@
     }
     
     // 2.射击
-    [self shootWithCreature:nil completion:^(Creature *creature) {
+    [self shootsWithCreature:nil completion:^(NSMutableArray *creatures) {
         // 3.扣血以及检测死亡
-        NSMutableArray *arrayM = [NSMutableArray array];
-        for (Creature *creature in self.targets) {
+        for (Creature *creature in creatures) {
             creature.HP -= self.damage;
             if (creature.HP <= 0) { // 死亡
-                [arrayM addObject:creature];
-            }
-        }
-        
-        for (Creature *child in arrayM) {
-            [self.targets removeObject:child];
-            if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
-                [self.delegate tower:self didDefeatCreature:child];
+                [self.targets removeObject:creature];
+                if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
+                    [self.delegate tower:self didDefeatCreature:creature];
+                }
             }
         }
     }];
@@ -96,7 +93,7 @@
 }
 
 #pragma mrak 攻击目标
-- (void)shootWithCreature:(Creature *)creature completion:(shootCompletionBlock)completion
+- (void)shootsWithCreature:(Creature *)creature completion:(shootsCompletionBlock)completion
 {
     self.working = YES;
     
@@ -107,8 +104,10 @@
         }
     }
     
+    NSMutableArray *targets = [NSMutableArray array];
     for (Creature *creature in self.targets) {
         creature.realHP -= self.damage;
+        [targets addObject:creature];
     }
     
     self.bullet.position = self.position;
@@ -119,7 +118,7 @@
         self.bullet.hidden = YES;
         
         if (completion) {
-            completion(nil);
+            completion(targets);
         }
     }];
 }

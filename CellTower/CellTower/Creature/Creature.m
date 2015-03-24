@@ -42,6 +42,16 @@
     return self;
 }
 
+#pragma mark 减速环
+- (SKSpriteNode *)SlowDownCircle {
+    if (!_SlowDownCircle) {
+        _SlowDownCircle = [SKSpriteNode spriteNodeWithImageNamed:@"SlowDownCircle"];
+        _SlowDownCircle.size = self.size;
+        _SlowDownCircle.position = CGPointMake(0,0);
+    }
+    return _SlowDownCircle;
+}
+
 #pragma mark 是否隐形
 - (void)setCreatureHidden:(BOOL)creatureHidden
 {
@@ -71,6 +81,8 @@
 - (void)moveWithPath:(NSMutableArray *)movePath
 {
     if (movePath == nil) return;
+    
+    [self removeAllActions];
     
     NSMutableArray *arrayM = [NSMutableArray arrayWithCapacity:movePath.count];
     
@@ -119,14 +131,28 @@
     
     // 1.减慢移动速度
     self.moveSpeed *= 0.5;
+    // 1.1 通知代理状态改变
+    if ([self.delegate respondsToSelector:@selector(creatureMoveStateDidChange:)]) {
+        [self.delegate creatureMoveStateDidChange:self];
+    }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.moveSpeed *= 2;
         self.slowDown = NO;
+        // 1.2 通知代理状态改变
+        if ([self.delegate respondsToSelector:@selector(creatureMoveStateDidChange:)]) {
+            [self.delegate creatureMoveStateDidChange:self];
+        }
+        [self.SlowDownCircle removeFromParent];
     });
-#warning 新移动速度 未刷新move方法
+
     
     // 2.添加减速效果
+    if (self.SlowDownCircle.scene == nil) {
+        [self addChild:self.SlowDownCircle];
+        SKAction *rotate = [SKAction rotateByAngle:M_PI duration:1.0f];
+        [self.SlowDownCircle runAction:[SKAction repeatActionForever:rotate]];
+    }
 }
 
 @end

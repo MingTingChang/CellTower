@@ -15,11 +15,12 @@
 #pragma mark 重写射击方法
 - (void)shootWithCreature:(Creature *)creature completion:(shootCompletionBlock)completion
 {
-    // 1.减速
-    [creature beSlowDown:self];
-    
-    // 2.攻击
-    [super shootWithCreature:creature completion:completion];
+    // 1.攻击
+    [super shootWithCreature:creature completion:^(Creature *creature){
+        // 2.减速
+        [creature beSlowDown:self];
+        completion(creature);
+    } ];
 }
 
 @end
