@@ -26,6 +26,13 @@
     return [[self alloc] initWithPoint:point value:value];
 }
 
++ (instancetype)copyWithMapPoint:(MapPoint *)point
+{
+    MapPoint *copyPoint = [MapPoint pointWithPoint:point.point value:point.value];
+    copyPoint.dreamValue = point.dreamValue;
+    return copyPoint;
+}
+
 @end
 
 @implementation Map
@@ -45,6 +52,39 @@
 {
     return [[self alloc] initWithSize:size rightDoor:right bottomDoor:bottom];
 }
+
++ (instancetype)copyWithMap:(Map *)map
+{
+    Map *copyMap = [Map mapWithSize:map.size rightDoor:map.rightTarget bottomDoor:map.bottomTarget];
+    
+    NSMutableArray *rightPathMap = [NSMutableArray array];
+    for (NSMutableArray *array in map.rightPathMap) {
+        NSMutableArray *copyArray = [NSMutableArray array];
+        for (MapPoint *mapPoint in array) {
+            MapPoint *copyPoint = [MapPoint copyWithMapPoint:mapPoint];
+            [copyArray addObject:copyPoint];
+        }
+        [rightPathMap addObject:copyArray];
+    }
+    NSMutableArray *bottomPathMap = [NSMutableArray array];
+    for (NSMutableArray *array in map.bottomPathMap) {
+        NSMutableArray *copyArray = [NSMutableArray array];
+        for (MapPoint *mapPoint in array) {
+            MapPoint *copyPoint = [MapPoint copyWithMapPoint:mapPoint];
+            [copyArray addObject:copyPoint];
+        }
+        [bottomPathMap addObject:copyArray];
+    }
+    copyMap.rightPathMap = rightPathMap;
+    copyMap.bottomPathMap = bottomPathMap;
+    
+    for (MapPoint *point in map.walls) {
+        [copyMap.walls addObject:point];
+    }
+    
+    return copyMap;
+}
+
 #pragma mark - Map的对象打印方法
 - (NSString *)description
 {
@@ -166,6 +206,7 @@
     for (MapPoint *pathPoint in path) {
         [pointPath addObject:[NSValue valueWithCGPoint:pathPoint.point]];
     }
+    
     return pointPath;
 }
 

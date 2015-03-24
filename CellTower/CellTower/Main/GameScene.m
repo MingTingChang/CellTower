@@ -16,6 +16,8 @@
 
 @property (nonatomic , strong) GameMap *gameMap;
 
+@property (nonatomic , strong) SKLabelNode *label;
+
 @end
 
 @implementation GameScene
@@ -24,24 +26,27 @@
 -(void)didMoveToView:(SKView *)view {
     self.backgroundColor = [SKColor lightGrayColor];
     
-    _gameMap = [GameMap spriteNodeWithImageNamed:@"test.jpg" gridPixel:10 mapType:MapTypeOneInOneOut];
+    _gameMap = [GameMap spriteNodeWithImageNamed:@"test.jpg" mapType:MapTypeOneInOneOut];
     _gameMap.anchorPoint = CGPointMake(0, 0);
     _gameMap.position = CGPointMake(124, 10);
-
     [self addChild:_gameMap];
-
+    
+    _label = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%ld",_gameMap.gold]];
+    _label.position = CGPointMake(20, self.size.height * 0.5);
+    _label.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+    _label.fontSize = 30;
+    _label.fontColor = [UIColor redColor];
+    _label.zPosition = 10;
+    [self addChild:_label];
+    
     [self setupPhysical];
+    
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)update:(NSTimeInterval)currentTime
 {
-    for (int i = 0; i < 20; i++) {
-        int y = arc4random_uniform(20) + self.gameMap.position.y + self.gameMap.size.height * 0.5 - 20;
-        CGPoint pos = CGPointMake(0, y);
-        [_gameMap addCreatureWithType:arc4random_uniform(8) point:pos];
-    }
-//    [_gameMap addCreatureWithType:1 point:CGPointMake(0, 160)];
-//    [_gameMap addCreatureWithType:2 point:CGPointMake(0, 200)];
+    _label.text = [NSString stringWithFormat:@"%ld",_gameMap.gold];
+    
 }
 
 

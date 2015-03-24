@@ -21,19 +21,9 @@ typedef enum
 
 @interface GameMap : SKSpriteNode
 
-@property (nonatomic , strong) Map *map;
+@property (nonatomic , assign) long gold;
 
-@property (nonatomic , assign) int gridPixel;
-
-@property (nonatomic , assign) MapType type;
-
-@property (nonatomic , strong) NSMutableArray *creatures;
-
-@property (nonatomic , strong) NSMutableArray *towers;
-
-@property (nonatomic , strong) NSMutableArray *towerModels;
-
-@property (nonatomic , strong) NSMutableArray *creatureModels;
+@property (nonatomic , assign) int curWaveNum;
 
 /**
  *  添加塔到图上

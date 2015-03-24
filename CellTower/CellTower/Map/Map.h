@@ -25,7 +25,7 @@ typedef enum
 
 - (instancetype)initWithPoint:(CGPoint)point value:(int)value;
 + (instancetype)pointWithPoint:(CGPoint)point value:(int)value;
-
++ (instancetype)copyWithMapPoint:(MapPoint *)point;
 @end
 
 
@@ -45,6 +45,8 @@ typedef enum
 @property (nonatomic , strong) NSMutableArray *bottomPathMap;
 /** 原始图有没有被修改 */
 @property (nonatomic , assign , getter=isChange) BOOL change;
+
++ (instancetype)copyWithMap:(Map *)map;
 
 /** 初始化方法 rightDoor为右终点 bottomDoor为下终点 */
 - (instancetype)initWithSize:(CGSize)size rightDoor:(CGPoint)right bottomDoor:(CGPoint)bottom;
