@@ -130,7 +130,7 @@
     self.slowDown = YES;
     
     // 1.减慢移动速度
-    self.moveSpeed *= 0.5;
+    self.moveSpeed *= 0.3;
     // 1.1 通知代理状态改变
     if ([self.delegate respondsToSelector:@selector(creatureMoveStateDidChange:)]) {
         [self.delegate creatureMoveStateDidChange:self];

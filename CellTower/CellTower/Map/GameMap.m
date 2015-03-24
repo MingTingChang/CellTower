@@ -15,11 +15,12 @@
 #import "ShockTower.h"
 #import "SlowDownTower.h"
 #import "AirTower.h"
+#include "Common.h"
 
 //默认单元栅格像素
 #define MapGridPixelNormalValue 12
 
-@interface GameMap() <TowerDelegate>
+@interface GameMap() <TowerDelegate,CreatureDelegate>
 
 @property (nonatomic , strong) Map *map;
 
@@ -223,6 +224,7 @@
     
     CreatureModel *creatureModel = self.creatureModels[type];
     Creature *creature = [Creature creatureWithModel:creatureModel position:point];
+    creature.delegate = self;
     creature.creatureHidden = NO;
     creature.HP = 4;
     creature.coin = 1;
@@ -312,7 +314,6 @@
         NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
             NSMutableArray *path = [self findPixelPathFromPoint:creature.position direction:PathDirectLeftToRight];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [creature removeAllActions];
                 [creature moveWithPath:path];
             });
         }];
@@ -383,11 +384,19 @@
     [_creatures removeObject:creature];
 }
 
+#pragma mark - Creature代理
+- (void)creatureMoveStateDidChange:(Creature *)creature
+{
+    [creature moveWithPath:[self findPixelPathFromPoint:creature.position direction:PathDirectLeftToRight]];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint point = [[touches anyObject] locationInNode:self];
     [self addTowerWithType:arc4random_uniform(7) point:point];
 }
+
+
 
 - (void)test
 {

@@ -8,11 +8,12 @@
 
 #pragma mark 设置碰撞掩码
 // 怪物类别
-static uint32_t creatureCategory = 1 << 0;
+#define creatureCategory (1 << 0)
 // 塔类别
-static uint32_t towerCategory = 1 << 1;
+#define towerCategory (1 << 1)
 // 雷达类别
-static uint32_t radarTowerCategory = 1 << 2;
+#define radarTowerCategory (1 << 2)
+
 
 #define CreatureTypeNumber 8
 #define TowerTypeNumber 7
