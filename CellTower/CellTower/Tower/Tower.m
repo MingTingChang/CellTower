@@ -76,24 +76,12 @@
     return bullet;
 }
 
-#pragma mark 目标数组清除隐藏怪物
+#pragma mark 目标数组清除隐藏怪物和死亡怪物
 - (void)removeHiddenCreature {
     NSMutableArray *arrayM = [NSMutableArray array];
     for (Creature *child in self.targets) {
-        if (child.creatureHidden == YES) {
-            [arrayM addObject:child];
-        }
-    }
-    for (Creature *child in arrayM) {
-        [self.targets removeObject:child];
-    }
-}
-
-#pragma mark 清除死亡目标
-- (void)removeDeadCreature {
-    NSMutableArray *arrayM = [NSMutableArray array];
-    for (Creature *child in self.targets) {
-        if (child.HP <= 0) {
+        if (child.creatureHidden == YES ||
+            child.realHP <= 0) {
             [arrayM addObject:child];
         }
     }
@@ -110,7 +98,6 @@
     
     // 1.目标数组清除隐藏怪物和死亡怪物
     [self removeHiddenCreature];
-    [self removeDeadCreature];
     
     // 2.攻击怪物
     if (self.targets.count < 1) {
@@ -133,7 +120,7 @@
     
     
     // 2.等待攻击间隔
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.working = NO;
         if (self.targets.count > 0) {
             [self attack];
@@ -145,6 +132,10 @@
 #pragma mark 射击
 - (void)shootWithCreature:(Creature *)creature completion:(shootCompletionBlock)completion
 {
+    if (creature == nil) return;
+    
+    creature.realHP -= self.damage;
+    
     // 瞄准
     SKAction *rotateAction = [SKAction rotateToAngle:[CTGeometryTool angleBetweenPoint1:creature.position andPoint2:self.position] duration:0.1f];
     [self runAction:rotateAction completion:^{
@@ -152,9 +143,6 @@
         // 1.获得子弹
         [self.bullets addObject:[self addBullet]];
         SKSpriteNode *bullet = [self.bullets lastObject];
-//        if (bullet.scene == nil) {
-//            [self.scene addChild:bullet];
-//        }
         if (bullet.parent == nil) {
             if ([self.parent isKindOfClass:[GameMap class]]) {
                 GameMap *gameMap = (GameMap *)self.parent;
@@ -163,7 +151,6 @@
         }
     
         // 2.发射子弹
-        
         bullet.position = self.position;
         [bullet trackToNode:creature duration:0.4f completion:^{
             [bullet removeFromParent];
@@ -178,7 +165,6 @@
 }
 
 #pragma mark - 公共方法
-
 - (NSMutableArray *)targets {
     if (!_targets) {
         _targets = [NSMutableArray array];

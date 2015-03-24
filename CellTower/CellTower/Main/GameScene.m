@@ -40,6 +40,8 @@
         CGPoint pos = CGPointMake(0, y);
         [_gameMap addCreatureWithType:arc4random_uniform(8) point:pos];
     }
+//    [_gameMap addCreatureWithType:1 point:CGPointMake(0, 160)];
+//    [_gameMap addCreatureWithType:2 point:CGPointMake(0, 200)];
 }
 
 

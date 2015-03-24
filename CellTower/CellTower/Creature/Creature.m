@@ -30,6 +30,7 @@
         
         self.imageName = [model.imageName copy];
         self.HP = model.HP;
+        self.realHP = model.HP;
         self.moveSpeed = model.moveSpeed;
         self.coin = model.coin;
         self.type = model.type;

@@ -160,10 +160,11 @@
     
     CreatureModel *creatureModel = self.creatureModels[type];
     Creature *creature = [Creature creatureWithModel:creatureModel position:point];
-    creature.creatureHidden = YES;
+    creature.creatureHidden = NO;
     [creature moveWithPath:[self findPixelPathFromPoint:point direction:PathDirectLeftToRight]];
     
-    creature.HP = 10;
+    creature.HP = 50;
+    creature.realHP = 50;
     [self setupCreaturePhysicsBody:creature];
     [self addChild:creature];
     [self.creatures addObject:creature];

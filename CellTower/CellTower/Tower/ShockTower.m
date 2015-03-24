@@ -31,6 +31,7 @@
 #pragma mark 怪物进入攻击范围
 - (void)creatureIntoAttackRange:(Creature *)creature
 {
+    
     [self.targets addObject:creature];
     [self attack];
 }
@@ -40,7 +41,8 @@
 {
     NSMutableArray *arrayM = [NSMutableArray array];
     for (Creature *child in self.targets) {
-        if (child.creatureHidden == YES) {
+        if (child.creatureHidden == YES ||
+            child.realHP <= 0) {
             [arrayM addObject:child];
         }
     }
@@ -49,18 +51,6 @@
     }
 }
 
-#pragma mark 清除死亡目标
-- (void)removeDeadCreature {
-    NSMutableArray *arrayM = [NSMutableArray array];
-    for (Creature *child in self.targets) {
-        if (child.HP <= 0) {
-            [arrayM addObject:child];
-        }
-    }
-    for (Creature *child in arrayM) {
-        [self.targets removeObject:child];
-    }
-}
 
 #pragma mark 攻击
 - (void)attack
@@ -70,7 +60,6 @@
     
     // 1.清除隐藏怪物
     [self removeHiddenCreature];
-    [self removeDeadCreature];
     
     if (self.targets.count < 1)
     {
@@ -98,7 +87,7 @@
     }];
     
     // 3.等待攻击间隔
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.working = NO;
         if (self.targets.count > 0) {
             [self attack];
@@ -111,16 +100,15 @@
 {
     self.working = YES;
     
-    // 1.发射子弹
-//    if (self.bullet.scene == nil) {
-//        [self.scene addChild:self.bullet];
-//    }
-    
     if (self.bullet.parent == nil) {
         if ([self.parent isKindOfClass:[GameMap class]]) {
             GameMap *gameMap = (GameMap *)self.parent;
             [gameMap addChild:self.bullet];
         }
+    }
+    
+    for (Creature *creature in self.targets) {
+        creature.realHP -= self.damage;
     }
     
     self.bullet.position = self.position;

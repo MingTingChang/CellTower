@@ -40,6 +40,9 @@ typedef enum{
 /** 怪物从那个出口出来 */
 @property (nonatomic , assign) CreatureOutlet outlet;
 
+/** 立即血量 */
+@property (nonatomic , assign) int realHP;
+
 #pragma mark - 方法
 
 /**

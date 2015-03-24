@@ -40,20 +40,8 @@
 - (void)removeHiddenCreature {
     NSMutableArray *arrayM = [NSMutableArray array];
     for (Creature *child in self.targets) {
-        if (child.creatureHidden == YES) {
-            [arrayM addObject:child];
-        }
-    }
-    for (Creature *child in arrayM) {
-        [self.targets removeObject:child];
-    }
-}
-
-#pragma mark 清除死亡目标
-- (void)removeDeadCreature {
-    NSMutableArray *arrayM = [NSMutableArray array];
-    for (Creature *child in self.targets) {
-        if (child.HP <= 0) {
+        if (child.creatureHidden == YES ||
+            child.realHP <= 0) {
             [arrayM addObject:child];
         }
     }
@@ -70,7 +58,6 @@
     
     // 1.清除隐藏目标
     [self removeHiddenCreature];
-    [self removeDeadCreature];
     
     if (self.targets.count < 1)
     {
@@ -99,7 +86,7 @@
     }];
     
     // 3.等待攻击间隔
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 / self.attackSpeed * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.working = NO;
         if (self.targets.count > 0) {
             [self attack];
@@ -114,16 +101,14 @@
     [self.bullets addObject:[self addBullet]];
     SKSpriteNode *bullet = [self.bullets lastObject];
     
-    // 2.发射子弹
-//    if (bullet.scene == nil) {
-//        [self.scene addChild:bullet];
-//    }
     if (bullet.parent == nil) {
         if ([self.parent isKindOfClass:[GameMap class]]) {
             GameMap *gameMap = (GameMap *)self.parent;
             [gameMap addChild:bullet];
         }
     }
+    
+    creature.realHP -= self.damage;
     
     bullet.position = self.position;
     [bullet trackToNode:creature duration:0.4f completion:^{
