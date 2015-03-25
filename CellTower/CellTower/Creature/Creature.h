@@ -11,11 +11,6 @@
 @class Tower;
 @class Creature;
 
-typedef enum{
-    CreatureOutletUp, // 上面出
-    CreatureOutletLeft // 左边出来
-} CreatureOutlet;
-
 @protocol CreatureDelegate <NSObject>
 @optional
 - (void)creatureMoveStateDidChange:(Creature *)creature;

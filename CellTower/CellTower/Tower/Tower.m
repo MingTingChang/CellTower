@@ -16,7 +16,6 @@
 
 @property (nonatomic , assign , readwrite) TowerType type;
 
-
 @end
 
 @implementation Tower
@@ -50,7 +49,7 @@
         self.destoryCoinRatio = model.destoryCoinRatio;
         self.grid = model.grid;
         self.working = model.working;
-        
+        [self setupTowerPhysicsBody:self];
     }
     return self;
 }
@@ -165,6 +164,31 @@
         }];
         
     }];
+}
+
+#pragma mark 设置塔的物理刚体属性
+- (void)setupTowerPhysicsBody:(Tower *)tower
+{
+    // 1.2 设置塔的物理刚体属性
+    // 1) 使用塔的范围创建一个圆形刚体
+    tower.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:tower.range];
+    /**
+     2)若打开dynamic,则节点可能由于碰撞而被引擎改变位置
+     但是若碰撞的两者都关闭,则无法发生碰撞.
+     */
+    tower.physicsBody.dynamic = NO;
+    // 3) 设置节点的类别掩码 , 设置之后可以被碰到
+    if (tower.type == TowerTypeRadar) {
+        tower.physicsBody.categoryBitMask = radarTowerCategory;
+    } else {
+        tower.physicsBody.categoryBitMask = towerCategory;
+    }
+    // 4) 设置之后可以主动碰到那些类别的节点
+    //        tower.physicsBody.contactTestBitMask = creatureCategory;
+    // 5) 设置回弹掩码
+    tower.physicsBody.collisionBitMask = 0;
+    // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
+    tower.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
 #pragma mark - 公共方法

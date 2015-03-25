@@ -43,7 +43,7 @@
         self.size = size;
         self.rightTarget = right;
         self.bottomTarget = bottom;
-        self.walls = [NSMutableSet set];
+        self.walls = [NSMutableArray array];
     }
     return self;
 }
@@ -78,7 +78,7 @@
     copyMap.rightPathMap = rightPathMap;
     copyMap.bottomPathMap = bottomPathMap;
     
-    for (MapPoint *point in map.walls) {
+    for (NSValue *point in map.walls) {
         [copyMap.walls addObject:point];
     }
     
@@ -118,16 +118,21 @@
 #pragma mark 添加一个墙
 - (void)addMapWallWithPoint:(CGPoint)point
 {
-    MapPoint *wall = [MapPoint pointWithPoint:point value:-1];
-    [_walls addObject:wall];
+    for (NSValue *wall in _walls) {
+        if (CGPointEqualToPoint([wall CGPointValue], point)) {
+            return;
+        }
+    }
+    NSValue *value = [NSValue valueWithCGPoint:point];
+    [_walls addObject:value];
     _change = YES;
 }
 
 #pragma mark 删除一个墙
 - (void)removeMapWallWithPoint:(CGPoint)point
 {
-    for (MapPoint *wall in _walls) {
-        if (CGPointEqualToPoint(wall.point, point)) {
+    for (NSValue *wall in _walls) {
+        if (CGPointEqualToPoint([wall CGPointValue], point)) {
             [_walls removeObject:wall];
             break;
         }
@@ -149,6 +154,7 @@
         pathMap = self.rightPathMap;
     } else if (direct == PathDirectTopToBottom) {
         pathMap = self.bottomPathMap;
+        
     }
     
     if (pathMap == nil) return nil;
@@ -156,7 +162,7 @@
     MapPoint *nowPoint = [pathMap objectAtPoint:from];
     
     if ((nowPoint == nil) || (nowPoint.value == -1)) {
-        CTLog(@"point not in map");
+//        CTLog(@"point not in map");
         return nil;
     }
     
@@ -222,8 +228,8 @@
         for (long x = 0; x < _size.width; x++) {
             CGPoint pos = CGPointMake(x, y);
             BOOL isWall = NO;
-            for (MapPoint *wall in _walls) {
-                if (CGPointEqualToPoint(wall.point, pos)) {
+            for (NSValue *wall in _walls) {
+                if (CGPointEqualToPoint([wall CGPointValue], pos)) {
                     isWall = YES;
                     break;
                 }

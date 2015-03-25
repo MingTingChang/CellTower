@@ -7,15 +7,6 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "TowerModel.h"
-#import "CreatureModel.h"
-
-typedef enum
-{
-    MapTypeNone = 0,
-    MapTypeOneInOneOut = 1,
-    MapTypeTwoInTwoOut = 2
-} MapType;
 
 @class Map;
 
@@ -36,13 +27,10 @@ typedef enum
  *  添加妖怪
  *
  *  @param type  妖怪类型
- *  @param point 妖怪起点
+ *  @param outlet 妖怪诞生方向
  */
-- (void)addCreatureWithType:(CreatureType)type point:(CGPoint)point;
-/**
- *  设置栅格图
- */
-- (void)setupGridMap;
+- (void)addCreatureWithType:(CreatureType)type;
+- (void)addCreatureWithType:(CreatureType)type outlet:(CreatureOutlet)outlet;
 
 /**
  *  初始化方法
@@ -54,6 +42,7 @@ typedef enum
 + (instancetype)spriteNodeWithImageNamed:(NSString *)name mapType:(MapType)type;
 + (instancetype)spriteNodeWithImageNamed:(NSString *)name gridPixel:(int)gridPixel
                                  mapType:(MapType)type;
++ (instancetype)mapWithType:(MapType)type;
 
 - (void)removeAllTowers;
 - (void)removeAllCreatures;

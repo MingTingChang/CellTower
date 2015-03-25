@@ -7,7 +7,6 @@
 //
 
 #import "Creature.h"
-#import "CreatureModel.h"
 #import "CTGeometryTool.h"
 
 @interface Creature ()
@@ -37,6 +36,7 @@
         self.creatureHidden = model.creatureHidden;
         self.alpha = self.creatureHidden ? 0.5 : 1.0;
         self.slowDown = model.slowDown;
+        [self setupCreaturePhysicsBody:self];
     }
     
     return self;
@@ -153,6 +153,32 @@
         SKAction *rotate = [SKAction rotateByAngle:M_PI duration:1.0f];
         [self.SlowDownCircle runAction:[SKAction repeatActionForever:rotate]];
     }
+}
+
+#pragma mark 设置怪物的物理刚体属性
+- (void)setupCreaturePhysicsBody:(Creature *)creature
+{
+    // 1.2 设置怪物的物理刚体属性
+    // 1) 使用怪物的尺寸创建一个圆形刚体
+    creature.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:creature.size.width / 2.0];
+    
+    /**
+     2)若打开dynamic,则节点可能由于碰撞而被引擎改变位置
+     但是若碰撞的两者都关闭,则无法发生碰撞.
+     */
+    creature.physicsBody.dynamic = YES;
+    // 3) 设置节点的类别掩码 , 设置之后可以被碰到
+    creature.physicsBody.categoryBitMask = creatureCategory;
+    // 4) 设置碰撞检测类别掩码 , 设置之后可以主动碰到那些类别的节点
+    if (creature.creatureHidden == YES) {
+        creature.physicsBody.contactTestBitMask = radarTowerCategory;
+    } else {
+        creature.physicsBody.contactTestBitMask = towerCategory;
+    }
+    // 5) 设置回弹掩码
+    creature.physicsBody.collisionBitMask = 0;
+    // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
+    creature.physicsBody.usesPreciseCollisionDetection = YES;
 }
 
 @end

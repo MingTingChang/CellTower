@@ -8,8 +8,6 @@
 
 #import "RadarTower.h"
 #import "Creature.h"
-#import "GameScene.h"
-#import "Common.h"
 
 @implementation RadarTower
 

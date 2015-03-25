@@ -7,18 +7,14 @@
 //
 
 #import "GameMap.h"
+#import "CTGeometryTool.h"
 #import "Map.h"
 #import "Creature.h"
-#import "CTGeometryTool.h"
 #import "Tower.h"
 #import "RadarTower.h"
 #import "ShockTower.h"
 #import "SlowDownTower.h"
 #import "AirTower.h"
-#include "Common.h"
-
-//默认单元栅格像素
-#define MapGridPixelNormalValue 12
 
 @interface GameMap() <TowerDelegate,CreatureDelegate>
 
@@ -36,8 +32,6 @@
 
 @property (nonatomic , strong) NSMutableArray *creatureModels;
 
-@property (nonatomic , strong) NSMutableSet *creatureGridPoints;
-
 @property (nonatomic , strong) NSOperationQueue *queue;
 
 @end
@@ -48,15 +42,15 @@
                            mapType:(MapType)type
 {
     if (self = [super initWithImageNamed:name]) {
+        
+        self.userInteractionEnabled = YES;
         self.gold = 5000;
-        self.size = CGSizeMake(300, 300);
+        self.size = CGSizeMake(320, 320);
         self.type = type;
         self.gridPixel = gridPixel;
         self.curWaveNum = 1;
         self.creatures = [NSMutableArray array];
         self.towers = [NSMutableArray array];
-        self.creatureGridPoints = [NSMutableSet set];
-        self.userInteractionEnabled = YES;
         self.queue = [[NSOperationQueue alloc] init];
 
         // 加载塔模型
@@ -71,11 +65,6 @@
             CreatureModel *model = [CreatureModel creatureModelWithType:i];
             [self.creatureModels addObject:model];
         }
-        
-        [self test];
-        
-        NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(test2) userInfo:nil repeats:YES];
-        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     }
     return self;
 }
@@ -96,6 +85,47 @@
     return [self spriteNodeWithImageNamed:name gridPixel:MapGridPixelNormalValue mapType:type];
 }
 
++ (instancetype)mapWithType:(MapType)type
+{
+    NSString *name;
+    if (type == MapTypeOneInOneOut) {
+        name = [NSString stringWithFormat:@"map_oneToOne.jpg"];
+    } else if (type == MapTypeTwoInTwoOut) {
+        name = [NSString stringWithFormat:@"map_twoToTwo.jpg"];
+    } else {
+        return nil;
+    }
+    GameMap *gameMap = [self spriteNodeWithImageNamed:name mapType:type];
+    [gameMap setupGridMap];
+    // 加墙
+    int i = 0;
+    CGFloat width = gameMap.map.size.width;
+    CGFloat height = gameMap.map.size.height;
+    int margin = 12;
+    for (i = 0; i < margin; i++) {
+        [gameMap.map addMapWallWithPoint:CGPointMake(0, i)];
+        [gameMap.map addMapWallWithPoint:CGPointMake(i, 0)];
+        
+        [gameMap.map addMapWallWithPoint:CGPointMake(width-1, i)];
+        [gameMap.map addMapWallWithPoint:CGPointMake(width-1-i, 0)];
+        
+        [gameMap.map addMapWallWithPoint:CGPointMake(0, height-1-i)];
+        [gameMap.map addMapWallWithPoint:CGPointMake(i, height-1)];
+        
+        [gameMap.map addMapWallWithPoint:CGPointMake(width-1, height-1-i)];
+        [gameMap.map addMapWallWithPoint:CGPointMake(width-1-i, height-1)];
+    }
+    if (type == MapTypeOneInOneOut) {
+        for (i = margin; i < width - margin; i++) {
+            [gameMap.map addMapWallWithPoint:CGPointMake(i, 0)];
+            [gameMap.map addMapWallWithPoint:CGPointMake(i, height - 1)];
+        }
+    }
+    
+    [gameMap test];
+    return gameMap;
+}
+
 #pragma mark - 对象方法
 #pragma mark 建造塔
 - (void)addTowerWithType:(TowerType)type point:(CGPoint)point
@@ -107,15 +137,14 @@
     
     // 获取塔4个栅格点的左上角栅格坐标
     CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
-    
-    
+   
     // 判断该坐标能不能造塔
     BOOL canBulid = YES;
     for (int y = 0; (y <= 1) && canBulid; y++) {
         for (int x = 0; (x <= 1) && canBulid; x++) {
             CGPoint pos = CGPointMake(gridHeadPoint.x + x, gridHeadPoint.y + y);
-            for (MapPoint *mapPoint in _map.walls) {
-                if (CGPointEqualToPoint(mapPoint.point, pos)) {
+            for (NSValue *wall in _map.walls) {
+                if (CGPointEqualToPoint([wall CGPointValue], pos)) {
                     canBulid = NO;
                     break;
                 }
@@ -147,15 +176,15 @@
     
     // 判断建塔会不会阻塞路径
     CGPoint startLeft = CGPointMake(0, self.size.height * 0.5);
-    NSMutableArray *path = [self findPixelPathFromPoint:startLeft direction:PathDirectLeftToRight];
+    NSMutableArray *path = [self findPixelPathFromPoint:startLeft outlet:CreatureOutletLeft];
     if (path.count == 0) {
         _map = map;
         [self failToBulidTower];
         return;
     }
     if (self.type == MapTypeTwoInTwoOut) {
-        CGPoint startTop = CGPointMake(self.size.width * 0.5, self.size.height);
-        NSMutableArray *path2 = [self findPixelPathFromPoint:startTop direction:PathDirectTopToBottom];
+        CGPoint startTop = CGPointMake(self.size.width * 0.5, self.size.height - 1);
+        NSMutableArray *path2 = [self findPixelPathFromPoint:startTop outlet:CreatureOutletUp];
         if (path2.count == 0) {
             _map = map;
             [self failToBulidTower];
@@ -163,7 +192,6 @@
         }
     }
     
-        
     self.gold -= towerModel.bulidCoin;
     // 设置像素坐标的塔的真实位置
     CGPoint tmpPoint = [CTGeometryTool pixelPointFromGridPoint:gridHeadPoint gridPixel:_gridPixel];
@@ -173,7 +201,6 @@
     tower.size = CGSizeMake(2 * MapGridPixelNormalValue, 2 * MapGridPixelNormalValue);
     tower.range = tower.range * 0.5;
     tower.delegate = self;
-    [self setupTowerPhysicsBody:tower];
     [self addChild:tower];
     [self.towers addObject:tower];
     
@@ -212,39 +239,69 @@
 }
 
 #pragma mark 制造妖怪
-- (void)addCreatureWithType:(CreatureType)type point:(CGPoint)point
+- (void)addCreatureWithType:(CreatureType)type outlet:(CreatureOutlet)outlet
 {
+    int x = 0,y = 0;
+    if (outlet == CreatureOutletLeft) {
+        x = 0;
+        y = arc4random_uniform(30) + self.size.height * 0.5 - 30;
+    } else if (outlet == CreatureOutletUp) {
+        x = arc4random_uniform(30) + self.size.width * 0.5 - 30;
+        y = self.size.height - 1;
+    } else {
+        return;
+    }
+    
+    CGPoint point = CGPointMake(x, y);
+    
     // 先判断该点有没有被塔占用
     CGPoint gridPoint = [CTGeometryTool gridPointFromPixelPoint:point gridPixel:_gridPixel];
-    for (MapPoint *mapPoint in _map.walls) {
-        if (CGPointEqualToPoint(mapPoint.point, gridPoint)) {
+    for (NSValue *wall in _map.walls) {
+        if (CGPointEqualToPoint([wall CGPointValue], gridPoint)) {
             return;
         }
     }
     
     CreatureModel *creatureModel = self.creatureModels[type];
     Creature *creature = [Creature creatureWithModel:creatureModel position:point];
+    creature.outlet = outlet;
     creature.delegate = self;
     creature.creatureHidden = NO;
-    creature.realHP = 4;
-    creature.HP = 4;
+    creature.HP = (self.curWaveNum >= 20)?20:self.curWaveNum;
+    creature.realHP = creature.HP;
     creature.coin = 1;
-    [self setupCreaturePhysicsBody:creature];
-   
-    [creature moveWithPath:[self findPixelPathFromPoint:point direction:PathDirectLeftToRight]];
     [self addChild:creature];
     [self.creatures addObject:creature];
- 
    
+    NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+        NSMutableArray *path = [self findPixelPathFromPoint:creature.position outlet:creature.outlet];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [creature moveWithPath:path];
+        });
+    }];
+    [self.queue addOperation:op];
+}
+
+- (void)addCreatureWithType:(CreatureType)type
+{
+    [self addCreatureWithType:type outlet:CreatureOutletLeft];
 }
 
 #pragma mark 寻找路径，传入的是像素坐标
-- (NSMutableArray *)findPixelPathFromPoint:(CGPoint)point direction:(PathDirect)direct
+- (NSMutableArray *)findPixelPathFromPoint:(CGPoint)point outlet:(CreatureOutlet)outlet
 {
     
     CGPoint gridPoint = [CTGeometryTool gridPointFromPixelPoint:point gridPixel:_gridPixel];
-    NSMutableArray *gridPath = [_map findPathFromPoint:gridPoint direction:direct];
-
+    
+    int pathDir = PathDirectLeftToRight;
+    if (outlet == CreatureOutletUp) {
+        pathDir = PathDirectTopToBottom;
+    }
+    NSMutableArray *gridPath = [_map findPathFromPoint:gridPoint direction:pathDir];
+    
+    if((gridPath.count == 0) || (gridPath == nil))
+        return nil;
+    
     NSMutableArray *path = [NSMutableArray array];
     for (NSValue *value in gridPath) {
         CGPoint pos = [value CGPointValue];
@@ -255,56 +312,6 @@
     return path;
 }
 
-#pragma mark 设置怪物的物理刚体属性
-- (void)setupCreaturePhysicsBody:(Creature *)creature
-{
-    // 1.2 设置怪物的物理刚体属性
-    // 1) 使用怪物的尺寸创建一个圆形刚体
-    creature.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:creature.size.width / 2.0];
-    
-    /**
-       2)若打开dynamic,则节点可能由于碰撞而被引擎改变位置
-         但是若碰撞的两者都关闭,则无法发生碰撞.
-     */
-    creature.physicsBody.dynamic = YES;
-    // 3) 设置节点的类别掩码 , 设置之后可以被碰到
-    creature.physicsBody.categoryBitMask = creatureCategory;
-    // 4) 设置碰撞检测类别掩码 , 设置之后可以主动碰到那些类别的节点
-    if (creature.creatureHidden == YES) {
-        creature.physicsBody.contactTestBitMask = radarTowerCategory;
-    } else {
-        creature.physicsBody.contactTestBitMask = towerCategory;
-    }
-    // 5) 设置回弹掩码
-    creature.physicsBody.collisionBitMask = 0;
-    // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
-    creature.physicsBody.usesPreciseCollisionDetection = YES;
-}
-
-#pragma mark 设置塔的物理刚体属性
-- (void)setupTowerPhysicsBody:(Tower *)tower
-{
-    // 1.2 设置塔的物理刚体属性
-    // 1) 使用塔的范围创建一个圆形刚体
-    tower.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:tower.range];
-    /**
-     2)若打开dynamic,则节点可能由于碰撞而被引擎改变位置
-     但是若碰撞的两者都关闭,则无法发生碰撞.
-     */
-    tower.physicsBody.dynamic = NO;
-    // 3) 设置节点的类别掩码 , 设置之后可以被碰到
-    if (tower.type == TowerTypeRadar) {
-        tower.physicsBody.categoryBitMask = radarTowerCategory;
-    } else {
-        tower.physicsBody.categoryBitMask = towerCategory;
-    }
-    // 4) 设置之后可以主动碰到那些类别的节点
-//        tower.physicsBody.contactTestBitMask = creatureCategory;
-    // 5) 设置回弹掩码
-    tower.physicsBody.collisionBitMask = 0;
-    // 6) 设置精确检测，用在仿真运行速度较高的物体上，防止出现“遂穿”的情况
-    tower.physicsBody.usesPreciseCollisionDetection = YES;
-}
 
 #pragma mark 重置妖怪路径
 - (void)resetCreaturePath
@@ -313,7 +320,7 @@
     for (int i = 0; i < _creatures.count; i++) {
         Creature *creature = _creatures[i];
         NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-            NSMutableArray *path = [self findPixelPathFromPoint:creature.position direction:PathDirectLeftToRight];
+            NSMutableArray *path = [self findPixelPathFromPoint:creature.position outlet:creature.outlet];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [creature moveWithPath:path];
             });
@@ -351,7 +358,7 @@
     CGPoint rightDoor = CGPointMake(gridSize.width - 1, gridSize.height * 0.5 - 1);
     CGPoint bottomDoor = CGPointZero;
     if (_type == MapTypeTwoInTwoOut) {
-        bottomDoor = CGPointMake(gridSize.width * 0.5 - 1, gridSize.height -1);
+        bottomDoor = CGPointMake(gridSize.width * 0.5 - 1, 0);
     }
     
     _map = [Map mapWithSize:gridSize rightDoor:rightDoor bottomDoor:bottomDoor];
@@ -363,7 +370,7 @@
     for (Tower *tower in self.towers) {
         [tower removeFromParent];
     }
-    _map.walls = [NSMutableSet set];
+    _map.walls = [NSMutableArray array];
     self.towers = [NSMutableArray array];
 }
 
@@ -388,12 +395,13 @@
 #pragma mark - Creature代理
 - (void)creatureMoveStateDidChange:(Creature *)creature
 {
-    [creature moveWithPath:[self findPixelPathFromPoint:creature.position direction:PathDirectLeftToRight]];
+    [creature moveWithPath:[self findPixelPathFromPoint:creature.position outlet:creature.outlet]];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint point = [[touches anyObject] locationInNode:self];
+    
     [self addTowerWithType:arc4random_uniform(7) point:point];
 }
 
@@ -409,10 +417,10 @@
         CGPoint pos = CGPointMake(100, y);
         [self addTowerWithType:arc4random_uniform(7) point:pos];
     }
-    for (int y = 0; y < 200; y+=MapGridPixelNormalValue) {
-        CGPoint pos = CGPointMake(150, y);
-        [self addTowerWithType:arc4random_uniform(7) point:pos];
-    }
+//    for (int y = 0; y < 200; y+=MapGridPixelNormalValue) {
+//        CGPoint pos = CGPointMake(150, y);
+//        [self addTowerWithType:arc4random_uniform(7) point:pos];
+//    }
     for (int y = 48; y < 300; y+=MapGridPixelNormalValue) {
         CGPoint pos = CGPointMake(200, y);
         [self addTowerWithType:arc4random_uniform(7) point:pos];
@@ -424,20 +432,7 @@
     
 }
 
-- (void)test2
-{
-    static int i = 3;
-    i--;
-    if (i == 0) {
-        self.curWaveNum ++;
-        for (int i = 0; i < 50; i++) {
-            int y = arc4random_uniform(30) + self.position.y + self.size.height * 0.5 - 30;
-            CGPoint pos = CGPointMake(0, y);
-            [self addCreatureWithType:arc4random_uniform(8) point:pos];
-        }
-        i = 3;
-    }
-}
+
 
 
 @end

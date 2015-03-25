@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum
-{
-    PathDirectLeftToRight = 0,      //行走方向为从左往右
-    PathDirectTopToBottom = 1       //行走方向为从上往下
-}PathDirect;
-
 /** 图的节点类 */
 @interface MapPoint : NSObject
 
@@ -32,7 +26,7 @@ typedef enum
 /** 图类 */
 @interface Map : NSObject
 /** 墙的集合 */
-@property (nonatomic , strong) NSMutableSet *walls;
+@property (nonatomic , strong) NSMutableArray *walls; //里面装的是NSValue对象包裹CGPoint
 /** 图的尺寸 */
 @property (nonatomic , assign) CGSize size;
 /** 从左往右行走的右终点坐标 */

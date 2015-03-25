@@ -26,9 +26,9 @@
 -(void)didMoveToView:(SKView *)view {
     self.backgroundColor = [SKColor lightGrayColor];
     
-    _gameMap = [GameMap spriteNodeWithImageNamed:@"test.jpg" mapType:MapTypeOneInOneOut];
+    _gameMap = [GameMap mapWithType:MapTypeOneInOneOut];
     _gameMap.anchorPoint = CGPointMake(0, 0);
-    _gameMap.position = CGPointMake(124, 10);
+    _gameMap.position = CGPointMake(124, 0);
     [self addChild:_gameMap];
     
     _label = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%ld",_gameMap.gold]];
@@ -38,9 +38,25 @@
     _label.fontColor = [UIColor redColor];
     _label.zPosition = 10;
     [self addChild:_label];
-    
+
     [self setupPhysical];
     
+    NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(test2) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    
+}
+
+- (void)test2
+{
+    static int i = 3;
+    i--;
+    if (i == 0) {
+        self.gameMap.curWaveNum ++;
+        for (int i = 0; i < 20; i++) {
+            [self.gameMap addCreatureWithType:arc4random_uniform(8) outlet:arc4random_uniform(2)];
+        }
+        i = 3;
+    }
 }
 
 - (void)update:(NSTimeInterval)currentTime
