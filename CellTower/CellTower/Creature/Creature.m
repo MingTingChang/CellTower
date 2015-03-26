@@ -11,8 +11,6 @@
 
 @interface Creature ()
 
-@property (nonatomic , assign, readwrite) CreatureType type;
-
 @end
 
 @implementation Creature
@@ -32,7 +30,7 @@
         self.realHP = model.HP;
         self.moveSpeed = model.moveSpeed;
         self.coin = model.coin;
-        self.type = model.type;
+        _type = model.type;
         self.creatureHidden = model.creatureHidden;
         self.alpha = self.creatureHidden ? 0.5 : 1.0;
         self.slowDown = model.slowDown;
@@ -119,7 +117,11 @@
     // 3.创建行为队列
     SKAction *moveSequeue = [SKAction sequence:arrayM];
     
-    [self runAction:moveSequeue];
+    [self runAction:moveSequeue completion:^{
+        if ([self.delegate respondsToSelector:@selector(creatureMovePathEnd:)]) {
+            [self.delegate creatureMovePathEnd:self];
+        }
+    }];
 }
 
 #pragma mark 被减速
@@ -130,7 +132,7 @@
     self.slowDown = YES;
     
     // 1.减慢移动速度
-    self.moveSpeed *= 0.3;
+    self.moveSpeed *= 0.5;
     // 1.1 通知代理状态改变
     if ([self.delegate respondsToSelector:@selector(creatureMoveStateDidChange:)]) {
         [self.delegate creatureMoveStateDidChange:self];

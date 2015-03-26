@@ -73,8 +73,9 @@ typedef void(^shootsCompletionBlock)(NSMutableArray *creatures);
     [self shootsWithCreature:nil completion:^(NSMutableArray *creatures) {
         // 3.扣血以及检测死亡
         for (Creature *creature in creatures) {
+            if (creature.HP <= 0) continue;
             creature.HP -= self.damage;
-            if (creature.HP <= 0) { // 死亡
+            if (creature.HP <= 0 && creature.hasActions) { // 死亡
                 [self.targets removeObject:creature];
                 if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
                     [self.delegate tower:self didDefeatCreature:creature];

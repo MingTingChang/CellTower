@@ -12,7 +12,7 @@
 #import "Common.h"
 #import "GameMap.h"
 
-@interface GameScene () <SKPhysicsContactDelegate>
+@interface GameScene () <SKPhysicsContactDelegate,GameMapDelegate>
 
 @property (nonatomic , strong) GameMap *gameMap;
 
@@ -26,42 +26,51 @@
 -(void)didMoveToView:(SKView *)view {
     self.backgroundColor = [SKColor lightGrayColor];
     
-    _gameMap = [GameMap mapWithType:MapTypeOneInOneOut];
+    _gameMap = [GameMap mapWithType:MapTypeTwoInTwoOut];
     _gameMap.anchorPoint = CGPointMake(0, 0);
     _gameMap.position = CGPointMake(124, 0);
+    _gameMap.delegate = self;
     [self addChild:_gameMap];
     
-    _label = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%ld",_gameMap.gold]];
+    _label = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%ld %d",_gameMap.gold,_gameMap.playerHP]];
     _label.position = CGPointMake(20, self.size.height * 0.5);
     _label.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-    _label.fontSize = 30;
+    _label.fontSize = 20;
     _label.fontColor = [UIColor redColor];
     _label.zPosition = 10;
     [self addChild:_label];
 
     [self setupPhysical];
     
-    NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(test2) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(test2) userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     
 }
 
-- (void)test2
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    static int i = 3;
-    i--;
-    if (i == 0) {
-        self.gameMap.curWaveNum ++;
-        for (int i = 0; i < 20; i++) {
+//    static int i = 3;
+//    i--;
+//    if (i == 0) {
+//        self.gameMap.curWaveNum ++;
+        for (int i = 0; i < 50; i++) {
             [self.gameMap addCreatureWithType:arc4random_uniform(8) outlet:arc4random_uniform(2)];
         }
-        i = 3;
-    }
+//        i = 3;
+//    }
+}
+
+#pragma mark - GameMap代理方法
+- (void)gameMapDidGameOver
+{
+    self.label.text = [NSString stringWithFormat:@"Game Over"];
 }
 
 - (void)update:(NSTimeInterval)currentTime
 {
-    _label.text = [NSString stringWithFormat:@"%ld",_gameMap.gold];
+    if (_gameMap.playerHP > 0) {
+        _label.text = [NSString stringWithFormat:@"%ld %d",_gameMap.gold,_gameMap.playerHP];
+    }
     
 }
 

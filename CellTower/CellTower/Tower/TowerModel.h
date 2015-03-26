@@ -46,9 +46,6 @@
 /** 所占栅格 */
 @property (nonatomic , assign) int grid;
 
-/** 攻击目标 */
-@property (nonatomic , strong) Creature *target;
-
 /** 是否正在攻击 */
 @property (nonatomic , assign ,getter=isWorking) BOOL working;
 

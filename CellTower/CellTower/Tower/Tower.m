@@ -22,6 +22,7 @@
 
 #pragma mark 子弹集合
 - (NSMutableArray *)bullets {
+    
     if (!_bullets) {
         _bullets = [NSMutableArray array];
     }
@@ -106,12 +107,13 @@
         self.working = NO;
         return;
     }
-    self.target = [self.targets firstObject];
-    [self shootWithCreature:self.target completion:^(Creature *creature) {
+    
+    [self shootWithCreature:[self.targets firstObject] completion:^(Creature *creature) {
+        if (creature.HP <= 0) return;
         // 扣血
         creature.HP -= self.damage;
         // 检测死亡
-        if (creature.HP <= 0) {
+        if (creature.HP <= 0 && creature.hasActions) {
             [self.targets removeObject:creature];
             
             if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {
@@ -216,7 +218,6 @@
 - (void)creatureIntoAttackRange:(Creature *)creature
 {
     [self.targets addObject:creature];
-    
     [self attack];
 }
 

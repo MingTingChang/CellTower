@@ -14,6 +14,7 @@
 @protocol CreatureDelegate <NSObject>
 @optional
 - (void)creatureMoveStateDidChange:(Creature *)creature;
+- (void)creatureMovePathEnd:(Creature *)creature;
 
 @end
 

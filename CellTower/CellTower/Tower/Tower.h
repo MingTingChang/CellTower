@@ -63,10 +63,6 @@ typedef void(^shootCompletionBlock)(Creature *creature);
 
 /** 所占栅格 */
 @property (nonatomic , assign) int grid;
-
-/** 攻击目标 */
-@property (nonatomic , strong) Creature *target;
-
 /**
  *  攻击目标数组
  */

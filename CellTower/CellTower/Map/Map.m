@@ -53,35 +53,37 @@
     return [[self alloc] initWithSize:size rightDoor:right bottomDoor:bottom];
 }
 
-+ (instancetype)copyWithMap:(Map *)map
++ (instancetype)copyWithMap:(Map *)map copyAll:(BOOL)copyAll
 {
     Map *copyMap = [Map mapWithSize:map.size rightDoor:map.rightTarget bottomDoor:map.bottomTarget];
-    
-    NSMutableArray *rightPathMap = [NSMutableArray array];
-    for (NSMutableArray *array in map.rightPathMap) {
-        NSMutableArray *copyArray = [NSMutableArray array];
-        for (MapPoint *mapPoint in array) {
-            MapPoint *copyPoint = [MapPoint copyWithMapPoint:mapPoint];
-            [copyArray addObject:copyPoint];
-        }
-        [rightPathMap addObject:copyArray];
-    }
-    NSMutableArray *bottomPathMap = [NSMutableArray array];
-    for (NSMutableArray *array in map.bottomPathMap) {
-        NSMutableArray *copyArray = [NSMutableArray array];
-        for (MapPoint *mapPoint in array) {
-            MapPoint *copyPoint = [MapPoint copyWithMapPoint:mapPoint];
-            [copyArray addObject:copyPoint];
-        }
-        [bottomPathMap addObject:copyArray];
-    }
-    copyMap.rightPathMap = rightPathMap;
-    copyMap.bottomPathMap = bottomPathMap;
     
     for (NSValue *point in map.walls) {
         [copyMap.walls addObject:point];
     }
     
+    if (copyAll == YES) {
+        NSMutableArray *rightPathMap = [NSMutableArray array];
+        for (NSMutableArray *array in map.rightPathMap) {
+            NSMutableArray *copyArray = [NSMutableArray array];
+            for (MapPoint *mapPoint in array) {
+                MapPoint *copyPoint = [MapPoint copyWithMapPoint:mapPoint];
+                [copyArray addObject:copyPoint];
+            }
+            [rightPathMap addObject:copyArray];
+        }
+        NSMutableArray *bottomPathMap = [NSMutableArray array];
+        for (NSMutableArray *array in map.bottomPathMap) {
+            NSMutableArray *copyArray = [NSMutableArray array];
+            for (MapPoint *mapPoint in array) {
+                MapPoint *copyPoint = [MapPoint copyWithMapPoint:mapPoint];
+                [copyArray addObject:copyPoint];
+            }
+            [bottomPathMap addObject:copyArray];
+        }
+        copyMap.rightPathMap = rightPathMap;
+        copyMap.bottomPathMap = bottomPathMap;
+    }
+ 
     return copyMap;
 }
 

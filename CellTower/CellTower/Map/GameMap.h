@@ -8,6 +8,13 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+@protocol GameMapDelegate <NSObject>
+
+@optional
+- (void)gameMapDidGameOver;
+
+@end
+
 @class Map;
 
 @interface GameMap : SKSpriteNode
@@ -15,6 +22,10 @@
 @property (nonatomic , assign) long gold;
 
 @property (nonatomic , assign) int curWaveNum;
+
+@property (nonatomic , assign) int playerHP;
+
+@property (nonatomic , weak) id<GameMapDelegate> delegate;
 
 /**
  *  添加塔到图上

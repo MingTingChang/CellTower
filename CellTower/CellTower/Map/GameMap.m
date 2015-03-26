@@ -45,12 +45,11 @@
         
         self.userInteractionEnabled = YES;
         self.gold = 5000;
+        self.playerHP = 50;
         self.size = CGSizeMake(320, 320);
         self.type = type;
         self.gridPixel = gridPixel;
         self.curWaveNum = 1;
-        self.creatures = [NSMutableArray array];
-        self.towers = [NSMutableArray array];
         self.queue = [[NSOperationQueue alloc] init];
 
         // 加载塔模型
@@ -126,6 +125,22 @@
     return gameMap;
 }
 
+- (NSMutableArray *)creatures
+{
+    if (_creatures == nil) {
+        _creatures = [NSMutableArray array];
+    }
+    return _creatures;
+}
+
+- (NSMutableArray *)towers
+{
+    if (_towers == nil) {
+        _towers = [NSMutableArray array];
+    }
+    return _towers;
+}
+
 #pragma mark - 对象方法
 #pragma mark 建造塔
 - (void)addTowerWithType:(TowerType)type point:(CGPoint)point
@@ -137,60 +152,15 @@
     
     // 获取塔4个栅格点的左上角栅格坐标
     CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
-   
+    
     // 判断该坐标能不能造塔
-    BOOL canBulid = YES;
-    for (int y = 0; (y <= 1) && canBulid; y++) {
-        for (int x = 0; (x <= 1) && canBulid; x++) {
-            CGPoint pos = CGPointMake(gridHeadPoint.x + x, gridHeadPoint.y + y);
-            for (NSValue *wall in _map.walls) {
-                if (CGPointEqualToPoint([wall CGPointValue], pos)) {
-                    canBulid = NO;
-                    break;
-                }
-            }
-            for (Creature *creature in self.creatures) {
-                CGPoint gridPoint = [CTGeometryTool gridPointFromPixelPoint:creature.position gridPixel:_gridPixel];
-                if (CGPointEqualToPoint(pos, gridPoint)) {
-                    canBulid = NO;
-                    break;
-                }
-            }
-        }
+    BOOL canBulid = [self canBulidTowerWithGridHeadPoint:gridHeadPoint];
+    if (canBulid == NO) {
+        [self failToBulidTower];
+        return;
     }
+    
     TowerModel *towerModel = self.towerModels[type];
-    if ((canBulid == NO)||(self.gold < towerModel.bulidCoin)) {
-        [self failToBulidTower];
-        return;
-    }
-    
-    Map *map = [Map copyWithMap:_map];
-    
-    // 把造塔的地方当做墙，加入到walls集合中
-    for (int y = 0; y <= 1; y++) {
-        for (int x = 0; x <= 1; x++) {
-            CGPoint pos = CGPointMake(gridHeadPoint.x + x, gridHeadPoint.y + y);
-            [_map addMapWallWithPoint:pos];
-        }
-    }
-    
-    // 判断建塔会不会阻塞路径
-    CGPoint startLeft = CGPointMake(0, self.size.height * 0.5);
-    NSMutableArray *path = [self findPixelPathFromPoint:startLeft outlet:CreatureOutletLeft];
-    if (path.count == 0) {
-        _map = map;
-        [self failToBulidTower];
-        return;
-    }
-    if (self.type == MapTypeTwoInTwoOut) {
-        CGPoint startTop = CGPointMake(self.size.width * 0.5, self.size.height - 1);
-        NSMutableArray *path2 = [self findPixelPathFromPoint:startTop outlet:CreatureOutletUp];
-        if (path2.count == 0) {
-            _map = map;
-            [self failToBulidTower];
-            return;
-        }
-    }
     
     self.gold -= towerModel.bulidCoin;
     // 设置像素坐标的塔的真实位置
@@ -206,6 +176,60 @@
     
     // 改变了塔图的构造，需要为所有怪重新生成路径
     [self resetCreaturePath];
+}
+
+- (BOOL)canBulidTowerWithGridHeadPoint:(CGPoint)gridHeadPoint
+{
+    // 判断该坐标是否被占用
+    BOOL isOccupy = NO;
+    for (int y = 0; (y <= 1) && (!isOccupy); y++) {
+        for (int x = 0; (x <= 1) && (!isOccupy); x++) {
+            CGPoint pos = CGPointMake(gridHeadPoint.x + x, gridHeadPoint.y + y);
+            for (NSValue *wall in _map.walls) {
+                if (CGPointEqualToPoint([wall CGPointValue], pos)) {
+                    isOccupy = YES;
+                    break;
+                }
+            }
+            for (Creature *creature in self.creatures) {
+                CGPoint gridPoint = [CTGeometryTool gridPointFromPixelPoint:creature.position gridPixel:_gridPixel];
+                if (CGPointEqualToPoint(pos, gridPoint)) {
+                    isOccupy = YES;
+                    break;
+                }
+            }
+        }
+    }
+    if (isOccupy == YES) return NO;
+    
+     // 判断建塔会不会阻塞路径
+    Map *map = [Map copyWithMap:_map copyAll:NO];
+    
+    // 把造塔的地方当做墙，加入到walls集合中
+    for (int y = 0; y <= 1; y++) {
+        for (int x = 0; x <= 1; x++) {
+            CGPoint pos = CGPointMake(gridHeadPoint.x + x, gridHeadPoint.y + y);
+            [map addMapWallWithPoint:pos];
+        }
+    }
+    
+    CGPoint startLeft = CGPointMake(0 , map.rightTarget.y);
+    NSMutableArray *path = [map findPathFromPoint:startLeft direction:PathDirectLeftToRight];
+    if ((path.count == 0) || (path == nil)) {
+        return NO;
+    }
+    if (self.type == MapTypeTwoInTwoOut) {
+        CGPoint startTop = CGPointMake(map.bottomTarget.x , map.size.height - 1);
+        NSMutableArray *path2 = [map findPathFromPoint:startTop
+                                             direction:PathDirectTopToBottom];
+        if ((path2.count == 0) || (path2 == nil)) {
+            return NO;
+        }
+    }
+    
+    _map = map;
+    
+    return YES;
 }
 
 - (void)failToBulidTower
@@ -242,11 +266,12 @@
 - (void)addCreatureWithType:(CreatureType)type outlet:(CreatureOutlet)outlet
 {
     int x = 0,y = 0;
+    int rand = 40;
     if (outlet == CreatureOutletLeft) {
         x = 0;
-        y = arc4random_uniform(30) + self.size.height * 0.5 - 30;
+        y = arc4random_uniform(rand) + self.size.height * 0.5 - rand*0.5;
     } else if (outlet == CreatureOutletUp) {
-        x = arc4random_uniform(30) + self.size.width * 0.5 - 30;
+        x = arc4random_uniform(rand) + self.size.width * 0.5 - rand*0.5;
         y = self.size.height - 1;
     } else {
         return;
@@ -267,16 +292,18 @@
     creature.outlet = outlet;
     creature.delegate = self;
     creature.creatureHidden = NO;
-    creature.HP = (self.curWaveNum >= 20)?20:self.curWaveNum;
+    creature.HP = 20;
     creature.realHP = creature.HP;
     creature.coin = 1;
     [self addChild:creature];
     [self.creatures addObject:creature];
    
+    __weak typeof(self) wSelf = self;
+    __weak Creature *wCreature = creature;
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-        NSMutableArray *path = [self findPixelPathFromPoint:creature.position outlet:creature.outlet];
+        NSMutableArray *path = [wSelf findPixelPathFromPoint:wCreature.position outlet:wCreature.outlet];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [creature moveWithPath:path];
+            [wCreature moveWithPath:path];
         });
     }];
     [self.queue addOperation:op];
@@ -309,6 +336,16 @@
         [path addObject:[NSValue valueWithCGPoint:pixelPoint]];
     }
     
+    if (outlet == CreatureOutletLeft) {
+        CGPoint end = CGPointMake(_map.rightTarget.x + 1, _map.rightTarget.y);
+        CGPoint pixelEnd = [CTGeometryTool pixelPointFromGridPoint:end gridPixel:_gridPixel];
+        [path addObject:[NSValue valueWithCGPoint:pixelEnd]];
+    } else if (outlet == CreatureOutletUp) {
+        CGPoint end = CGPointMake(_map.bottomTarget.x, _map.bottomTarget.y - 1);
+        CGPoint pixelEnd = [CTGeometryTool pixelPointFromGridPoint:end gridPixel:_gridPixel];
+        [path addObject:[NSValue valueWithCGPoint:pixelEnd]];
+    }
+    
     return path;
 }
 
@@ -317,10 +354,11 @@
 - (void)resetCreaturePath
 {
     NSMutableArray *ops = [NSMutableArray array];
+    __weak typeof(self) wSelf = self;
     for (int i = 0; i < _creatures.count; i++) {
-        Creature *creature = _creatures[i];
+        __weak Creature *creature = _creatures[i];
         NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-            NSMutableArray *path = [self findPixelPathFromPoint:creature.position outlet:creature.outlet];
+            NSMutableArray *path = [wSelf findPixelPathFromPoint:creature.position outlet:creature.outlet];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [creature moveWithPath:path];
             });
@@ -367,18 +405,14 @@
 #pragma mark - 销毁方法
 - (void)removeAllTowers
 {
-    for (Tower *tower in self.towers) {
-        [tower removeFromParent];
-    }
-    _map.walls = [NSMutableArray array];
+    [self.towers removeAllObjects];
     self.towers = [NSMutableArray array];
+    _map.walls = [NSMutableArray array];
 }
 
 - (void)removeAllCreatures
 {
-    for (Creature *creature in self.creatures) {
-        [creature removeFromParent];
-    }
+    [self.creatures removeAllObjects];
     self.creatures = [NSMutableArray array];
 }
 
@@ -388,14 +422,37 @@
     if (creature == nil) return;
     self.gold += creature.coin;
     
-    [creature removeFromParent];
     [_creatures removeObject:creature];
+    [creature removeFromParent];
 }
 
 #pragma mark - Creature代理
 - (void)creatureMoveStateDidChange:(Creature *)creature
 {
     [creature moveWithPath:[self findPixelPathFromPoint:creature.position outlet:creature.outlet]];
+}
+
+- (void)creatureMovePathEnd:(Creature *)creature
+{
+    if (self.playerHP <= 0) return;
+    
+    self.playerHP--;
+    if (self.playerHP <= 0) {
+        
+        [self removeAllTowers];
+        [self removeAllCreatures];
+        [self removeAllChildren];
+        if ([self.delegate respondsToSelector:@selector(gameMapDidGameOver)]) {
+            [self.delegate gameMapDidGameOver];
+        }
+        return;
+    }
+    for (Tower *tower in self.towers) {
+        [tower.targets removeObject:creature];
+    }
+    
+    [_creatures removeObject:creature];
+    [creature removeFromParent];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

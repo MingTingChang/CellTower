@@ -71,10 +71,11 @@
         NSUInteger count = self.targets.count > 3 ? 4 : self.targets.count;
         for (NSUInteger i = 0; i < count; i ++) {
             [self shootWithCreature:self.targets[i] completion:^(Creature *creature) {
+                if (creature.HP <= 0) return;
                 // 扣血
                 creature.HP -= self.damage;
                 // 检测死亡
-                if (creature.HP <= 0) {
+                if (creature.HP <= 0 && creature.hasActions) {
                     [self.targets removeObject:creature];
                     
                     if ([self.delegate respondsToSelector:@selector(tower:didDefeatCreature:)]) {

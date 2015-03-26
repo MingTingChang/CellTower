@@ -5,6 +5,7 @@
 //  Created by 刘奥明 on 15-3-22.
 //  Copyright (c) 2015年 MingTingChang. All rights reserved.
 //
+
 #pragma mark - 宏定义
 #pragma mark 设置碰撞掩码
 // 怪物类别

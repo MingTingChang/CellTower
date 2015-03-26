@@ -40,7 +40,7 @@
 /** 原始图有没有被修改 */
 @property (nonatomic , assign , getter=isChange) BOOL change;
 
-+ (instancetype)copyWithMap:(Map *)map;
++ (instancetype)copyWithMap:(Map *)map copyAll:(BOOL)copyAll;
 
 /** 初始化方法 rightDoor为右终点 bottomDoor为下终点 */
 - (instancetype)initWithSize:(CGSize)size rightDoor:(CGPoint)right bottomDoor:(CGPoint)bottom;
