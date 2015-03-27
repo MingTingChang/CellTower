@@ -22,7 +22,7 @@
     
     if (self = [super initWithImageNamed:model.imageName]) {
         self.size = CGSizeMake(15, 15);
-        self.zPosition = 1;
+        self.zPosition = 4;
         self.position = CGPointMake(-100, -100);
         
         self.imageName = [model.imageName copy];
@@ -45,6 +45,7 @@
     if (!_SlowDownCircle) {
         _SlowDownCircle = [SKSpriteNode spriteNodeWithImageNamed:@"SlowDownCircle"];
         _SlowDownCircle.size = self.size;
+        _SlowDownCircle.zPosition = self.zPosition + 2;
         _SlowDownCircle.position = CGPointMake(0,0);
     }
     return _SlowDownCircle;

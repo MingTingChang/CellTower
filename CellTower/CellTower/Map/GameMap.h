@@ -18,14 +18,16 @@
 @class Map;
 
 @interface GameMap : SKSpriteNode
-
+/** 金币 */
 @property (nonatomic , assign) long gold;
-
+/** 当前怪波数 */
 @property (nonatomic , assign) int curWaveNum;
-
+/** 玩家生命 */
 @property (nonatomic , assign) int playerHP;
-
+/** 代理 */
 @property (nonatomic , weak) id<GameMapDelegate> delegate;
+/** 是否进入建造模式 */
+@property (nonatomic , assign) BOOL willBulid;
 
 /**
  *  添加塔到图上

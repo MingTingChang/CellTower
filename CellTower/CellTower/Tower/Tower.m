@@ -35,7 +35,7 @@
     if (self = [super initWithImageNamed:model.imageName]) {
         
         self.size = CGSizeMake(20, 20);
-        self.zPosition = 1;
+        self.zPosition = 5;
         
         self.imageName = [model.imageName copy];
         self.range = model.range;
@@ -58,7 +58,6 @@
 #pragma mark 添加子弹
 - (SKSpriteNode *)addBullet {
     SKSpriteNode *bullet = nil;
-    
     if (self.type == TowerTypeShock) {
         bullet = [SKSpriteNode spriteNodeWithImageNamed:@"shock"];
         bullet.size = CGSizeMake(2, 2);
@@ -75,7 +74,7 @@
         bullet = [SKSpriteNode spriteNodeWithImageNamed:@"bullet"];
         bullet.size = CGSizeMake(2, 2);
     }
-    
+    bullet.zPosition = 6;
     return bullet;
 }
 
@@ -210,7 +209,7 @@
 + (instancetype)towerWithModel:(TowerModel *)model position:(CGPoint)position {
     Tower *tower = [self towerWithModel:model];
     tower.position = position;
-    
+
     return tower;
 }
 

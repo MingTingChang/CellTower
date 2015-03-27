@@ -18,6 +18,8 @@
 
 @property (nonatomic , strong) SKLabelNode *label;
 
+@property (nonatomic , strong) NSTimer *timer;
+
 @end
 
 @implementation GameScene
@@ -42,28 +44,35 @@
 
     [self setupPhysical];
     
-//    NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(test2) userInfo:nil repeats:YES];
-//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(test2) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
     
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    static int i = 3;
-//    i--;
-//    if (i == 0) {
-//        self.gameMap.curWaveNum ++;
+    self.gameMap.willBulid = !self.gameMap.willBulid;
+}
+
+- (void)test2
+{
+    static int i = 5;
+    i--;
+    if (i == 0) {
+        self.gameMap.curWaveNum ++;
         for (int i = 0; i < 50; i++) {
             [self.gameMap addCreatureWithType:arc4random_uniform(8) outlet:arc4random_uniform(2)];
         }
-//        i = 3;
-//    }
+        i = 5;
+    }
 }
 
 #pragma mark - GameMap代理方法
 - (void)gameMapDidGameOver
 {
     self.label.text = [NSString stringWithFormat:@"Game Over"];
+    [_timer invalidate];
+    _timer = nil;
 }
 
 - (void)update:(NSTimeInterval)currentTime

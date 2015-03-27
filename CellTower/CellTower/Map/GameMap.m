@@ -34,6 +34,8 @@
 
 @property (nonatomic , strong) NSOperationQueue *queue;
 
+@property (nonatomic , strong) NSMutableArray *bulidWalls;
+
 @end
 
 @implementation GameMap
@@ -44,25 +46,26 @@
     if (self = [super initWithImageNamed:name]) {
         
         self.userInteractionEnabled = YES;
-        self.gold = 5000;
-        self.playerHP = 50;
         self.size = CGSizeMake(320, 320);
-        self.type = type;
-        self.gridPixel = gridPixel;
-        self.curWaveNum = 1;
-        self.queue = [[NSOperationQueue alloc] init];
+        _gold = 5000;
+        _playerHP = 50;
+        _curWaveNum = 1;
+        _willBulid = NO;
+        _type = type;
+        _gridPixel = gridPixel;
+        _queue = [[NSOperationQueue alloc] init];
 
         // 加载塔模型
-        self.towerModels = [NSMutableArray array];
+        _towerModels = [NSMutableArray array];
         for (int i = 0; i < TowerTypeNumber; i++) {
             TowerModel *model = [TowerModel towerModelWithType:i];
-            [self.towerModels addObject:model];
+            [_towerModels addObject:model];
         }
         // 加载妖怪模型
-        self.creatureModels = [NSMutableArray array];
+        _creatureModels = [NSMutableArray array];
         for (int i = 0; i < CreatureTypeNumber; i++) {
             CreatureModel *model = [CreatureModel creatureModelWithType:i];
-            [self.creatureModels addObject:model];
+            [_creatureModels addObject:model];
         }
     }
     return self;
@@ -83,7 +86,7 @@
 {
     return [self spriteNodeWithImageNamed:name gridPixel:MapGridPixelNormalValue mapType:type];
 }
-
+#pragma mark 快捷初始化方法
 + (instancetype)mapWithType:(MapType)type
 {
     NSString *name;
@@ -125,6 +128,21 @@
     return gameMap;
 }
 
+#pragma mark 初始化Map对象
+- (void)setupGridMap
+{
+    CGSize gridSize = CGSizeMake(self.size.width/_gridPixel, self.size.height/_gridPixel);
+    
+    CGPoint rightDoor = CGPointMake(gridSize.width - 1, gridSize.height * 0.5 - 1);
+    CGPoint bottomDoor = CGPointZero;
+    if (_type == MapTypeTwoInTwoOut) {
+        bottomDoor = CGPointMake(gridSize.width * 0.5 - 1, 0);
+    }
+    
+    _map = [Map mapWithSize:gridSize rightDoor:rightDoor bottomDoor:bottomDoor];
+}
+
+#pragma mark - setter and getter
 - (NSMutableArray *)creatures
 {
     if (_creatures == nil) {
@@ -141,8 +159,48 @@
     return _towers;
 }
 
-#pragma mark - 对象方法
-#pragma mark 建造塔
+- (NSMutableArray *)bulidWalls
+{
+    if (_bulidWalls == nil) {
+        _bulidWalls = [NSMutableArray array];
+    }
+    return _bulidWalls;
+}
+
+- (void)setWillBulid:(BOOL)willBulid
+{
+    _willBulid = willBulid;
+    
+    if (willBulid == NO) {
+        for (SKSpriteNode *bulidWall in self.bulidWalls) {
+            [bulidWall removeFromParent];
+        }
+        [self.bulidWalls removeAllObjects];
+    } else {
+        for (int y = 15; y < 310; y+=10) {
+            for (int x = 15; x < 310; x+=10) {
+                CGPoint point = CGPointMake(x, y);
+                SKSpriteNode *green = [SKSpriteNode spriteNodeWithImageNamed:@"bg_green3.jpg"];
+                green.position = point;
+                green.zPosition = 0;
+                [self addChild:green];
+                [self.bulidWalls addObject:green];
+                
+            }
+        }
+        for (Tower *tower in self.towers) {
+            SKSpriteNode *blue = [SKSpriteNode spriteNodeWithImageNamed:@"bg.jpg"];
+            blue.position = tower.position;
+            blue.zPosition = 1;
+            [self addChild:blue];
+            [self.bulidWalls addObject:blue];
+        }
+    }
+    
+}
+
+#pragma mark - 塔相关方法
+#pragma mark 建塔
 - (void)addTowerWithType:(TowerType)type point:(CGPoint)point
 {
 
@@ -153,8 +211,7 @@
     // 获取塔4个栅格点的左上角栅格坐标
     CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
     
-    // 判断该坐标能不能造塔
-    BOOL canBulid = [self canBulidTowerWithGridHeadPoint:gridHeadPoint];
+    BOOL canBulid = [self canBulidTowerWithPoint:point];
     if (canBulid == NO) {
         [self failToBulidTower];
         return;
@@ -167,6 +224,14 @@
     CGPoint tmpPoint = [CTGeometryTool pixelPointFromGridPoint:gridHeadPoint gridPixel:_gridPixel];
     CGPoint centerPoint = CGPointMake(tmpPoint.x + _gridPixel * 0.5, tmpPoint.y + _gridPixel * 0.5);
     
+    if (_willBulid == YES) {
+        SKSpriteNode *blue = [SKSpriteNode spriteNodeWithImageNamed:@"bg.jpg"];
+        blue.position = centerPoint;
+        blue.zPosition = 1;
+        [self addChild:blue];
+        [self.bulidWalls addObject:blue];
+    }
+    
     Tower *tower = [self getRealTowerWithType:type position:centerPoint];
     tower.size = CGSizeMake(2 * MapGridPixelNormalValue, 2 * MapGridPixelNormalValue);
     tower.range = tower.range * 0.5;
@@ -178,8 +243,11 @@
     [self resetCreaturePath];
 }
 
-- (BOOL)canBulidTowerWithGridHeadPoint:(CGPoint)gridHeadPoint
+#pragma mark 判断塔能不能建(排除经济原因)
+- (BOOL)canBulidTowerWithPoint:(CGPoint)point
 {
+    CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
+    
     // 判断该坐标是否被占用
     BOOL isOccupy = NO;
     for (int y = 0; (y <= 1) && (!isOccupy); y++) {
@@ -232,11 +300,13 @@
     return YES;
 }
 
+#pragma mark 企图建塔失败方法
 - (void)failToBulidTower
 {
     
 }
 
+#pragma mark 获取塔的真实类型
 - (Tower *)getRealTowerWithType:(TowerType)type position:(CGPoint)point
 {
     TowerModel *towerModel = self.towerModels[type];
@@ -262,6 +332,27 @@
     return tower;
 }
 
+#pragma mark 获取塔的4个栅格的左上角栅格坐标
+- (CGPoint)gridHeadPointAroundPixelPoint:(CGPoint)point
+{
+    int border = _gridPixel * 1.5;
+    if (point.x < border) {
+        point.x = border;
+    } else if (point.x > self.size.width - 1 - border) {
+        point.x = self.size.width - 1 - border;
+    }
+    if (point.y < border) {
+        point.y = border;
+    } else if (point.y > self.size.height - 1 - border) {
+        point.y = self.size.height - 1 - border;
+    }
+    
+    int offsetX = (point.x - _gridPixel * 0.5)/_gridPixel;
+    int offsetY = (point.y - _gridPixel * 0.5)/_gridPixel;
+    return CGPointMake(offsetX, offsetY);
+}
+
+#pragma mark - 妖怪相关方法
 #pragma mark 制造妖怪
 - (void)addCreatureWithType:(CreatureType)type outlet:(CreatureOutlet)outlet
 {
@@ -314,6 +405,24 @@
     [self addCreatureWithType:type outlet:CreatureOutletLeft];
 }
 
+#pragma mark 重置妖怪路径
+- (void)resetCreaturePath
+{
+    NSMutableArray *ops = [NSMutableArray array];
+    __weak typeof(self) wSelf = self;
+    for (int i = 0; i < _creatures.count; i++) {
+        __weak Creature *creature = _creatures[i];
+        NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+            NSMutableArray *path = [wSelf findPixelPathFromPoint:creature.position outlet:creature.outlet];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [creature moveWithPath:path];
+            });
+        }];
+        [ops addObject:op];
+    }
+    [self.queue addOperations:ops waitUntilFinished:NO];
+}
+
 #pragma mark 寻找路径，传入的是像素坐标
 - (NSMutableArray *)findPixelPathFromPoint:(CGPoint)point outlet:(CreatureOutlet)outlet
 {
@@ -350,58 +459,6 @@
 }
 
 
-#pragma mark 重置妖怪路径
-- (void)resetCreaturePath
-{
-    NSMutableArray *ops = [NSMutableArray array];
-    __weak typeof(self) wSelf = self;
-    for (int i = 0; i < _creatures.count; i++) {
-        __weak Creature *creature = _creatures[i];
-        NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-            NSMutableArray *path = [wSelf findPixelPathFromPoint:creature.position outlet:creature.outlet];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [creature moveWithPath:path];
-            });
-        }];
-        [ops addObject:op];
-    }
-    [self.queue addOperations:ops waitUntilFinished:NO];
-}
-
-#pragma mark 获取塔的4个栅格的左上角栅格坐标
-- (CGPoint)gridHeadPointAroundPixelPoint:(CGPoint)point
-{
-    int border = _gridPixel * 0.5;
-    if (point.x < border) {
-        point.x = border;
-    } else if (point.x > self.size.width - 1 - border) {
-        point.x = self.size.width - 1 - border;
-    }
-    if (point.y < border) {
-        point.y = border;
-    } else if (point.y > self.size.height - 1 - border) {
-        point.y = self.size.height - 1 - border;
-    }
-    
-    int offsetX = (point.x - border)/_gridPixel;
-    int offsetY = (point.y - border)/_gridPixel;
-    return CGPointMake(offsetX, offsetY);
-}
-
-#pragma mark 初始化Map对象
-- (void)setupGridMap
-{
-    CGSize gridSize = CGSizeMake(self.size.width/_gridPixel, self.size.height/_gridPixel);
-    
-    CGPoint rightDoor = CGPointMake(gridSize.width - 1, gridSize.height * 0.5 - 1);
-    CGPoint bottomDoor = CGPointZero;
-    if (_type == MapTypeTwoInTwoOut) {
-        bottomDoor = CGPointMake(gridSize.width * 0.5 - 1, 0);
-    }
-    
-    _map = [Map mapWithSize:gridSize rightDoor:rightDoor bottomDoor:bottomDoor];
-}
-
 #pragma mark - 销毁方法
 - (void)removeAllTowers
 {
@@ -414,6 +471,17 @@
 {
     [self.creatures removeAllObjects];
     self.creatures = [NSMutableArray array];
+}
+
+- (void)resetAll
+{
+    [self removeAllTowers];
+    [self removeAllCreatures];
+    [self removeAllChildren];
+    _willBulid = NO;
+    _gold = 5000;
+    _playerHP = 50;
+    _curWaveNum = 1;
 }
 
 #pragma mark - Tower代理方法
@@ -439,9 +507,7 @@
     self.playerHP--;
     if (self.playerHP <= 0) {
         
-        [self removeAllTowers];
-        [self removeAllCreatures];
-        [self removeAllChildren];
+        [self resetAll];
         if ([self.delegate respondsToSelector:@selector(gameMapDidGameOver)]) {
             [self.delegate gameMapDidGameOver];
         }
@@ -455,11 +521,15 @@
     [creature removeFromParent];
 }
 
+#pragma mark - touch方法
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint point = [[touches anyObject] locationInNode:self];
     
+    
     [self addTowerWithType:arc4random_uniform(7) point:point];
+    
+
 }
 
 
