@@ -32,6 +32,7 @@
 
 - (SKSpriteNode *)addBullet {
     SKSpriteNode *bullet = [SKSpriteNode spriteNodeWithImageNamed:@"bullet"];
+    bullet.zPosition = 6;
     bullet.size = CGSizeMake(2, 2);
     return bullet;
 }

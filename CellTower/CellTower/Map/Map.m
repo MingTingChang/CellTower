@@ -58,7 +58,8 @@
     Map *copyMap = [Map mapWithSize:map.size rightDoor:map.rightTarget bottomDoor:map.bottomTarget];
     
     for (NSValue *point in map.walls) {
-        [copyMap.walls addObject:point];
+        NSValue *copyPoint = [NSValue valueWithCGPoint:[point CGPointValue]];
+        [copyMap.walls addObject:copyPoint];
     }
     
     if (copyAll == YES) {

@@ -45,7 +45,7 @@
     if (!_SlowDownCircle) {
         _SlowDownCircle = [SKSpriteNode spriteNodeWithImageNamed:@"SlowDownCircle"];
         _SlowDownCircle.size = self.size;
-        _SlowDownCircle.zPosition = self.zPosition + 2;
+        _SlowDownCircle.zPosition = 6;
         _SlowDownCircle.position = CGPointMake(0,0);
     }
     return _SlowDownCircle;

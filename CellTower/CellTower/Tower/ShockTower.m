@@ -25,6 +25,7 @@ typedef void(^shootsCompletionBlock)(NSMutableArray *creatures);
 - (SKSpriteNode *)bullet {
     if (!_bullet) {
         _bullet = [SKSpriteNode spriteNodeWithImageNamed:@"shock"];
+        _bullet.zPosition = 6;
         _bullet.size = CGSizeMake(2, 2);
     }
     return _bullet;

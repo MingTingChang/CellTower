@@ -36,6 +36,10 @@
 
 @property (nonatomic , strong) NSMutableArray *bulidWalls;
 
+@property (nonatomic , strong) SKSpriteNode *bgGrid;
+
+@property (nonatomic , strong) SKSpriteNode *bulidPos;
+
 @end
 
 @implementation GameMap
@@ -172,31 +176,16 @@
     _willBulid = willBulid;
     
     if (willBulid == NO) {
-        for (SKSpriteNode *bulidWall in self.bulidWalls) {
-            [bulidWall removeFromParent];
-        }
-        [self.bulidWalls removeAllObjects];
+        [_bgGrid removeFromParent];
+        _bgGrid = nil;
     } else {
-        for (int y = 15; y < 310; y+=10) {
-            for (int x = 15; x < 310; x+=10) {
-                CGPoint point = CGPointMake(x, y);
-                SKSpriteNode *green = [SKSpriteNode spriteNodeWithImageNamed:@"bg_green3.jpg"];
-                green.position = point;
-                green.zPosition = 0;
-                [self addChild:green];
-                [self.bulidWalls addObject:green];
-                
-            }
-        }
-        for (Tower *tower in self.towers) {
-            SKSpriteNode *blue = [SKSpriteNode spriteNodeWithImageNamed:@"bg.jpg"];
-            blue.position = tower.position;
-            blue.zPosition = 1;
-            [self addChild:blue];
-            [self.bulidWalls addObject:blue];
-        }
+        SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:@"bgGrid.png"];
+        node.zPosition = 1;
+        node.anchorPoint = CGPointMake(0, 0);
+        node.position = CGPointMake(10, 10);
+        [self addChild:node];
+        _bgGrid = node;
     }
-    
 }
 
 #pragma mark - 塔相关方法
@@ -211,11 +200,12 @@
     // 获取塔4个栅格点的左上角栅格坐标
     CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
     
-    BOOL canBulid = [self canBulidTowerWithPoint:point];
-    if (canBulid == NO) {
+    Map *map = [self canBulidTowerWithPoint:point];
+    if (map == nil) {
         [self failToBulidTower];
         return;
     }
+    _map = map;
     
     TowerModel *towerModel = self.towerModels[type];
     
@@ -224,13 +214,12 @@
     CGPoint tmpPoint = [CTGeometryTool pixelPointFromGridPoint:gridHeadPoint gridPixel:_gridPixel];
     CGPoint centerPoint = CGPointMake(tmpPoint.x + _gridPixel * 0.5, tmpPoint.y + _gridPixel * 0.5);
     
-    if (_willBulid == YES) {
-        SKSpriteNode *blue = [SKSpriteNode spriteNodeWithImageNamed:@"bg.jpg"];
-        blue.position = centerPoint;
-        blue.zPosition = 1;
-        [self addChild:blue];
-        [self.bulidWalls addObject:blue];
-    }
+    
+    SKSpriteNode *wall = [SKSpriteNode spriteNodeWithImageNamed:@"bg2.jpg"];
+    wall.position = centerPoint;
+    wall.zPosition = 2;
+    [self addChild:wall];
+    [self.bulidWalls addObject:wall];
     
     Tower *tower = [self getRealTowerWithType:type position:centerPoint];
     tower.size = CGSizeMake(2 * MapGridPixelNormalValue, 2 * MapGridPixelNormalValue);
@@ -244,7 +233,7 @@
 }
 
 #pragma mark 判断塔能不能建(排除经济原因)
-- (BOOL)canBulidTowerWithPoint:(CGPoint)point
+- (Map *)canBulidTowerWithPoint:(CGPoint)point
 {
     CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
     
@@ -268,7 +257,7 @@
             }
         }
     }
-    if (isOccupy == YES) return NO;
+    if (isOccupy == YES) return nil;
     
      // 判断建塔会不会阻塞路径
     Map *map = [Map copyWithMap:_map copyAll:NO];
@@ -284,20 +273,18 @@
     CGPoint startLeft = CGPointMake(0 , map.rightTarget.y);
     NSMutableArray *path = [map findPathFromPoint:startLeft direction:PathDirectLeftToRight];
     if ((path.count == 0) || (path == nil)) {
-        return NO;
+        return nil;
     }
     if (self.type == MapTypeTwoInTwoOut) {
         CGPoint startTop = CGPointMake(map.bottomTarget.x , map.size.height - 1);
         NSMutableArray *path2 = [map findPathFromPoint:startTop
                                              direction:PathDirectTopToBottom];
         if ((path2.count == 0) || (path2 == nil)) {
-            return NO;
+            return nil;
         }
     }
     
-    _map = map;
-    
-    return YES;
+    return map;
 }
 
 #pragma mark 企图建塔失败方法
@@ -463,7 +450,9 @@
 - (void)removeAllTowers
 {
     [self.towers removeAllObjects];
+    [self.bulidWalls removeAllObjects];
     self.towers = [NSMutableArray array];
+    self.bulidWalls = [NSMutableArray array];
     _map.walls = [NSMutableArray array];
 }
 
@@ -526,10 +515,51 @@
 {
     CGPoint point = [[touches anyObject] locationInNode:self];
     
+    self.bulidPos = [SKSpriteNode spriteNodeWithImageNamed:@"canBulid.jpg"];
+    self.bulidPos.zPosition = 8;
     
-    [self addTowerWithType:arc4random_uniform(7) point:point];
+    CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
+    if ([self canBulidTowerWithPoint:point] == nil) {
+        self.bulidPos.texture = [SKTexture textureWithImageNamed:@"noBulid.jpg"];
+    }
     
+    // 设置像素坐标的塔的真实位置
+    CGPoint tmpPoint = [CTGeometryTool pixelPointFromGridPoint:gridHeadPoint gridPixel:_gridPixel];
+    CGPoint centerPoint = CGPointMake(tmpPoint.x + _gridPixel * 0.5, tmpPoint.y + _gridPixel * 0.5);
+    
+    self.bulidPos.position = centerPoint;
+    [self addChild:self.bulidPos];
+}
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint point = [[touches anyObject] locationInNode:self];
+    
+    CGPoint gridHeadPoint = [self gridHeadPointAroundPixelPoint:point];
+    CGPoint posGridPoint = [self gridHeadPointAroundPixelPoint:self.bulidPos.position];
+    if (CGPointEqualToPoint(gridHeadPoint, posGridPoint)) {
+        return;
+    }
+    
+    if ([self canBulidTowerWithPoint:point] == nil) {
+        self.bulidPos.texture = [SKTexture textureWithImageNamed:@"noBulid.jpg"];
+    } else {
+        self.bulidPos.texture = [SKTexture textureWithImageNamed:@"canBulid.jpg"];
+    }
+    
+    // 设置像素坐标的塔的真实位置
+    CGPoint tmpPoint = [CTGeometryTool pixelPointFromGridPoint:gridHeadPoint gridPixel:_gridPixel];
+    CGPoint centerPoint = CGPointMake(tmpPoint.x + _gridPixel * 0.5, tmpPoint.y + _gridPixel * 0.5);
+    
+    self.bulidPos.position = centerPoint;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint point = [[touches anyObject] locationInNode:self];
+    [self.bulidPos removeFromParent];
+    self.bulidPos = nil;
+    [self addTowerWithType:arc4random_uniform(7) point:point];
 }
 
 
