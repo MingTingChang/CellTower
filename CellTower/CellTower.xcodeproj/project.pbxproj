@@ -17,6 +17,9 @@
 		B53483141ABB173600A8D950 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483111ABB173600A8D950 /* Map.m */; };
 		B547F0B81ABE8BE2006FB1CE /* SKNode+Expention.m in Sources */ = {isa = PBXBuildFile; fileRef = B547F0B71ABE8BE2006FB1CE /* SKNode+Expention.m */; };
 		B547F0BB1ABE8BFD006FB1CE /* NSMutableArray+Point.m in Sources */ = {isa = PBXBuildFile; fileRef = B547F0BA1ABE8BFD006FB1CE /* NSMutableArray+Point.m */; };
+		B556485D1AC2C83C001A6623 /* MessageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B556485C1AC2C83C001A6623 /* MessageMenu.m */; };
+		B55648601AC2CFB6001A6623 /* AttactRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B556485F1AC2CFB6001A6623 /* AttactRange.m */; };
+		B55648691AC2EA4E001A6623 /* SKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B55648681AC2EA4E001A6623 /* SKButton.m */; };
 		B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B5901B8E1ABC54CF000200FE /* GameMap.m */; };
 		B593350B1AB81E580039A94C /* air_fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334F91AB81E570039A94C /* air_fire.wav */; };
 		B593350C1AB81E580039A94C /* congratulation.wav in Resources */ = {isa = PBXBuildFile; fileRef = B59334FA1AB81E570039A94C /* congratulation.wav */; };
@@ -84,6 +87,12 @@
 		B547F0B71ABE8BE2006FB1CE /* SKNode+Expention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKNode+Expention.m"; sourceTree = "<group>"; };
 		B547F0B91ABE8BFD006FB1CE /* NSMutableArray+Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Point.h"; sourceTree = "<group>"; };
 		B547F0BA1ABE8BFD006FB1CE /* NSMutableArray+Point.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Point.m"; sourceTree = "<group>"; };
+		B556485B1AC2C83C001A6623 /* MessageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageMenu.h; sourceTree = "<group>"; };
+		B556485C1AC2C83C001A6623 /* MessageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageMenu.m; sourceTree = "<group>"; };
+		B556485E1AC2CFB6001A6623 /* AttactRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttactRange.h; sourceTree = "<group>"; };
+		B556485F1AC2CFB6001A6623 /* AttactRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttactRange.m; sourceTree = "<group>"; };
+		B55648671AC2EA4E001A6623 /* SKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKButton.h; sourceTree = "<group>"; };
+		B55648681AC2EA4E001A6623 /* SKButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKButton.m; sourceTree = "<group>"; };
 		B5686DC51ABAB1500037EA42 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = pch/PrefixHeader.pch; sourceTree = "<group>"; };
 		B5901B8D1ABC54CF000200FE /* GameMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMap.h; sourceTree = "<group>"; };
 		B5901B8E1ABC54CF000200FE /* GameMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameMap.m; sourceTree = "<group>"; };
@@ -176,6 +185,7 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
+				B556485A1AC2C7F8001A6623 /* Menu */,
 				B51AD0DB1ABE7C9C00F7F1F3 /* Category */,
 				B5ADD2E01ABD35C200DF4163 /* Main */,
 				B5BF25291ABACF61005CEAC1 /* Tool */,
@@ -276,6 +286,19 @@
 				B53483111ABB173600A8D950 /* Map.m */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		B556485A1AC2C7F8001A6623 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B556485B1AC2C83C001A6623 /* MessageMenu.h */,
+				B556485C1AC2C83C001A6623 /* MessageMenu.m */,
+				B556485E1AC2CFB6001A6623 /* AttactRange.h */,
+				B556485F1AC2CFB6001A6623 /* AttactRange.m */,
+				B55648671AC2EA4E001A6623 /* SKButton.h */,
+				B55648681AC2EA4E001A6623 /* SKButton.m */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		B59334F81AB81E570039A94C /* music */ = {
@@ -452,6 +475,7 @@
 				B547F0BB1ABE8BFD006FB1CE /* NSMutableArray+Point.m in Sources */,
 				B5D702581AB84071003FE835 /* TowerModel.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
+				B556485D1AC2C83C001A6623 /* MessageMenu.m in Sources */,
 				B5C9E73B1ABC4E64003CA711 /* RadarTower.m in Sources */,
 				B5901B8F1ABC54CF000200FE /* GameMap.m in Sources */,
 				B5BF25281ABACF54005CEAC1 /* CTGeometryTool.m in Sources */,
@@ -461,6 +485,7 @@
 				B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
+				B55648601AC2CFB6001A6623 /* AttactRange.m in Sources */,
 				B5ADD2EB1ABD35C200DF4163 /* GameViewController.m in Sources */,
 				B5ADD2E91ABD35C200DF4163 /* GameScene.m in Sources */,
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
@@ -469,6 +494,7 @@
 				B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,
 				B5D2FAE61ABD4491009BB190 /* AirTower.m in Sources */,
+				B55648691AC2EA4E001A6623 /* SKButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

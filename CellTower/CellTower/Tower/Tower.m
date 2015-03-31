@@ -34,6 +34,7 @@
 - (instancetype)initWithModel:(TowerModel *)model {
     if (self = [super initWithImageNamed:model.imageName]) {
         
+        // 1.设置属性
         self.size = CGSizeMake(20, 20);
         self.zPosition = 5;
         
@@ -249,5 +250,6 @@
     
     return sum * self.destoryCoinRatio;
 }
+
 
 @end

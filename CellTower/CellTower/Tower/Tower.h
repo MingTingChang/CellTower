@@ -118,4 +118,9 @@ typedef void(^shootCompletionBlock)(Creature *creature);
 /** 拆除 */
 - (int)destory;
 
+/**
+ *  显示塔的攻击范围
+ */
+- (void)showAttactRange;
+
 @end
