@@ -11,6 +11,9 @@
 #import "SwitchButtonNode.h"
 #import "BlockButtonNode.h"
 #import "GameScene.h"
+#import "CTBgMusicPlayer.h"
+#import "Common.h"
+
 
 typedef void(^Completion)();
 
@@ -56,6 +59,7 @@ typedef void(^Completion)();
         _buttonNodes = [NSMutableArray array];
     }
     return _buttonNodes;
+    
 }
 
 
@@ -68,6 +72,17 @@ typedef void(^Completion)();
     [self setupTitleNode];
     // 3.添加按钮
     [self setAllButtonNode];
+    // 4.初始化背景音乐
+    [self setupBgMusic];
+}
+
+#pragma mark 初始化背景音乐
+- (void)setupBgMusic
+{
+    BOOL audio = [[NSUserDefaults standardUserDefaults] boolForKey:kAudio];
+    if (audio) {
+        [[CTBgMusicPlayer sharedPlayer] playBgMusic];
+    }
 }
 
 #pragma mark 加载场景资源并执行回调
@@ -160,6 +175,22 @@ typedef void(^Completion)();
 - (void)touchSwitchButtonNode:(SwitchButtonNode *)buttonNode
 {
     [buttonNode touchButton];
+    
+    if ([buttonNode.name isEqualToString:@"audio"]) {
+        [self changeBgMusicState];
+    }
+}
+
+#pragma mark 改变背景音乐状态
+- (void)changeBgMusicState
+{
+    BOOL audio = [[NSUserDefaults standardUserDefaults] boolForKey:kAudio];
+    
+    if (audio) {
+        [[CTBgMusicPlayer sharedPlayer] playBgMusic];
+    } else {
+        [[CTBgMusicPlayer sharedPlayer] stop];
+    }
 }
 
 #pragma mark 点击了跳跃节点按钮

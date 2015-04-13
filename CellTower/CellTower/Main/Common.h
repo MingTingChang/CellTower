@@ -20,6 +20,9 @@
 //默认单元栅格像素
 #define MapGridPixelNormalValue 10
 
+// 开启/关闭声音储存Key
+#define kAudio @"audio"
+
 #pragma mark - 枚举定义
 typedef enum{
     CreatureOutletLeft = 0, // 左边出来

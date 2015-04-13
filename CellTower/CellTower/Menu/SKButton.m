@@ -89,7 +89,7 @@
     if (self.bgImageName) {
         self.texture = [SKTexture textureWithImage:[UIImage imageNamed:self.bgImageName]];
     }
-
+    
     if (self.callback) {
         self.callback();
     }

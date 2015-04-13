@@ -61,6 +61,8 @@
 		B5D702581AB84071003FE835 /* TowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D702571AB84071003FE835 /* TowerModel.m */; };
 		B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D7025A1AB84095003FE835 /* CreatureModel.m */; };
 		B5D7025D1AB848C1003FE835 /* tower.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D7025C1AB848C1003FE835 /* tower.plist */; };
+		B5E995961ADBD9860024895A /* CTBgMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E995951ADBD9860024895A /* CTBgMusicPlayer.m */; };
+		B5E995981ADBDC600024895A /* whack.caf in Resources */ = {isa = PBXBuildFile; fileRef = B5E995971ADBDC600024895A /* whack.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +163,9 @@
 		B5D7025A1AB84095003FE835 /* CreatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatureModel.m; sourceTree = "<group>"; };
 		B5D7025C1AB848C1003FE835 /* tower.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tower.plist; sourceTree = "<group>"; };
 		B5E3CC521ABE5F4E005F2ECB /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		B5E995941ADBD9860024895A /* CTBgMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTBgMusicPlayer.h; sourceTree = "<group>"; };
+		B5E995951ADBD9860024895A /* CTBgMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTBgMusicPlayer.m; sourceTree = "<group>"; };
+		B5E995971ADBDC600024895A /* whack.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whack.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +345,7 @@
 		B59334F81AB81E570039A94C /* music */ = {
 			isa = PBXGroup;
 			children = (
+				B5E995971ADBDC600024895A /* whack.caf */,
 				B59334F91AB81E570039A94C /* air_fire.wav */,
 				B59334FA1AB81E570039A94C /* congratulation.wav */,
 				B59334FB1AB81E580039A94C /* create_tower.wav */,
@@ -382,6 +388,8 @@
 			children = (
 				B5BF25261ABACF54005CEAC1 /* CTGeometryTool.h */,
 				B5BF25271ABACF54005CEAC1 /* CTGeometryTool.m */,
+				B5E995941ADBD9860024895A /* CTBgMusicPlayer.h */,
+				B5E995951ADBD9860024895A /* CTBgMusicPlayer.m */,
 			);
 			name = Tool;
 			path = Creature;
@@ -474,6 +482,7 @@
 				B5ADD2EA1ABD35C200DF4163 /* GameScene.sks in Resources */,
 				B593351B1AB81E580039A94C /* sniper_fire.wav in Resources */,
 				B507885D1AB7F11600D5864E /* LaunchScreen.xib in Resources */,
+				B5E995981ADBDC600024895A /* whack.caf in Resources */,
 				B59335181AB81E580039A94C /* rocket_fire.wav in Resources */,
 				B5CE09941AB833C500C44123 /* creature.plist in Resources */,
 				B59335111AB81E580039A94C /* explosion.wav in Resources */,
@@ -523,6 +532,7 @@
 				B5D2FADF1ABD390E009BB190 /* SniperTower.m in Sources */,
 				B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
+				B5E995961ADBD9860024895A /* CTBgMusicPlayer.m in Sources */,
 				B52A4B421ACD2C13007FD5CF /* JumpButtonNode.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
 				B55648601AC2CFB6001A6623 /* AttactRange.m in Sources */,
