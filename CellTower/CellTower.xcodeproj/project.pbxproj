@@ -14,6 +14,12 @@
 		B50788691AB7F11600D5864E /* CellTowerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B50788681AB7F11600D5864E /* CellTowerTests.m */; };
 		B50F76971AB7F89F0007FF1F /* Creature.m in Sources */ = {isa = PBXBuildFile; fileRef = B50F76961AB7F89F0007FF1F /* Creature.m */; };
 		B51128D01AB80D23005C8B2E /* Tower.m in Sources */ = {isa = PBXBuildFile; fileRef = B51128CF1AB80D23005C8B2E /* Tower.m */; };
+		B52A4B3E1ACD2C13007FD5CF /* BaseButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B52A4B341ACD2C13007FD5CF /* BaseButtonNode.m */; };
+		B52A4B3F1ACD2C13007FD5CF /* BlockButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B52A4B361ACD2C13007FD5CF /* BlockButtonNode.m */; };
+		B52A4B401ACD2C13007FD5CF /* ButtonNode.plist in Resources */ = {isa = PBXBuildFile; fileRef = B52A4B371ACD2C13007FD5CF /* ButtonNode.plist */; };
+		B52A4B411ACD2C13007FD5CF /* GameStartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B52A4B391ACD2C13007FD5CF /* GameStartScene.m */; };
+		B52A4B421ACD2C13007FD5CF /* JumpButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B52A4B3B1ACD2C13007FD5CF /* JumpButtonNode.m */; };
+		B52A4B431ACD2C13007FD5CF /* SwitchButtonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B52A4B3D1ACD2C13007FD5CF /* SwitchButtonNode.m */; };
 		B53483141ABB173600A8D950 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = B53483111ABB173600A8D950 /* Map.m */; };
 		B547F0B81ABE8BE2006FB1CE /* SKNode+Expention.m in Sources */ = {isa = PBXBuildFile; fileRef = B547F0B71ABE8BE2006FB1CE /* SKNode+Expention.m */; };
 		B547F0BB1ABE8BFD006FB1CE /* NSMutableArray+Point.m in Sources */ = {isa = PBXBuildFile; fileRef = B547F0BA1ABE8BFD006FB1CE /* NSMutableArray+Point.m */; };
@@ -81,6 +87,17 @@
 		B50F76961AB7F89F0007FF1F /* Creature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Creature.m; sourceTree = "<group>"; };
 		B51128CE1AB80D23005C8B2E /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
 		B51128CF1AB80D23005C8B2E /* Tower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tower.m; sourceTree = "<group>"; };
+		B52A4B331ACD2C13007FD5CF /* BaseButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseButtonNode.h; sourceTree = "<group>"; };
+		B52A4B341ACD2C13007FD5CF /* BaseButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseButtonNode.m; sourceTree = "<group>"; };
+		B52A4B351ACD2C13007FD5CF /* BlockButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockButtonNode.h; sourceTree = "<group>"; };
+		B52A4B361ACD2C13007FD5CF /* BlockButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockButtonNode.m; sourceTree = "<group>"; };
+		B52A4B371ACD2C13007FD5CF /* ButtonNode.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ButtonNode.plist; sourceTree = "<group>"; };
+		B52A4B381ACD2C13007FD5CF /* GameStartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameStartScene.h; sourceTree = "<group>"; };
+		B52A4B391ACD2C13007FD5CF /* GameStartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameStartScene.m; sourceTree = "<group>"; };
+		B52A4B3A1ACD2C13007FD5CF /* JumpButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpButtonNode.h; sourceTree = "<group>"; };
+		B52A4B3B1ACD2C13007FD5CF /* JumpButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JumpButtonNode.m; sourceTree = "<group>"; };
+		B52A4B3C1ACD2C13007FD5CF /* SwitchButtonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchButtonNode.h; sourceTree = "<group>"; };
+		B52A4B3D1ACD2C13007FD5CF /* SwitchButtonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchButtonNode.m; sourceTree = "<group>"; };
 		B53483101ABB173600A8D950 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
 		B53483111ABB173600A8D950 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		B547F0B61ABE8BE2006FB1CE /* SKNode+Expention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKNode+Expention.h"; sourceTree = "<group>"; };
@@ -185,6 +202,7 @@
 		B50788461AB7F11600D5864E /* CellTower */ = {
 			isa = PBXGroup;
 			children = (
+				B52A4B321ACD2C13007FD5CF /* GameStart */,
 				B556485A1AC2C7F8001A6623 /* Menu */,
 				B51AD0DB1ABE7C9C00F7F1F3 /* Category */,
 				B5ADD2E01ABD35C200DF4163 /* Main */,
@@ -275,6 +293,24 @@
 				B547F0B71ABE8BE2006FB1CE /* SKNode+Expention.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		B52A4B321ACD2C13007FD5CF /* GameStart */ = {
+			isa = PBXGroup;
+			children = (
+				B52A4B331ACD2C13007FD5CF /* BaseButtonNode.h */,
+				B52A4B341ACD2C13007FD5CF /* BaseButtonNode.m */,
+				B52A4B351ACD2C13007FD5CF /* BlockButtonNode.h */,
+				B52A4B361ACD2C13007FD5CF /* BlockButtonNode.m */,
+				B52A4B3A1ACD2C13007FD5CF /* JumpButtonNode.h */,
+				B52A4B3B1ACD2C13007FD5CF /* JumpButtonNode.m */,
+				B52A4B3C1ACD2C13007FD5CF /* SwitchButtonNode.h */,
+				B52A4B3D1ACD2C13007FD5CF /* SwitchButtonNode.m */,
+				B52A4B371ACD2C13007FD5CF /* ButtonNode.plist */,
+				B52A4B381ACD2C13007FD5CF /* GameStartScene.h */,
+				B52A4B391ACD2C13007FD5CF /* GameStartScene.m */,
+			);
+			path = GameStart;
 			sourceTree = "<group>";
 		};
 		B534830F1ABB173600A8D950 /* Map */ = {
@@ -441,6 +477,7 @@
 				B59335181AB81E580039A94C /* rocket_fire.wav in Resources */,
 				B5CE09941AB833C500C44123 /* creature.plist in Resources */,
 				B59335111AB81E580039A94C /* explosion.wav in Resources */,
+				B52A4B401ACD2C13007FD5CF /* ButtonNode.plist in Resources */,
 				B507885A1AB7F11600D5864E /* Images.xcassets in Resources */,
 				B593351C1AB81E580039A94C /* upgrade_tower.wav in Resources */,
 				B593350F1AB81E580039A94C /* creature_rich_dest.WAV in Resources */,
@@ -472,8 +509,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B52A4B3E1ACD2C13007FD5CF /* BaseButtonNode.m in Sources */,
 				B547F0BB1ABE8BFD006FB1CE /* NSMutableArray+Point.m in Sources */,
 				B5D702581AB84071003FE835 /* TowerModel.m in Sources */,
+				B52A4B3F1ACD2C13007FD5CF /* BlockButtonNode.m in Sources */,
 				B51128D01AB80D23005C8B2E /* Tower.m in Sources */,
 				B556485D1AC2C83C001A6623 /* MessageMenu.m in Sources */,
 				B5C9E73B1ABC4E64003CA711 /* RadarTower.m in Sources */,
@@ -484,13 +523,16 @@
 				B5D2FADF1ABD390E009BB190 /* SniperTower.m in Sources */,
 				B5ADD2E81ABD35C200DF4163 /* AppDelegate.m in Sources */,
 				B50F76971AB7F89F0007FF1F /* Creature.m in Sources */,
+				B52A4B421ACD2C13007FD5CF /* JumpButtonNode.m in Sources */,
 				B5BF25251ABACE05005CEAC1 /* ShockTower.m in Sources */,
 				B55648601AC2CFB6001A6623 /* AttactRange.m in Sources */,
 				B5ADD2EB1ABD35C200DF4163 /* GameViewController.m in Sources */,
 				B5ADD2E91ABD35C200DF4163 /* GameScene.m in Sources */,
 				B5D7025B1AB84095003FE835 /* CreatureModel.m in Sources */,
 				B5D2FAE31ABD3A82009BB190 /* RocketTower.m in Sources */,
+				B52A4B431ACD2C13007FD5CF /* SwitchButtonNode.m in Sources */,
 				B547F0B81ABE8BE2006FB1CE /* SKNode+Expention.m in Sources */,
+				B52A4B411ACD2C13007FD5CF /* GameStartScene.m in Sources */,
 				B5BF25221ABAC838005CEAC1 /* SlowDownTower.m in Sources */,
 				B507884A1AB7F11600D5864E /* main.m in Sources */,
 				B5D2FAE61ABD4491009BB190 /* AirTower.m in Sources */,
